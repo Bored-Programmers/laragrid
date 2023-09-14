@@ -18,6 +18,9 @@ class AdminGrid extends Component
     #[Url(history: true)]
     public array $filter = [];
 
+    #[Url]
+    public string $search = '';
+
     public array $columns = [
         'name' => [
             'type' => 'text',
@@ -26,14 +29,24 @@ class AdminGrid extends Component
         'email' => [
             'type' => 'select',
             'filtrationType' => 'equal',
+            'options' => [
+                'berneice.lindgren@example.net' => 'berneice.lindgren@example.net',
+                'saul77@example.org' => 'saul77@example.org',
+            ],
+            'includePrompt' => true,
         ],
         'created_at' => [
             'type' => 'date',
             'filtrationType' => 'dateBetween',
         ],
         'is_active' => [
-            'type' => 'boolean',
+            'type' => 'select',
             'filtrationType' => 'equal',
+            'options' => [
+                '1' => 'active',
+                '0' => 'inactive',
+            ],
+            'includePrompt' => true,
         ],
     ];
 
@@ -42,6 +55,11 @@ class AdminGrid extends Component
         'equal',
         'dateBetween',
     ];
+
+    public function test()
+    {
+        $this->reset();
+    }
 
     /**
      * @throws \Exception

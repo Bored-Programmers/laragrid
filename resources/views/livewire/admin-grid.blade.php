@@ -1,5 +1,12 @@
 <div>
     <table class="table">
+        <a wire:click="test">
+            @lang('laragrid.migrationReset')
+        </a>
+
+        <input type="text" wire:model.live="search">
+        {{ $search }}
+
         <thead>
         <tr>
             @foreach($columns as $columnName => $columnProperties)
@@ -10,10 +17,13 @@
                             @break
 
                         @case('select')
-                            {{-- You'd need to define your select options somehow --}}
                             <select wire:model.live="filter.{{ $columnName }}">
-                                <option value="">Select...</option>
-                                <option value="example@email.com">example@email.com</option>
+                                @if($columnProperties['includePrompt'])
+                                    <option wire:key="item-prompt" value="">@lang('laragrid.choose')</option>
+                                @endif
+                                @foreach($columnProperties['options'] as $value => $label)
+                                    <option wire:key="item-{{ $value }}" value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
                             </select>
                             @break
 
@@ -21,17 +31,6 @@
                             <input type="date" wire:model.live="filter.{{ $columnName }}.from"> to
                             <input type="date" wire:model.live="filter.{{ $columnName }}.to">
                             @break
-
-                        @case('boolean')
-                            <select wire:model.live="filter.{{ $columnName }}">
-                                <option value="">@lang('any')</option>
-                                <option value="1">@lang('yes')</option>
-                                <option value="0">@lang('no')</option>
-                            </select>
-                            @break
-
-                        @default
-                            <input type="text" wire:model.live="filter.{{ $columnName }}">
                     @endswitch
                 </th>
             @endforeach
@@ -42,7 +41,7 @@
             <tr>
                 @foreach($columns as $columnName => $columnProperties)
                     @if (is_bool($user->{$columnName}))
-                        <td>{{ $user->{$columnName} ? __('yes') : __('no') }}</td>
+                        <td>{{ $columnProperties['options'][$user->{$columnName}] }}</td>
                     @else
                         <td>{{ $user->{$columnName} }}</td>
                     @endif
