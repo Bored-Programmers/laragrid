@@ -17,58 +17,17 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Builder::macro('whereLike', function ($attributes, $searchTerm) {
-            if ($searchTerm === null || $searchTerm === '') {
-                return $this;
-            }
+            if ($searchTerm === null || $searchTerm === '') return $this;
 
-            $this->where(function (Builder $query) use ($attributes, $searchTerm) {
-                foreach (Arr::wrap($attributes) as $attribute) {
-                    $query->when(
-                        Str::contains($attribute, '.'),
-                        function (Builder $query) use ($attribute, $searchTerm) {
-                            [$relationName, $relationAttribute] = explode('.', $attribute);
-
-                            $query->orWhereHas(
-                                $relationName,
-                                function (Builder $query) use ($relationAttribute, $searchTerm) {
-                                    $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
-                                }
-                            );
-                        },
-                        function (Builder $query) use ($attribute, $searchTerm) {
-                            $query->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
-                        }
-                    );
-                }
-            });
+            $this->whereOrWhereRelation($attributes, $searchTerm, 'LIKE', "%{$searchTerm}%");
 
             return $this;
         });
 
         Builder::macro('whereEqual', function ($attributes, $value) {
-            if ($value === null || $value === '') {
-                return $this;
-            }
+            if ($value === null || $value === '') return $this;
 
-            $this->where(function (Builder $query) use ($attributes, $value) {
-                foreach (Arr::wrap($attributes) as $attribute) {
-                    $query->when(
-                        Str::contains($attribute, '.'),
-                        function (Builder $query) use ($attribute, $value) {
-                            [$relationName, $relationAttribute] = explode('.', $attribute);
-                            $query->orWhereHas(
-                                $relationName,
-                                function (Builder $query) use ($relationAttribute, $value) {
-                                    $query->where($relationAttribute, '=', $value);
-                                }
-                            );
-                        },
-                        function (Builder $query) use ($attribute, $value) {
-                            $query->orWhere($attribute, '=', $value);
-                        }
-                    );
-                }
-            });
+            $this->whereOrWhereRelation($attributes, $value);
 
             return $this;
         });
@@ -100,6 +59,28 @@ class AppServiceProvider extends ServiceProvider
             });
 
             return $this;
+        });
+
+        Builder::macro('whereOrWhereRelation', function ($attributes, $value, $operator = '=', $formattedValue = null) {
+            $this->where(function (Builder $query) use ($attributes, $value, $operator, $formattedValue) {
+                foreach (Arr::wrap($attributes) as $attribute) {
+                    $query->when(
+                        Str::contains($attribute, '.'),
+                        function (Builder $query) use ($attribute, $value, $operator, $formattedValue) {
+                            [$relationName, $relationAttribute] = explode('.', $attribute);
+                            $query->orWhereHas(
+                                $relationName,
+                                function (Builder $query) use ($relationAttribute, $value, $operator, $formattedValue) {
+                                    $query->where($relationAttribute, $operator, $formattedValue ?: $value);
+                                }
+                            );
+                        },
+                        function (Builder $query) use ($formattedValue, $attribute, $value, $operator) {
+                            $query->orWhere($attribute, $operator, $formattedValue ?: $value);
+                        }
+                    );
+                }
+            });
         });
     }
 
