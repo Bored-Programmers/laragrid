@@ -17,8 +17,10 @@ abstract class BaseGrid extends Component
     #[Url]
     public array $filter = [];
 
+    #[Url(keep: true)]
     public string $sortColumn = 'id';
 
+    #[Url(keep: true)]
     public string $sortDirection = 'desc';
 
     public int $perPage = 25;

@@ -15,7 +15,7 @@
                     <x-laragrid.column-filter
                             :column="$column"
                             :sort-column="$sortColumn"
-                            :sort-direction="$sortColumn"
+                            :sort-direction="$sortDirection"
                     />
                 </th>
             @endforeach
