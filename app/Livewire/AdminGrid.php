@@ -3,97 +3,35 @@
 namespace App\Livewire;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\Attributes\Url;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class AdminGrid extends Component
+class AdminGrid extends BaseGrid
 {
-
-    use WithPagination;
 
     public string $model = User::class;
 
-    #[Url(history: true)]
-    public array $filter = [];
-
-    #[Url]
-    public string $search = '';
-
-    public array $columns = [
-        'name' => [
-            'type' => 'text',
-            'filtrationType' => 'like',
-        ],
-        'email' => [
-            'type' => 'select',
-            'filtrationType' => 'equal',
-            'options' => [
-                'berneice.lindgren@example.net' => 'berneice.lindgren@example.net',
-                'saul77@example.org' => 'saul77@example.org',
-            ],
-            'includePrompt' => true,
-        ],
-        'created_at' => [
-            'type' => 'date',
-            'filtrationType' => 'dateBetween',
-        ],
-        'is_active' => [
-            'type' => 'select',
-            'filtrationType' => 'equal',
-            'options' => [
-                '1' => 'active',
-                '0' => 'inactive',
-            ],
-            'includePrompt' => true,
-        ],
-    ];
-
-    protected array $filtrationTypes = [
-        'like',
-        'equal',
-        'dateBetween',
-    ];
-
-    public function test()
+    protected function getColumns(): array
     {
-        $this->reset();
-    }
+        return [
+            TextColumn::make('name', 'name')
+                ->setSortable(),
 
-    /**
-     * @throws \Exception
-     */
-    public function render()
-    {
-        /** @var Builder $users */
-        $users = $this->model::query();
+            SelectColumn::make('email', 'email')
+                ->setSortable()
+                ->setOptions(User::pluck('email', 'email'))
+                ->setPrompt('choose'),
 
-        foreach ($this->columns as $columnName => $columnProperties) {
-            if (!in_array($columnProperties['filtrationType'], $this->filtrationTypes)) {
-                throw new \Exception(
-                    'Filtration type "' . $columnProperties['filtrationType'] . ' for column "' . $columnName . '" does not exist.'
-                );
-            }
-        }
+            DateRangeColumn::make('created_at', 'created_at')
+                ->setSortable(),
 
-        foreach ($this->columns as $columnName => $columnProperties) {
-            if (array_key_exists($columnName, $this->filter)) {
-                match ($columnProperties['filtrationType']) {
-                    'like' => $users->whereLike($columnName, $this->filter[$columnName]),
-                    'equal' => $users->whereEqual($columnName, $this->filter[$columnName]),
-                    'dateBetween' => $users->whereDateBetween(
-                        $columnName,
-                        $this->filter[$columnName]['from'] ?? null,
-                        $this->filter[$columnName]['to'] ?? null
-                    ),
-                };
-            }
-        }
-
-        return view('livewire.admin-grid', [
-            'users' => $users->paginate(10),
-        ]);
+            SelectColumn::make('is_active', 'is_active')
+                ->setSortable()
+                ->setOptions([
+                    '1' => 'active',
+                    '0' => 'inactive',
+                ])
+                ->setPrompt('choose'),
+        ];
     }
 
 }
