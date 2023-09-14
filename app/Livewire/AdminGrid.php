@@ -53,7 +53,9 @@ class AdminGrid extends Component
 
         foreach ($this->columns as $columnName => $columnProperties) {
             if (!in_array($columnProperties['filtrationType'], $this->filtrationTypes)) {
-                throw new \Exception('Filtration type "' . $columnProperties['filtrationType'] . '" does not exist.');
+                throw new \Exception(
+                    'Filtration type "' . $columnProperties['filtrationType'] . ' for column "' . $columnName . '" does not exist.'
+                );
             }
         }
 
@@ -62,13 +64,17 @@ class AdminGrid extends Component
                 match ($columnProperties['filtrationType']) {
                     'like' => $users->whereLike($columnName, $this->filter[$columnName]),
                     'equal' => $users->whereEqual($columnName, $this->filter[$columnName]),
-                    'dateBetween' => $users->whereDateBetween($columnName, $this->filter[$columnName][0], $this->filter[$columnName][1]),
+                    'dateBetween' => $users->whereDateBetween(
+                        $columnName,
+                        $this->filter[$columnName]['from'] ?? null,
+                        $this->filter[$columnName]['to'] ?? null
+                    ),
                 };
             }
         }
 
         return view('livewire.admin-grid', [
-            'users' => $users->paginate(3),
+            'users' => $users->paginate(10),
         ]);
     }
 

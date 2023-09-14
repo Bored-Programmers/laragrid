@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -72,10 +73,13 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
-        Builder::macro('whereDateBetween', function ($attribute, $startDate, $endDate) {
+        Builder::macro('whereDateBetween', function ($attribute, $startDate = null, $endDate = null) {
             if (!$startDate && !$endDate) {
                 return $this;
             }
+
+            $startDate = $startDate ?: Carbon::today();
+            $endDate = $endDate ?: Carbon::today();
 
             $this->where(function (Builder $query) use ($attribute, $startDate, $endDate) {
                 $query->when(

@@ -18,8 +18,8 @@
                             @break
 
                         @case('date')
-                            <input type="date" wire:model.live="filter.{{ $columnName }}.0"> to
-                            <input type="date" wire:model.live="filter.{{ $columnName }}.1">
+                            <input type="date" wire:model.live="filter.{{ $columnName }}.from"> to
+                            <input type="date" wire:model.live="filter.{{ $columnName }}.to">
                             @break
 
                         @case('boolean')
