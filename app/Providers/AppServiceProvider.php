@@ -16,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        Builder::macro('whereLike', function ($attributes, string $searchTerm) {
-            if (!$searchTerm) {
+        Builder::macro('whereLike', function ($attributes, $searchTerm) {
+            if ($searchTerm === null || $searchTerm === '') {
                 return $this;
             }
 
@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Builder::macro('whereEqual', function ($attributes, $value) {
-            if (!$value) {
+            if ($value === null || $value === '') {
                 return $this;
             }
 
