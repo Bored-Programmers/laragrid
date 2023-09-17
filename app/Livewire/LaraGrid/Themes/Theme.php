@@ -5,118 +5,109 @@ namespace App\Livewire\LaraGrid\Themes;
 class Theme
 {
 
-    private $table = '';
+    private ?string $table = null;
+    private ?string $link = null;
+    private ?string $thead = null;
+    private ?string $tr = null;
+    private ?string $th = null;
+    private ?string $tbody = null;
+    private ?string $td = null;
+    private ?string $pagination = null;
 
-    private $link = '';
-
-    private $thead = '';
-
-    private $tr = '';
-
-    private $th = '';
-
-    private $tbody = '';
-
-    private $td = '';
-
-    private $pagination = '';
-
-    // Setters
-    public function setTable($style)
-    {
-        $this->table = $style;
-
-        return $this;
-    }
-
-    public function setLink($style)
-    {
-        $this->link = $style;
-
-        return $this;
-    }
-
-    public function setThead($style)
-    {
-        $this->thead = $style;
-
-        return $this;
-    }
-
-    public function setTr($style)
-    {
-        $this->tr = $style;
-
-        return $this;
-    }
-
-    public function setTh($style)
-    {
-        $this->th = $style;
-
-        return $this;
-    }
-
-    public function setTbody($style)
-    {
-        $this->tbody = $style;
-
-        return $this;
-    }
-
-    public function setTd($style)
-    {
-        $this->td = $style;
-
-        return $this;
-    }
-
-    public function setPagination($style)
-    {
-        $this->pagination = $style;
-
-        return $this;
-    }
-
-    // Getters
-    public function getTable()
+    public function getTable(): ?string
     {
         return $this->table;
     }
 
-    public function getLink()
+    public function setTable(?string $table): Theme
+    {
+        $this->table = $table;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
     {
         return $this->link;
     }
 
-    public function getThead()
+    public function setLink(?string $link): Theme
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getThead(): ?string
     {
         return $this->thead;
     }
 
-    public function getTr()
+    public function setThead(?string $thead): Theme
+    {
+        $this->thead = $thead;
+
+        return $this;
+    }
+
+    public function getTr(): ?string
     {
         return $this->tr;
     }
 
-    public function getTh()
+    public function setTr(?string $tr): Theme
+    {
+        $this->tr = $tr;
+
+        return $this;
+    }
+
+    public function getTh(): ?string
     {
         return $this->th;
     }
 
-    public function getTbody()
+    public function setTh(?string $th): Theme
+    {
+        $this->th = $th;
+
+        return $this;
+    }
+
+    public function getTbody(): ?string
     {
         return $this->tbody;
     }
 
-    public function getTd()
+    public function setTbody(?string $tbody): Theme
+    {
+        $this->tbody = $tbody;
+
+        return $this;
+    }
+
+    public function getTd(): ?string
     {
         return $this->td;
     }
 
-    public function getPagination()
+    public function setTd(?string $td): Theme
+    {
+        $this->td = $td;
+
+        return $this;
+    }
+
+    public function getPagination(): ?string
     {
         return $this->pagination;
+    }
+
+    public function setPagination(?string $pagination): Theme
+    {
+        $this->pagination = $pagination;
+
+        return $this;
     }
 
 }
