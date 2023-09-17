@@ -3,8 +3,7 @@
     * @var \App\Livewire\LaraGrid\Column[] $columns
     * @var \App\Livewire\LaraGrid\Themes\Theme $theme
  */
-    $theme = new $theme();
-
+    $theme = new $theme(); // fixme - jde to jinak? Nejak mi to blblo a nechtel se objekt passnout z gridu
 @endphp
 <div>
     <table class="{{ $theme->getTable() }}">
