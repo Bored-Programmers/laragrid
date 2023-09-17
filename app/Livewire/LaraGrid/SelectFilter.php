@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire\Filters;
+namespace App\Livewire\LaraGrid;
 
-use App\Livewire\Column;
-use App\Livewire\Enums\FilterType;
-use App\Livewire\Enums\FiltrationType;
+use App\Livewire\LaraGrid\Enums\FilterType;
+use App\Livewire\LaraGrid\Enums\FiltrationType;
 use Illuminate\Support\Collection;
 
 class SelectFilter extends BaseFilter
@@ -14,15 +13,6 @@ class SelectFilter extends BaseFilter
     protected array $options;
 
     protected string $prompt;
-
-    public static function make(): self
-    {
-        $column = new static();
-        $column->setFiltrationType(FiltrationType::EQUAL);
-        $column->setFilterType(FilterType::SELECT);
-
-        return $column;
-    }
 
     public function getOptions(): array
     {
@@ -40,6 +30,15 @@ class SelectFilter extends BaseFilter
         $this->options = $selectOptions;
 
         return $this;
+    }
+
+    public static function make(): self
+    {
+        $column = new static();
+        $column->setFiltrationType(FiltrationType::EQUAL);
+        $column->setFilterType(FilterType::SELECT);
+
+        return $column;
     }
 
     public function getPrompt(): string

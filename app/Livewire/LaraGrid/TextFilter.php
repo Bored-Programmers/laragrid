@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire\Filters;
+namespace App\Livewire\LaraGrid;
 
-use App\Livewire\Column;
-use App\Livewire\Enums\FilterType;
-use App\Livewire\Enums\FiltrationType;
+use App\Livewire\LaraGrid\Enums\FilterType;
+use App\Livewire\LaraGrid\Enums\FiltrationType;
 
 class TextFilter extends BaseFilter
 {

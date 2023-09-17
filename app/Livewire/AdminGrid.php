@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Filters\SelectFilter;
+use App\Livewire\LaraGrid\BaseGrid;
+use App\Livewire\LaraGrid\Column;
+use App\Livewire\LaraGrid\SelectFilter;
 use App\Models\User;
 
 class AdminGrid extends BaseGrid
@@ -17,26 +19,26 @@ class AdminGrid extends BaseGrid
                 ->setSortable(),
 
             Column::make('email', 'email')
+                ->setSortable()
                 ->setFilter(
                     SelectFilter::make()
                         ->setOptions(User::pluck('email', 'email'))
                         ->setPrompt('choose')
-                )
-                ->setSortable(),
+                ),
 
             Column::make('created_at', 'created_at')
                 ->setSortable(),
 
             Column::make('is_active', 'is_active')
+                ->setSortable()
                 ->setFilter(
                     SelectFilter::make()
+                        ->setPrompt('choose')
                         ->setOptions([
                             '1' => 'active',
                             '0' => 'inactive',
                         ])
-                        ->setPrompt('choose')
-                )
-                ->setSortable(),
+                ),
         ];
     }
 

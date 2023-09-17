@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Filters;
+namespace App\Livewire\LaraGrid;
 
-use App\Livewire\Enums\FilterType;
-use App\Livewire\Enums\FiltrationType;
+use App\Livewire\LaraGrid\Enums\FilterType;
+use App\Livewire\LaraGrid\Enums\FiltrationType;
 
 abstract class BaseFilter
 {
@@ -48,16 +48,16 @@ abstract class BaseFilter
         $this->filterType = $filterType;
     }
 
+    public function getFiltrationType(): FiltrationType
+    {
+        return $this->filtrationType;
+    }
+
     public function setFiltrationType(FiltrationType $filtrationType): static
     {
         $this->filtrationType = $filtrationType;
 
         return $this;
-    }
-
-    public function getFiltrationType(): FiltrationType
-    {
-        return $this->filtrationType;
     }
 
 }

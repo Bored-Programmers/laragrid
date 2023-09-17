@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\LaraGrid;
 
-use App\Livewire\Enums\FiltrationType;
+use App\Livewire\LaraGrid\Enums\FiltrationType;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,8 +27,6 @@ abstract class BaseGrid extends Component
     public int $perPage = 25;
 
     protected string $model;
-
-    protected abstract function getColumns();
 
     public function resetFilters(): void
     {
@@ -98,5 +96,7 @@ abstract class BaseGrid extends Component
             'columns' => $columns,
         ]);
     }
+
+    protected abstract function getColumns();
 
 }

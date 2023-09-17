@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Filters;
+namespace App\Livewire\LaraGrid;
 
 class SelectFilterOption
 {
@@ -9,15 +9,15 @@ class SelectFilterOption
 
     private mixed $value;
 
-    public static function make(mixed $value, mixed $label = null): self
-    {
-        return new static($value, $label ?: $value);
-    }
-
     public function __construct(mixed $value, mixed $label)
     {
         $this->setValue($value);
         $this->setLabel($label);
+    }
+
+    public static function make(mixed $value, mixed $label = null): self
+    {
+        return new static($value, $label ?: $value);
     }
 
     public function getLabel()
