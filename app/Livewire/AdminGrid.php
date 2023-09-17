@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Filters\SelectFilter;
 use App\Models\User;
-use Livewire\WithPagination;
 
 class AdminGrid extends BaseGrid
 {
@@ -13,24 +13,30 @@ class AdminGrid extends BaseGrid
     protected function getColumns(): array
     {
         return [
-            TextColumn::make('name', 'name')
+            Column::make('name', 'name')
                 ->setSortable(),
 
-            SelectColumn::make('email', 'email')
-                ->setSortable()
-                ->setOptions(User::pluck('email', 'email'))
-                ->setPrompt('choose'),
-
-            DateRangeColumn::make('created_at', 'created_at')
+            Column::make('email', 'email')
+                ->setFilter(
+                    SelectFilter::make()
+                        ->setOptions(User::pluck('email', 'email'))
+                        ->setPrompt('choose')
+                )
                 ->setSortable(),
 
-            SelectColumn::make('is_active', 'is_active')
-                ->setSortable()
-                ->setOptions([
-                    '1' => 'active',
-                    '0' => 'inactive',
-                ])
-                ->setPrompt('choose'),
+            Column::make('created_at', 'created_at')
+                ->setSortable(),
+
+            Column::make('is_active', 'is_active')
+                ->setFilter(
+                    SelectFilter::make()
+                        ->setOptions([
+                            '1' => 'active',
+                            '0' => 'inactive',
+                        ])
+                        ->setPrompt('choose')
+                )
+                ->setSortable(),
         ];
     }
 

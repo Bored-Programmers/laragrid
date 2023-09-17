@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Enums\FiltrationType;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,17 +51,19 @@ abstract class BaseGrid extends Component
     public function render(): View
     {
         /**
-         * @var BaseColumn[] $columns
-         * @var Builder      $query
+         * @var Column[] $columns
+         * @var Builder  $query
          */
         $columns = $this->getColumns();
         $query = $this->model::query();
 
         foreach ($columns as $column) {
-            if (!in_array($column->getFiltrationType(), FiltrationType::cases())) {
+            $filter = $column->getFilter();
+
+            if ($filter && !in_array($filter->getFiltrationType(), FiltrationType::cases())) {
                 throw new Exception(
                     'Filtration type "'
-                    . $column['filtrationType']
+                    . $filter->getFiltrationType()->name
                     . ' for column "'
                     . $column->getModelField()
                     . '" does not exist.'
@@ -70,7 +73,7 @@ abstract class BaseGrid extends Component
 
         foreach ($columns as $column) {
             if (array_key_exists($column->getModelField(), $this->filter)) {
-                match ($column->getFiltrationType()) {
+                match ($column->getFilter()?->getFiltrationType()) {
                     FiltrationType::LIKE => $query->whereLike(
                         $column->getModelField(),
                         $this->filter[$column->getModelField()]

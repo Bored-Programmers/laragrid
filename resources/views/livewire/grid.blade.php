@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Livewire\BaseColumn[] $columns */
+    /** @var \App\Livewire\Column[] $columns */
 @endphp
 
 <div>

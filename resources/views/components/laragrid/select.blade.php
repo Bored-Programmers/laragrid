@@ -1,13 +1,18 @@
 @props([
-    /** @var \App\Livewire\BaseColumn $column */
+    /** @var \App\Livewire\Column $column */
     'column',
 ])
 
+@php
+    /** @var \App\Livewire\Filters\SelectFilter $filter */
+    $filter = $column->getFilter()
+@endphp
+
 <select wire:model.live="filter.{{ $column->getModelField() }}">
-    @if($column->getPrompt())
-        <option wire:key="item-prompt" value="">@lang($column->getPrompt())</option>
+    @if($filter->getPrompt())
+        <option wire:key="item-prompt" value="">@lang($filter->getPrompt())</option>
     @endif
-    @foreach($column->getOptions() as $option)
+    @foreach($filter->getOptions() as $option)
         <option
                 wire:key="item-{{ $option->getValue() }}"
                 value="{{ $option->getValue() }}"

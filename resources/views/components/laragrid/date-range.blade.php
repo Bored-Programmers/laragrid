@@ -1,5 +1,5 @@
 @props([
-    /** @var \App\Livewire\BaseColumn $column */
+    /** @var \App\Livewire\Column $column */
     'column',
 ])
 

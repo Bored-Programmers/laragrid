@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Filters;
 
-class SelectOption
+class SelectFilterOption
 {
 
     private mixed $label;
