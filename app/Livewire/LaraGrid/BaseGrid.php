@@ -94,6 +94,7 @@ abstract class BaseGrid extends Component
         return view('livewire.grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
+            'theme' => $this->theme,
         ]);
     }
 

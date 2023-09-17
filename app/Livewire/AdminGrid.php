@@ -4,13 +4,15 @@ namespace App\Livewire;
 
 use App\Livewire\LaraGrid\BaseGrid;
 use App\Livewire\LaraGrid\Column;
-use App\Livewire\LaraGrid\SelectFilter;
+use App\Livewire\LaraGrid\Filters\SelectFilter;
+use App\Livewire\LaraGrid\Themes\UiKitTheme;
 use App\Models\User;
 
 class AdminGrid extends BaseGrid
 {
 
     public string $model = User::class;
+    public string $theme = UiKitTheme::class;
 
     protected function getColumns(): array
     {

@@ -1,17 +1,21 @@
 @php
-    /** @var \App\Livewire\LaraGrid\Column[] $columns */
-@endphp
+    /**
+    * @var \App\Livewire\LaraGrid\Column[] $columns
+    * @var \App\Livewire\LaraGrid\Themes\Theme $theme
+ */
+    $theme = new $theme();
 
+@endphp
 <div>
-    <table class="table">
-        <a wire:click="resetFilters">
+    <table class="{{ $theme->getTable() }}">
+        <a class="{{ $theme->getLink() }}" wire:click="resetFilters">
             @lang('laragrid.migrationReset')
         </a>
 
-        <thead>
-        <tr>
+        <thead class="{{ $theme->getThead() }}">
+        <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
-                <th>
+                <th class="{{ $theme->getTh() }}">
                     <x-laragrid.column-filter
                             :column="$column"
                             :sort-column="$sortColumn"
@@ -21,16 +25,20 @@
             @endforeach
         </tr>
         </thead>
-        <tbody>
+        <tbody class="{{ $theme->getTbody() }}">
         @foreach($records as $record)
-            <tr>
+            <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    <td>{{ $column->getRecordValue($record) }}</td>
+                    <td class="{{ $theme->getTd() }}">
+                        {{ $column->getRecordValue($record) }}
+                    </td>
                 @endforeach
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    {{ $records->links() }}
+    <div class="{{ $theme->getPagination() }}">
+        {{ $records->links() }}
+    </div>
 </div>
