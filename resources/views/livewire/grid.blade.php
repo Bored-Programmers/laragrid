@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Livewire\Column[] $columns */
+    /** @var \App\Livewire\LaraGrid\Column[] $columns */
 @endphp
 
 <div>

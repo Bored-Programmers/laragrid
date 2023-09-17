@@ -1,5 +1,5 @@
 @props([
-    /** @var \App\Livewire\Column $column */
+    /** @var \App\Livewire\LaraGrid\Column $column */
     'column',
     'sortColumn',
     'sortDirection',
@@ -20,15 +20,15 @@
 </span>
 
 @switch($column->getFilter()?->getFilterType())
-    @case(\App\Livewire\Enums\FilterType::TEXT)
+    @case(\App\Livewire\LaraGrid\Enums\FilterType::TEXT)
         <x-laragrid.text :column="$column"/>
         @break
 
-    @case(\App\Livewire\Enums\FilterType::SELECT)
+    @case(\App\Livewire\LaraGrid\Enums\FilterType::SELECT)
         <x-laragrid.select :column="$column"/>
         @break
 
-    @case(\App\Livewire\Enums\FilterType::DATE)
+    @case(\App\Livewire\LaraGrid\Enums\FilterType::DATE)
         <x-laragrid.date-range :column="$column"/>
         @break
 @endswitch
