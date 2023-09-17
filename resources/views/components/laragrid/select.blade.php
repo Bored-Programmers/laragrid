@@ -4,7 +4,7 @@
 ])
 
 @php
-    /** @var \App\Livewire\LaraGrid\SelectFilter $filter */
+    /** @var \App\Livewire\LaraGrid\Filters\SelectFilter $filter */
     $filter = $column->getFilter()
 @endphp
 

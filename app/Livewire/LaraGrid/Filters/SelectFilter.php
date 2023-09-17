@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\LaraGrid;
+namespace App\Livewire\LaraGrid\Filters;
 
 use App\Livewire\LaraGrid\Enums\FilterType;
 use App\Livewire\LaraGrid\Enums\FiltrationType;

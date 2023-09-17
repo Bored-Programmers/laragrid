@@ -3,6 +3,9 @@
 namespace App\Livewire\LaraGrid;
 
 use App\Livewire\LaraGrid\Enums\FilterType;
+use App\Livewire\LaraGrid\Filters\BaseFilter;
+use App\Livewire\LaraGrid\Filters\SelectFilter;
+use App\Livewire\LaraGrid\Filters\SelectFilterOption;
 use Illuminate\Database\Eloquent\Model;
 
 class Column
@@ -14,11 +17,6 @@ class Column
 
     protected bool $sortable = false;
 
-    /** @var SelectFilterOption[] */
-    protected array $options;
-
-    protected string $prompt;
-
     protected ?BaseFilter $filter = null;
 
     public function __construct(string $modelField, string $label)
@@ -29,9 +27,7 @@ class Column
 
     public static function make(string $modelField, string $label): self
     {
-        $column = new static($modelField, $label);
-
-        return $column;
+        return new static($modelField, $label);
     }
 
     public function getRecordValue(Model $record)

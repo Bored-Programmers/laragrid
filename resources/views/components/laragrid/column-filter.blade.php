@@ -5,7 +5,11 @@
     'sortDirection',
 ])
 
-<span wire:click="sort('{{ $column->getModelField() }}')">
+<span
+        @if ($column->isSortable())
+            wire:click="sort('{{ $column->getModelField() }}')"
+        @endif
+>
     @lang($column->getLabel())
 
     @if ($sortColumn === $column->getModelField())

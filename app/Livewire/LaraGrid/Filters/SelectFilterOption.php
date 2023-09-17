@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\LaraGrid;
+namespace App\Livewire\LaraGrid\Filters;
 
 class SelectFilterOption
 {
