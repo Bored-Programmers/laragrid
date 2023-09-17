@@ -16,6 +16,7 @@
             @foreach($columns as $column)
                 <th class="{{ $theme->getTh() }}">
                     <x-laragrid.column-filter
+                            :theme="$theme"
                             :column="$column"
                             :sort-column="$sortColumn"
                             :sort-direction="$sortDirection"

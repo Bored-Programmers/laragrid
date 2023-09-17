@@ -14,6 +14,15 @@ class SelectFilter extends BaseFilter
 
     protected string $prompt;
 
+    public static function make(): self
+    {
+        $column = new static();
+        $column->setFiltrationType(FiltrationType::EQUAL);
+        $column->setFilterType(FilterType::SELECT);
+
+        return $column;
+    }
+
     public function getOptions(): array
     {
         return $this->options;
@@ -30,15 +39,6 @@ class SelectFilter extends BaseFilter
         $this->options = $selectOptions;
 
         return $this;
-    }
-
-    public static function make(): self
-    {
-        $column = new static();
-        $column->setFiltrationType(FiltrationType::EQUAL);
-        $column->setFilterType(FilterType::SELECT);
-
-        return $column;
     }
 
     public function getPrompt(): string

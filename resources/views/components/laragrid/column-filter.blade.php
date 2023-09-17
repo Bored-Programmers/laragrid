@@ -3,10 +3,12 @@
     'column',
     'sortColumn',
     'sortDirection',
+    'theme',
 ])
 
 <span
         @if ($column->isSortable())
+            class="{{ $theme->getLink() }}"
             wire:click="sort('{{ $column->getModelField() }}')"
         @endif
 >
