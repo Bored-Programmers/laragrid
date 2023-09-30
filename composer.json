@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "BoredProgrammers\\Laragrid\\": "src/"
+      "BoredProgrammers\\LaraGrid\\": "src/"
     }
   },
   "authors": [

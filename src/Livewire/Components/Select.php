@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\Laragrid\Livewire\Components;
+namespace BoredProgrammers\LaraGrid\Livewire\Components;
 
 class Select
 {

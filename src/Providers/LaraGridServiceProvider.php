@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\Laragrid\Providers;
+namespace BoredProgrammers\LaraGrid\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
