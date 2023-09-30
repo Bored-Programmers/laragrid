@@ -19,7 +19,7 @@
       "email": "mat.cerny3@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "config": {
     "sort-packages": true,
