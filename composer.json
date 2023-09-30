@@ -1,0 +1,35 @@
+{
+  "name": "bored-programmers/laragrid",
+  "description": "Laravel grid package",
+  "type": "library",
+  "require": {
+    "laravel/laravel": "^10.2",
+    "livewire/livewire": "^3.0",
+    "kirschbaum-development/eloquent-power-joins": "^3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "BoredProgrammers\\Laragrid\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Matěj Černý",
+      "email": "mat.cerny3@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "preferred-install": "dist",
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "BoredProgrammers\\Providers\\LaraGridServiceProvider"
+      ]
+    }
+  }
+}
