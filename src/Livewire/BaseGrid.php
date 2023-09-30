@@ -111,7 +111,7 @@ abstract class BaseGrid extends Component
             );
         }
 
-        return view('livewire.grid', [
+        return view('laragrid::grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
             'theme' => $this->theme,
