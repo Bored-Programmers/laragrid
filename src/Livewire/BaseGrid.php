@@ -1,12 +1,12 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Livewire;
+namespace BoredProgrammers\LaraGrid;
 
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Enums\FiltrationType;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -104,7 +104,7 @@ abstract class BaseGrid extends Component
             );
         }
 
-        return view('livewire.grid', [
+        return view('grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
             'theme' => $this->theme,
