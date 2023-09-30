@@ -1,13 +1,13 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Livewire;
+namespace BoredProgrammers\LaraGrid\Components;
 
-use Closure;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use BoredProgrammers\LaraGrid\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
+use Closure;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use UnitEnum;
 
 class Column

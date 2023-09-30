@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Livewire;
+namespace BoredProgrammers\LaraGrid\Theme;
 
 class UiKitTheme extends Theme
 {

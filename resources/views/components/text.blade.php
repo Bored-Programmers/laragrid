@@ -1,5 +1,5 @@
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Livewire\Column $column */
+    /** @var \BoredProgrammers\LaraGrid\Components\Column $column */
     'column',
     /** @var \BoredProgrammers\LaraGrid\Livewire\Theme $theme */
     'theme'

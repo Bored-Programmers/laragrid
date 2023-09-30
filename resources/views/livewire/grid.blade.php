@@ -1,6 +1,6 @@
 @php
     /**
-    * @var \BoredProgrammers\LaraGrid\Livewire\Column[] $columns
+    * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
     * @var \BoredProgrammers\LaraGrid\Livewire\Theme $theme
  */
     $theme = new $theme(); // fixme - jde to jinak? Nejak mi to blblo a nechtel se objekt passnout z gridu

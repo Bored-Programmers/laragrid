@@ -2,6 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Livewire;
 
+use BoredProgrammers\LaraGrid\Components\Column;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,6 +28,8 @@ abstract class BaseGrid extends Component
 
     public int $perPage = 25;
 
+    public string $theme;
+
     protected abstract function getColumns();
 
     protected abstract function getDataSource();
@@ -51,6 +54,10 @@ abstract class BaseGrid extends Component
      */
     public function render(): View
     {
+        if (!$this->theme) {
+            throw new Exception('Theme is not set!');
+        }
+
         /**
          * @var Column[] $columns
          * @var Builder  $query
@@ -104,7 +111,7 @@ abstract class BaseGrid extends Component
             );
         }
 
-        return view('grid', [
+        return view('livewire.grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
             'theme' => $this->theme,
