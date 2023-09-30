@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid;
+namespace BoredProgrammers\LaraGrid\Livewire;
 
 class Theme
 {
