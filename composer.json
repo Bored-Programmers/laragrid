@@ -29,7 +29,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "BoredProgrammers\\Providers\\LaraGridServiceProvider"
+        "BoredProgrammers\\LaraGrid\\Providers\\LaraGridServiceProvider"
       ]
     }
   }
