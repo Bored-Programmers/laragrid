@@ -4,7 +4,7 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "laravel/laravel": "^10.0",
+    "illuminate/support": "^10.0",
     "livewire/livewire": "^3.0",
     "kirschbaum-development/eloquent-power-joins": "^3.2"
   },
