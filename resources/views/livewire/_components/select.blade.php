@@ -1,10 +1,10 @@
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Livewire\Column $column */
+    /** @var \BoredProgrammers\LaraGrid\Column $column */
     'column',
 ])
 
 @php
-    /** @var \LaraGrid\Filters\SelectFilter $filter */
+    /** @var \BoredProgrammers\LaraGrid\Filters\SelectFilter $filter */
     $filter = $column->getFilter()
 @endphp
 

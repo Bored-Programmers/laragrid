@@ -1,9 +1,9 @@
 <?php
 
-namespace LaraGrid\Filters;
+namespace BoredProgrammers\LaraGrid\Filters;
 
-use LaraGrid\Enums\FilterType;
-use LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Enums\FilterType;
+use BoredProgrammers\LaraGrid\Enums\FiltrationType;
 use Illuminate\Support\Collection;
 
 class SelectFilter extends BaseFilter

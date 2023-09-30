@@ -1,7 +1,7 @@
 @php
     /**
-    * @var \App\Modules\Admin\Livewire\LaraGrid\Column[] $columns
-    * @var \App\Modules\Admin\Livewire\LaraGrid\Themes\Theme $theme
+    * @var \BoredProgrammers\LaraGrid\Column[] $columns
+    * @var \BoredProgrammers\LaraGrid\Theme $theme
  */
     $theme = new $theme(); // fixme - jde to jinak? Nejak mi to blblo a nechtel se objekt passnout z gridu
 @endphp
@@ -18,7 +18,7 @@
                         wire:key="column-filter-{{ $column->getModelField() }}"
                         class="{{ $theme->getTh() }}"
                 >
-                    <x-admin::laragrid.column-filter
+                    <x-laragrid::column-filter
                             :theme="$theme"
                             :column="$column"
                             :sort-column="$sortColumn"

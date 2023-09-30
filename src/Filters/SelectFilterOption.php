@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraGrid\Filters;
+namespace BoredProgrammers\LaraGrid\Filters;
 
 class SelectFilterOption
 {
