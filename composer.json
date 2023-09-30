@@ -2,6 +2,7 @@
   "name": "bored-programmers/laragrid",
   "description": "Laravel grid package",
   "type": "library",
+  "license": "MIT",
   "require": {
     "laravel/laravel": "^10.2",
     "livewire/livewire": "^3.0",
