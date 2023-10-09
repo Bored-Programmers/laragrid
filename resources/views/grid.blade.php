@@ -1,8 +1,9 @@
 @php
     /**
     * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
-    * @var \BoredProgrammers\LaraGrid\Livewire\Theme $theme
- */
+    * @var \BoredProgrammers\LaraGrid\Components\ActionButton[] $actionButtons
+    * @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme
+    */
     $theme = new $theme(); // fixme - jde to jinak? Nejak mi to blblo a nechtel se objekt passnout z gridu
 @endphp
 <div>
@@ -26,6 +27,9 @@
                     />
                 </th>
             @endforeach
+            <th>
+                @lang('laraGrid.actions')
+            </th>
         </tr>
         </thead>
         <tbody class="{{ $theme->getTbody() }}">
@@ -34,6 +38,15 @@
                 @foreach($columns as $column)
                     <td class="{{ $theme->getTd() }}">
                         {{ $column->callRenderer($record) }}
+                    </td>
+                @endforeach
+                @foreach($actionButtons as $actionButton)
+                    <td class="{{ $theme->getTd() }}">
+                        <x-laragrid::action-button
+                                :theme="$theme"
+                                :action-button="$actionButton"
+                                :record="$record"
+                        />
                     </td>
                 @endforeach
             </tr>

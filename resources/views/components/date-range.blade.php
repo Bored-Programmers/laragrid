@@ -1,9 +1,9 @@
 @props([
     /** @var \BoredProgrammers\LaraGrid\Components\Column $column */
     'column',
-    /** @var \BoredProgrammers\LaraGrid\Livewire\Theme $theme */
+    /** @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme */
     'theme',
 ])
 
-<input type="date" wire:model.live="filter.{{ $column->getModelField() }}.from"> -
-<input type="date" wire:model.live="filter.{{ $column->getModelField() }}.to">
+<input type="date" wire:model.live="filter.{{ $column->getModelField() }}.from" class="{{ $theme->getFilterDate() }}"> -
+<input type="date" wire:model.live="filter.{{ $column->getModelField() }}.to" class="{{ $theme->getFilterDate() }}">

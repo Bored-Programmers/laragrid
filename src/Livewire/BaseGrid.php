@@ -3,7 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Livewire;
 
 use BoredProgrammers\LaraGrid\Components\Column;
-use BoredProgrammers\LaraGrid\Theme\Theme;
+use BoredProgrammers\LaraGrid\Theme\BaseTheme;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +29,7 @@ abstract class BaseGrid extends Component
 
     public int $perPage = 25;
 
-    public string $theme = Theme::class;
+    public string $theme = BaseTheme::class;
 
     protected abstract function getColumns();
 

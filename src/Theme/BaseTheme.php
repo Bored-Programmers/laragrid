@@ -2,7 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Theme;
 
-class Theme
+class BaseTheme
 {
 
     private ?string $table = null;
@@ -12,15 +12,18 @@ class Theme
     private ?string $th = null;
     private ?string $tbody = null;
     private ?string $td = null;
+    private ?string $actionContainer = null;
     private ?string $pagination = null;
     private ?string $filterText = null;
+    private ?string $filterSelect = null;
+    private ?string $filterDate = null;
 
     public function getTable(): ?string
     {
         return $this->table;
     }
 
-    public function setTable(?string $table): Theme
+    public function setTable(?string $table): BaseTheme
     {
         $this->table = $table;
 
@@ -32,7 +35,7 @@ class Theme
         return $this->resetLink;
     }
 
-    public function setResetLink(?string $resetLink): Theme
+    public function setResetLink(?string $resetLink): BaseTheme
     {
         $this->resetLink = $resetLink;
 
@@ -44,7 +47,7 @@ class Theme
         return $this->thead;
     }
 
-    public function setThead(?string $thead): Theme
+    public function setThead(?string $thead): BaseTheme
     {
         $this->thead = $thead;
 
@@ -56,7 +59,7 @@ class Theme
         return $this->tr;
     }
 
-    public function setTr(?string $tr): Theme
+    public function setTr(?string $tr): BaseTheme
     {
         $this->tr = $tr;
 
@@ -68,7 +71,7 @@ class Theme
         return $this->th;
     }
 
-    public function setTh(?string $th): Theme
+    public function setTh(?string $th): BaseTheme
     {
         $this->th = $th;
 
@@ -80,7 +83,7 @@ class Theme
         return $this->tbody;
     }
 
-    public function setTbody(?string $tbody): Theme
+    public function setTbody(?string $tbody): BaseTheme
     {
         $this->tbody = $tbody;
 
@@ -92,7 +95,7 @@ class Theme
         return $this->td;
     }
 
-    public function setTd(?string $td): Theme
+    public function setTd(?string $td): BaseTheme
     {
         $this->td = $td;
 
@@ -104,7 +107,7 @@ class Theme
         return $this->pagination;
     }
 
-    public function setPagination(?string $pagination): Theme
+    public function setPagination(?string $pagination): BaseTheme
     {
         $this->pagination = $pagination;
 
@@ -116,9 +119,45 @@ class Theme
         return $this->filterText;
     }
 
-    public function setFilterText(?string $filterText): Theme
+    public function setFilterText(?string $filterText): BaseTheme
     {
         $this->filterText = $filterText;
+
+        return $this;
+    }
+
+    public function getFilterSelect(): ?string
+    {
+        return $this->filterSelect;
+    }
+
+    public function setFilterSelect(?string $filterSelect): BaseTheme
+    {
+        $this->filterSelect = $filterSelect;
+
+        return $this;
+    }
+
+    public function getFilterDate(): ?string
+    {
+        return $this->filterDate;
+    }
+
+    public function setFilterDate(?string $filterDate): BaseTheme
+    {
+        $this->filterDate = $filterDate;
+
+        return $this;
+    }
+
+    public function getActionContainer(): ?string
+    {
+        return $this->actionContainer;
+    }
+
+    public function setActionContainer(?string $actionContainer): BaseTheme
+    {
+        $this->actionContainer = $actionContainer;
 
         return $this;
     }

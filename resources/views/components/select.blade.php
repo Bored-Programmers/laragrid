@@ -1,6 +1,8 @@
 @props([
     /** @var \BoredProgrammers\LaraGrid\Components\Column $column */
     'column',
+    /** @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme */
+    'theme',
 ])
 
 @php
@@ -8,7 +10,7 @@
     $filter = $column->getFilter()
 @endphp
 
-<select wire:model.live="filter.{{ $column->getModelField() }}">
+<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $theme->getFilterSelect() }}">
     @if($filter->getPrompt())
         <option wire:key="item-prompt" value="">@lang($filter->getPrompt())</option>
     @endif
