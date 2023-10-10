@@ -37,7 +37,11 @@
         <x-laragrid::select :column="$column" :theme="$theme" />
         @break
 
-    @case(\BoredProgrammers\LaraGrid\Enums\FilterType::DATE)
+    @case(\BoredProgrammers\LaraGrid\Enums\FilterType::DATE_RANGE)
         <x-laragrid::date-range :column="$column" :theme="$theme" />
+        @break
+
+    @case(\BoredProgrammers\LaraGrid\Enums\FilterType::DATE)
+        <x-laragrid::date :column="$column" :theme="$theme" />
         @break
 @endswitch

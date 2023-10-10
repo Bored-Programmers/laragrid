@@ -10,11 +10,11 @@ class DateFilter extends BaseFilter
 
     public static function make(): self
     {
-        $column = new static();
-        $column->setFiltrationType(FiltrationType::DATE_BETWEEN);
-        $column->setFilterType(FilterType::DATE);
+        $filter = new static();
+        $filter->setFiltrationType(FiltrationType::DATE_BETWEEN);
+        $filter->setFilterType(FilterType::DATE);
 
-        return $column;
+        return $filter;
     }
 
 }

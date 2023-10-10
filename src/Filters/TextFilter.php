@@ -10,11 +10,11 @@ class TextFilter extends BaseFilter
 
     public static function make(): self
     {
-        $column = new static();
-        $column->setFiltrationType(FiltrationType::LIKE);
-        $column->setFilterType(FilterType::TEXT);
+        $filter = new static();
+        $filter->setFiltrationType(FiltrationType::LIKE);
+        $filter->setFilterType(FilterType::TEXT);
 
-        return $column;
+        return $filter;
     }
 
 }

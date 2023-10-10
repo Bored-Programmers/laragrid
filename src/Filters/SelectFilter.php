@@ -16,12 +16,12 @@ class SelectFilter extends BaseFilter
 
     public static function make(): self
     {
-        $column = new static();
-        $column->setFiltrationType(FiltrationType::EQUAL);
-        $column->setFilterType(FilterType::SELECT);
-        $column->setPrompt('laraGrid.choose');
+        $filter = new static();
+        $filter->setFiltrationType(FiltrationType::EQUAL);
+        $filter->setFilterType(FilterType::SELECT);
+        $filter->setPrompt('laraGrid.choose');
 
-        return $column;
+        return $filter;
     }
 
     public function getOptions(): array
