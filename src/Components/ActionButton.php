@@ -2,32 +2,40 @@
 
 namespace BoredProgrammers\LaraGrid\Components;
 
+use BoredProgrammers\LaraGrid\Enums\FilterType;
+use Closure;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+
 class ActionButton
 {
 
-    protected string $route;
+    protected Closure $route;
 
     protected string $label;
 
-    protected string $icon;
+    protected Closure $renderer;
 
-    protected string $class;
-
-    public function __construct()
+    public function __construct(string $label, Closure $route)
     {
+        $this->setLabel(__($label));
+        $this->setRoute($route);
+        $this->setRenderer(function (Model $model) {
+            return $this->getDefaultRenderer($model);
+        });
     }
 
-    public static function make(): self
+    public static function make(string $label, Closure $route): self
     {
-        return new static();
+        return new static($label, $route);
     }
 
-    public function getRoute(): string
+    public function getRoute($model): string
     {
-        return $this->route;
+        return ($this->route)($model);
     }
 
-    public function setRoute(string $route): ActionButton
+    public function setRoute(Closure $route): ActionButton
     {
         $this->route = $route;
 
@@ -44,6 +52,28 @@ class ActionButton
         $this->label = $label;
 
         return $this;
+    }
+
+    public function getRenderer(): Closure
+    {
+        return $this->renderer;
+    }
+
+    public function setRenderer(Closure $renderer): ActionButton
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
+
+    public function callRenderer(Model $model)
+    {
+        return ($this->renderer)($model);
+    }
+
+    public function getDefaultRenderer(Model $model): string
+    {
+        return __($this->getLabel());
     }
 
 }

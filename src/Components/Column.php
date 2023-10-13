@@ -31,8 +31,8 @@ class Column
         $this->setLabel($label ?: $modelField);
         $this->setSortable();
 
-        $this->setRenderer(function ($value) {
-            return $this->defaultRender($value);
+        $this->setRenderer(function (Model $model) {
+            return $this->defaultRender($model);
         });
     }
 
@@ -41,9 +41,9 @@ class Column
         return new static($modelField, $label);
     }
 
-    public function defaultRender(Model $record)
+    public function defaultRender(Model $model)
     {
-        $value = data_get($record, $this->getModelField());
+        $value = data_get($model, $this->getModelField());
 
         if ($value instanceof UnitEnum) {
             $value = $value->name;

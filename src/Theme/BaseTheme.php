@@ -17,6 +17,7 @@ class BaseTheme
     private ?string $filterText = null;
     private ?string $filterSelect = null;
     private ?string $filterDate = null;
+    private ?string $actionButton = null;
 
     public function getTable(): ?string
     {
@@ -158,6 +159,18 @@ class BaseTheme
     public function setActionContainer(?string $actionContainer): BaseTheme
     {
         $this->actionContainer = $actionContainer;
+
+        return $this;
+    }
+
+    public function getActionButton(): ?string
+    {
+        return $this->actionButton;
+    }
+
+    public function setActionButton(?string $actionButton): BaseTheme
+    {
+        $this->actionButton = $actionButton;
 
         return $this;
     }

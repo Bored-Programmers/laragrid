@@ -2,6 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Livewire;
 
+use BoredProgrammers\LaraGrid\Components\ActionButton;
 use BoredProgrammers\LaraGrid\Components\Column;
 use BoredProgrammers\LaraGrid\Theme\BaseTheme;
 use Exception;
@@ -31,8 +32,9 @@ abstract class BaseGrid extends Component
 
     public string $theme = BaseTheme::class;
 
-    protected abstract function getColumns();
+    protected abstract function getRowColumns();
 
+    /** @return Builder */
     protected abstract function getDataSource();
 
     public function resetFilters(): void
@@ -59,12 +61,8 @@ abstract class BaseGrid extends Component
             throw new Exception('Theme is not set!');
         }
 
-        /**
-         * @var Column[] $columns
-         * @var Builder  $query
-         */
-        $columns = $this->getColumns();
         $query = $this->getDataSource();
+        $columns = $this->getColumns();
 
         foreach ($columns as $column) {
             $filter = $column->getFilter();
@@ -78,9 +76,7 @@ abstract class BaseGrid extends Component
                     . '" does not exist.'
                 );
             }
-        }
 
-        foreach ($columns as $column) {
             $activeFilters = Arr::dot($this->filter);
 
             if (array_key_exists($column->getModelField(), $activeFilters)) {
@@ -115,8 +111,40 @@ abstract class BaseGrid extends Component
         return view('laragrid::grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
+            'actionButtons' => $this->getActionButtons(),
             'theme' => $this->theme,
         ]);
+    }
+
+    /************************************************ PRIVATE ************************************************/
+
+    /** @return Column[] */
+    private function getColumns(): array
+    {
+        $rowColumns = $this->getRowColumns();
+        $columns = [];
+
+        foreach ($rowColumns as $key => $column) {
+            if ($column instanceof Column) {
+                $columns[] = $column;
+            }
+        }
+
+        return $columns;
+    }
+
+    private function getActionButtons(): array
+    {
+        $rowColumns = $this->getRowColumns();
+        $actionButtons = [];
+
+        foreach ($rowColumns as $key => $column) {
+            if ($column instanceof ActionButton) {
+                $actionButtons[] = $column;
+            }
+        }
+
+        return $actionButtons;
     }
 
 }

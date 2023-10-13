@@ -40,7 +40,8 @@
                         {{ $column->callRenderer($record) }}
                     </td>
                 @endforeach
-                @foreach($actionButtons as $actionButton)
+
+                @foreach ($actionButtons as $actionButton)
                     <td class="{{ $theme->getTd() }}">
                         <x-laragrid::action-button
                                 :theme="$theme"
