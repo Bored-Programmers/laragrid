@@ -4,7 +4,7 @@ This package is in development, so it's not ready for use in your projects. If y
 
 ## License
 
-This project is licensed under the [MIT license](https://github.com/Bored-Programmers/laragrid/blob/main/README.md).
+This project is licensed under the [MIT license](https://github.com/Bored-Programmers/laragrid/blob/main/LICENSE.md).
 
 ### Contribution
 
