@@ -8,7 +8,7 @@ use BoredProgrammers\LaraGrid\Enums\FiltrationType;
 class TextFilter extends BaseFilter
 {
 
-    public static function make(): self
+    public static function make(): static
     {
         $filter = new static();
         $filter->setFiltrationType(FiltrationType::LIKE);

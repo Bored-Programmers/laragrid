@@ -18,7 +18,7 @@ abstract class BaseFilter
 
     public function __construct()
     {
-        $this->setBuilder(function (\Illuminate\Database\Eloquent\Builder|Builder $query, $field, $value) {
+        $this->setBuilder(function (\Illuminate\Database\Eloquent\Builder|Builder $query, string $field, $value) {
             match ($this->getFiltrationType()) {
                 FiltrationType::LIKE => $query->whereLike($field, $value),
                 FiltrationType::EQUAL => $query->whereEqual($field, $value),
@@ -33,12 +33,12 @@ abstract class BaseFilter
 
     /*********************************************** GETTERS && SETTERS ***********************************************/
 
-    public function callBuilder(Builder|\Illuminate\Database\Eloquent\Builder $query, $field, $value)
+    public function callBuilder(Builder|\Illuminate\Database\Eloquent\Builder $query, string $field, $value)
     {
         return ($this->builder)($query, $field, $value);
     }
 
-    public function setBuilder(Closure $builder): BaseFilter
+    public function setBuilder(Closure $builder): static
     {
         $this->builder = $builder;
 
@@ -50,9 +50,11 @@ abstract class BaseFilter
         return $this->filterType;
     }
 
-    public function setFilterType(FilterType $filterType): void
+    public function setFilterType(FilterType $filterType): static
     {
         $this->filterType = $filterType;
+
+        return $this;
     }
 
     public function getFiltrationType(): FiltrationType

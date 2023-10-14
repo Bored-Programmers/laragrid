@@ -3,27 +3,29 @@
     * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
     * @var \BoredProgrammers\LaraGrid\Components\ActionButton[] $actionButtons
     * @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme
+    * @var array $filter
     */
-    $theme = new $theme(); // fixme - jde to jinak? Nejak mi to blblo a nechtel se objekt passnout z gridu
 @endphp
 <div>
     <table class="{{ $theme->getTable() }}">
-        <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-            @lang('laraGrid.migrationReset')
-        </a>
+        @if(!count($filter))
+            <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
+                @lang('laraGrid.migrationReset')
+            </a>
+        @endif
 
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
                 <th
-                        wire:key="column-filter-{{ $column->getModelField() }}"
-                        class="{{ $theme->getTh() }}"
+                    wire:key="column-filter-{{ $column->getModelField() }}"
+                    class="{{ $theme->getTh() }}"
                 >
                     <x-laragrid::column-filter
-                            :theme="$theme"
-                            :column="$column"
-                            :sort-column="$sortColumn"
-                            :sort-direction="$sortDirection"
+                        :theme="$theme"
+                        :column="$column"
+                        :sort-column="$sortColumn"
+                        :sort-direction="$sortDirection"
                     />
                 </th>
             @endforeach
@@ -44,9 +46,9 @@
                 @foreach ($actionButtons as $actionButton)
                     <td class="{{ $theme->getTd() }}">
                         <x-laragrid::action-button
-                                :theme="$theme"
-                                :action-button="$actionButton"
-                                :record="$record"
+                            :theme="$theme"
+                            :action-button="$actionButton"
+                            :record="$record"
                         />
                     </td>
                 @endforeach

@@ -10,16 +10,15 @@ class SelectFilter extends BaseFilter
 {
 
     /** @var SelectFilterOption[] */
-    protected array $options;
+    protected array $options = [];
 
-    protected string $prompt;
+    protected string $prompt = 'laraGrid.choose';
 
-    public static function make(): self
+    public static function make(): static
     {
         $filter = new static();
         $filter->setFiltrationType(FiltrationType::EQUAL);
         $filter->setFilterType(FilterType::SELECT);
-        $filter->setPrompt('laraGrid.choose');
 
         return $filter;
     }
@@ -47,7 +46,7 @@ class SelectFilter extends BaseFilter
         return $this->prompt;
     }
 
-    public function setPrompt(string $prompt): SelectFilter
+    public function setPrompt(string $prompt): static
     {
         $this->prompt = $prompt;
 
