@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use UnitEnum;
 
-class Column
+class Column extends BaseComponent
 {
 
     protected string $modelField;
 
     protected string $label;
 
-    protected bool $sortable = false;
+    protected bool $sortable = true;
 
     protected ?BaseFilter $filter = null;
 
@@ -29,14 +29,13 @@ class Column
     {
         $this->setModelField($modelField);
         $this->setLabel($label ?: $modelField);
-        $this->setSortable();
 
         $this->setRenderer(function (Model $model) {
             return $this->defaultRender($model);
         });
     }
 
-    public static function make(string $modelField, string $label): self
+    public static function make(string $modelField, string $label): static
     {
         return new static($modelField, $label);
     }
@@ -62,9 +61,9 @@ class Column
         return $value;
     }
 
-    public function callRenderer($value)
+    public function callRenderer(Model $model)
     {
-        return ($this->renderer)($value);
+        return ($this->renderer)($model);
     }
 
     public function setRenderer(Closure $renderer): Column
@@ -111,7 +110,7 @@ class Column
         return $this->sortable;
     }
 
-    public function setSortable($isSortable = true): self
+    public function setSortable($isSortable = true): static
     {
         $this->sortable = $isSortable;
 

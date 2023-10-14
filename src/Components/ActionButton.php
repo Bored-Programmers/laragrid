@@ -2,12 +2,10 @@
 
 namespace BoredProgrammers\LaraGrid\Components;
 
-use BoredProgrammers\LaraGrid\Enums\FilterType;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
-class ActionButton
+class ActionButton extends BaseComponent
 {
 
     protected Closure $route;
@@ -35,7 +33,7 @@ class ActionButton
         return ($this->route)($model);
     }
 
-    public function setRoute(Closure $route): ActionButton
+    public function setRoute(Closure $route): static
     {
         $this->route = $route;
 
@@ -47,7 +45,7 @@ class ActionButton
         return $this->label;
     }
 
-    public function setLabel(string $label): ActionButton
+    public function setLabel(string $label): static
     {
         $this->label = $label;
 
@@ -59,7 +57,7 @@ class ActionButton
         return $this->renderer;
     }
 
-    public function setRenderer(Closure $renderer): ActionButton
+    public function setRenderer(Closure $renderer): static
     {
         $this->renderer = $renderer;
 

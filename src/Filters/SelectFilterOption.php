@@ -15,7 +15,7 @@ class SelectFilterOption
         $this->setLabel($label);
     }
 
-    public static function make(mixed $value, mixed $label = null): self
+    public static function make(mixed $value, mixed $label = null): static
     {
         return new static($value, $label ?: $value);
     }
@@ -25,9 +25,11 @@ class SelectFilterOption
         return $this->label;
     }
 
-    public function setLabel($label): void
+    public function setLabel($label): static
     {
         $this->label = $label;
+
+        return $this;
     }
 
     public function getValue()
@@ -35,9 +37,11 @@ class SelectFilterOption
         return $this->value;
     }
 
-    public function setValue($value): void
+    public function setValue($value): static
     {
         $this->value = $value;
+
+        return $this;
     }
 
 }

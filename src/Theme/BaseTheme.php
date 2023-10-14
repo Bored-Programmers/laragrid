@@ -24,7 +24,7 @@ class BaseTheme
         return $this->table;
     }
 
-    public function setTable(?string $table): BaseTheme
+    public function setTable(?string $table): static
     {
         $this->table = $table;
 
@@ -36,7 +36,7 @@ class BaseTheme
         return $this->resetLink;
     }
 
-    public function setResetLink(?string $resetLink): BaseTheme
+    public function setResetLink(?string $resetLink): static
     {
         $this->resetLink = $resetLink;
 
@@ -48,7 +48,7 @@ class BaseTheme
         return $this->thead;
     }
 
-    public function setThead(?string $thead): BaseTheme
+    public function setThead(?string $thead): static
     {
         $this->thead = $thead;
 
@@ -60,7 +60,7 @@ class BaseTheme
         return $this->tr;
     }
 
-    public function setTr(?string $tr): BaseTheme
+    public function setTr(?string $tr): static
     {
         $this->tr = $tr;
 
@@ -72,7 +72,7 @@ class BaseTheme
         return $this->th;
     }
 
-    public function setTh(?string $th): BaseTheme
+    public function setTh(?string $th): static
     {
         $this->th = $th;
 
@@ -84,7 +84,7 @@ class BaseTheme
         return $this->tbody;
     }
 
-    public function setTbody(?string $tbody): BaseTheme
+    public function setTbody(?string $tbody): static
     {
         $this->tbody = $tbody;
 
@@ -96,7 +96,7 @@ class BaseTheme
         return $this->td;
     }
 
-    public function setTd(?string $td): BaseTheme
+    public function setTd(?string $td): static
     {
         $this->td = $td;
 
@@ -108,7 +108,7 @@ class BaseTheme
         return $this->pagination;
     }
 
-    public function setPagination(?string $pagination): BaseTheme
+    public function setPagination(?string $pagination): static
     {
         $this->pagination = $pagination;
 
@@ -120,7 +120,7 @@ class BaseTheme
         return $this->filterText;
     }
 
-    public function setFilterText(?string $filterText): BaseTheme
+    public function setFilterText(?string $filterText): static
     {
         $this->filterText = $filterText;
 
@@ -132,7 +132,7 @@ class BaseTheme
         return $this->filterSelect;
     }
 
-    public function setFilterSelect(?string $filterSelect): BaseTheme
+    public function setFilterSelect(?string $filterSelect): static
     {
         $this->filterSelect = $filterSelect;
 
@@ -144,7 +144,7 @@ class BaseTheme
         return $this->filterDate;
     }
 
-    public function setFilterDate(?string $filterDate): BaseTheme
+    public function setFilterDate(?string $filterDate): static
     {
         $this->filterDate = $filterDate;
 
@@ -156,7 +156,7 @@ class BaseTheme
         return $this->actionContainer;
     }
 
-    public function setActionContainer(?string $actionContainer): BaseTheme
+    public function setActionContainer(?string $actionContainer): static
     {
         $this->actionContainer = $actionContainer;
 
@@ -168,7 +168,7 @@ class BaseTheme
         return $this->actionButton;
     }
 
-    public function setActionButton(?string $actionButton): BaseTheme
+    public function setActionButton(?string $actionButton): static
     {
         $this->actionButton = $actionButton;
 

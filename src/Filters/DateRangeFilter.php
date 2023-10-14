@@ -10,7 +10,7 @@ class DateRangeFilter extends BaseFilter
 
     protected bool $isOneInput = false;
 
-    public static function make($isOneInput = false): self
+    public static function make($isOneInput = false): static
     {
         $filter = new static();
         $filter->setFiltrationType(FiltrationType::DATE_BETWEEN);
@@ -25,7 +25,7 @@ class DateRangeFilter extends BaseFilter
         return $this->isOneInput;
     }
 
-    public function setIsOneInput(bool $isOneInput): DateRangeFilter
+    public function setIsOneInput(bool $isOneInput = true): static
     {
         $this->isOneInput = $isOneInput;
 
