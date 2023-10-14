@@ -3,7 +3,6 @@
     * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
     * @var \BoredProgrammers\LaraGrid\Components\ActionButton[] $actionButtons
     * @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme
-    * @var array $filter
     */
 @endphp
 <div>
