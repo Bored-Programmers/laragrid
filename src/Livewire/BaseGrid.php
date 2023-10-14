@@ -31,7 +31,7 @@ abstract class BaseGrid extends Component
 
     public int $perPage = 25;
 
-    public string $theme = BaseTheme::class;
+    protected string $theme = BaseTheme::class;
 
     /** @return BaseComponent[] */
     protected abstract function getRowColumns(): array;

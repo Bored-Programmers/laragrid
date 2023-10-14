@@ -8,11 +8,9 @@
 @endphp
 <div>
     <table class="{{ $theme->getTable() }}">
-        @if(!count($filter))
-            <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-                @lang('laraGrid.migrationReset')
-            </a>
-        @endif
+        <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
+            @lang('laraGrid.migrationReset')
+        </a>
 
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
