@@ -23,10 +23,10 @@ abstract class BaseLaraGrid extends Component
     #[Url]
     public array $filter = [];
 
-    #[Url(keep: true)]
+    #[Url]
     public string $sortColumn = 'id';
 
-    #[Url(keep: true)]
+    #[Url]
     public string $sortDirection = 'desc';
 
     public int $perPage = 25;
