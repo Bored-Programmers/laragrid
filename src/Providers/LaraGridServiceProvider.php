@@ -18,9 +18,15 @@ class LaraGridServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../Config/laragrid.php' => config_path('laragrid.php'),
+        ], 'laragrid-config');
+
+        $this->publishes([
             __DIR__ . '/../Lang' => $this->app->langPath('vendor/laragrid'),
+        ], 'laragrid-lang');
+
+        $this->publishes([
             __DIR__ . '/../../resources/Views' => resource_path('views/vendor/courier'),
-        ]);
+        ], 'laragrid-views');
 
         Builder::macro('whereLike', function ($attributes, $searchTerm) {
             if ($searchTerm === null || $searchTerm === '') {
