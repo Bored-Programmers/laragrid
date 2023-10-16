@@ -8,34 +8,33 @@ use Illuminate\Database\Eloquent\Model;
 class ActionButton extends BaseLaraGridComponent
 {
 
-    protected Closure $route;
+    protected Closure $redirect;
 
     protected string $label;
 
     protected Closure $renderer;
 
-    public function __construct(string $label, Closure $route)
+    public function __construct(string $label)
     {
         $this->setLabel(__($label));
-        $this->setRoute($route);
         $this->setRenderer(function (Model $model) {
             return $this->getDefaultRenderer($model);
         });
     }
 
-    public static function make(string $label, Closure $route): self
+    public static function make(string $label): self
     {
-        return new static($label, $route);
+        return new static($label);
     }
 
-    public function getRoute($model): string
+    public function getRedirect($model): string
     {
-        return ($this->route)($model);
+        return ($this->redirect)($model);
     }
 
-    public function setRoute(Closure $route): static
+    public function setRedirect(Closure $redirect): static
     {
-        $this->route = $route;
+        $this->redirect = $redirect;
 
         return $this;
     }

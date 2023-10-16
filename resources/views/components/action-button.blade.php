@@ -8,7 +8,7 @@
 
 <a
         class="{{ $theme->getActionButton() }}"
-        href="{{ $actionButton->getRoute($record) }}"
+        href="{{ $actionButton->getRedirect($record) }}"
 >
     {{ $actionButton->callRenderer($record) }}
 </a>
