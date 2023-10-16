@@ -32,6 +32,7 @@ abstract class BaseLaraGrid extends Component
     #[Url]
     public string $sortDirection = 'desc';
 
+    #[Url]
     public int $perPage = 25;
 
     protected array $perPageOptions = [25, 50, 100];

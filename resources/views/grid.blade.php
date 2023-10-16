@@ -72,15 +72,17 @@
         </tbody>
     </table>
 
-    <div class="{{ $theme->getMaxResultsSelectContainer() }}">
-        <select wire:model="perPage" class="{{ $theme->getMaxResultsSelect() }}">
-            @foreach($perPageOptions as $option)
-                <option value="{{ $option }}">{{ $option }}</option>
-            @endforeach
-        </select>
-    </div>
+    <div class="{{ $theme->getPaginationContainer() }}">
+        <div class="{{ $theme->getPaginationMaxResultsContainer() }}">
+            <select wire:model.live="perPage" class="{{ $theme->getPaginationMaxResults() }}">
+                @foreach($perPageOptions as $option)
+                    <option value="{{ $option }}">{{ $option }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <div class="{{ $theme->getPagination() }}">
-        {{ $records->links() }}
+        <div class="{{ $theme->getPagination() }}">
+            {{ $records->links() }}
+        </div>
     </div>
 </div>

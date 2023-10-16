@@ -31,9 +31,11 @@ class BaseLaraGridTheme
 
     private ?string $actionButton = null;
 
-    private ?string $maxResultsSelect = null;
+    private ?string $paginationMaxResults = null;
 
-    private ?string $maxResultsSelectContainer = null;
+    private ?string $paginationMaxResultsContainer = null;
+
+    private ?string $paginationContainer = null;
 
     public function getTable(): ?string
     {
@@ -191,26 +193,38 @@ class BaseLaraGridTheme
         return $this;
     }
 
-    public function getMaxResultsSelect(): ?string
+    public function getPaginationMaxResults(): ?string
     {
-        return $this->maxResultsSelect;
+        return $this->paginationMaxResults;
     }
 
-    public function setMaxResultsSelect(?string $maxResultsSelect): BaseLaraGridTheme
+    public function setPaginationMaxResults(?string $paginationMaxResults): BaseLaraGridTheme
     {
-        $this->maxResultsSelect = $maxResultsSelect;
+        $this->paginationMaxResults = $paginationMaxResults;
 
         return $this;
     }
 
-    public function getMaxResultsSelectContainer(): ?string
+    public function getPaginationMaxResultsContainer(): ?string
     {
-        return $this->maxResultsSelectContainer;
+        return $this->paginationMaxResultsContainer;
     }
 
-    public function setMaxResultsSelectContainer(?string $maxResultsSelectContainer): BaseLaraGridTheme
+    public function setPaginationMaxResultsContainer(?string $paginationMaxResultsContainer): BaseLaraGridTheme
     {
-        $this->maxResultsSelectContainer = $maxResultsSelectContainer;
+        $this->paginationMaxResultsContainer = $paginationMaxResultsContainer;
+
+        return $this;
+    }
+
+    public function getPaginationContainer(): ?string
+    {
+        return $this->paginationContainer;
+    }
+
+    public function setPaginationContainer(?string $paginationContainer): BaseLaraGridTheme
+    {
+        $this->paginationContainer = $paginationContainer;
 
         return $this;
     }
