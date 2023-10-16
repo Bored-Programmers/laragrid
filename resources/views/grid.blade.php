@@ -47,7 +47,7 @@
                         <td class="{{ $theme->getTd() }}">
                             <x-laragrid::action-button
                                     :theme="$theme"
-                                    :action-button="$actionButton"
+                                    :action-button="$column"
                                     :record="$record"
                             />
                         </td>
