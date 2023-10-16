@@ -1,9 +1,7 @@
 @php
-    namespace BoredProgrammers\LaraGrid\Components;
-
     /**
-    * @var Column[] $columns
-    * @var ActionButton[] $actionButtons
+    * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
+    * @var \BoredProgrammers\LaraGrid\Components\ActionButton[] $actionButtons
     * @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme
     */
 @endphp
@@ -16,7 +14,7 @@
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
-                @if($column instanceof Column)
+                @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
                     <th
                             wire:key="column-filter-{{ $column->getModelField() }}"
                             class="{{ $theme->getTh() }}"
@@ -39,13 +37,13 @@
         @foreach($records as $record)
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    @if($column instanceof Column)
+                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
                         <td class="{{ $theme->getTd() }}">
                             {{ $column->callRenderer($record) }}
                         </td>
                     @endif
 
-                    @if($column instanceof ActionButton)
+                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\ActionButton)
                         <td class="{{ $theme->getTd() }}">
                             <x-laragrid::action-button
                                     :theme="$theme"
