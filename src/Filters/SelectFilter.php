@@ -12,7 +12,7 @@ class SelectFilter extends BaseFilter
     /** @var SelectFilterOption[] */
     protected array $options = [];
 
-    protected string $prompt = 'laraGrid.choose';
+    protected string $prompt = 'laragrid.filter.choose';
 
     public static function make(): static
     {

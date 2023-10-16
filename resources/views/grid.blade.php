@@ -8,7 +8,7 @@
 <div>
     <table class="{{ $theme->getTable() }}">
         <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-            @lang('laraGrid.migrationReset')
+            @lang('laragrid::translations.filter.reset')
         </a>
 
         <thead class="{{ $theme->getThead() }}">
@@ -28,7 +28,7 @@
                 @endif
             @endforeach
             <th>
-                @lang('laraGrid.actions')
+                @lang('laragrid::translations.actions')
             </th>
         </tr>
         </thead>

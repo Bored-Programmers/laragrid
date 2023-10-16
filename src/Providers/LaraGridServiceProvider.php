@@ -13,7 +13,14 @@ class LaraGridServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../Lang', 'laragrid');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laragrid');
+
+        $this->publishes([
+            __DIR__ . '/../Config/laragrid.php' => config_path('laragrid.php'),
+            __DIR__ . '/../Lang' => $this->app->langPath('vendor/laragrid'),
+            __DIR__ . '/../../resources/Views' => resource_path('views/vendor/courier'),
+        ]);
 
         Builder::macro('whereLike', function ($attributes, $searchTerm) {
             if ($searchTerm === null || $searchTerm === '') {

@@ -9,8 +9,8 @@ class BooleanFilter extends SelectFilter
     {
         $filter = parent::make();
         $filter->setOptions([
-            1 => __('laraGrid.yes'),
-            0 => __('laraGrid.no'),
+            1 => __('laragrid::translations.filter.options.yes'),
+            0 => __('laragrid::translations.filter.options.no'),
         ]);
 
         return $filter;

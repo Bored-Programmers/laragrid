@@ -48,6 +48,7 @@
         const options = {
           mode: 'range',
           defaultHour: 0,
+          dateFormat: @js(config('laragrid.dateFormat')),
           locale: @js(config('laragrid.locale')),
         };
 
