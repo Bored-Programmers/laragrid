@@ -5,10 +5,14 @@
     'theme',
     'record',
 ])
-
 <a
         class="{{ $theme->getActionButton() }}"
-        href="{{ $actionButton->getRedirect($record) }}"
+        @if($redirect = $actionButton->callRedirect($record))
+            href="{{ $redirect }}"
+        @endif
+        @if($attributes = $actionButton->callAttributes($record))
+            {!! $attributes !!}
+        @endif
 >
     {{ $actionButton->callRenderer($record) }}
 </a>

@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ActionButton extends BaseLaraGridComponent
 {
 
-    protected Closure $redirect;
+    protected ?Closure $redirect = null;
 
     protected string $label;
 
     protected Closure $renderer;
+
+    protected ?Closure $attributes = null;
 
     public function __construct(string $label)
     {
@@ -27,16 +29,20 @@ class ActionButton extends BaseLaraGridComponent
         return new static($label);
     }
 
-    public function getRedirect($model): string
-    {
-        return ($this->redirect)($model);
-    }
-
     public function setRedirect(Closure $redirect): static
     {
         $this->redirect = $redirect;
 
         return $this;
+    }
+
+    public function callRedirect($model): ?string
+    {
+        if ($this->redirect === null) {
+            return null;
+        }
+
+        return ($this->redirect)($model);
     }
 
     public function getLabel(): string
@@ -49,11 +55,6 @@ class ActionButton extends BaseLaraGridComponent
         $this->label = $label;
 
         return $this;
-    }
-
-    public function getRenderer(): Closure
-    {
-        return $this->renderer;
     }
 
     public function setRenderer(Closure $renderer): static
@@ -71,6 +72,22 @@ class ActionButton extends BaseLaraGridComponent
     public function getDefaultRenderer(Model $model): string
     {
         return __($this->getLabel());
+    }
+
+    public function setAttributes(Closure $attributes): ActionButton
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function callAttributes(Model $model)
+    {
+        if ($this->attributes === null) {
+            return null;
+        }
+
+        return ($this->attributes)($model);
     }
 
 }
