@@ -6,6 +6,7 @@ use BoredProgrammers\LaraGrid\Components\BaseLaraGridComponent;
 use BoredProgrammers\LaraGrid\Components\Column;
 use BoredProgrammers\LaraGrid\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -34,6 +35,11 @@ abstract class BaseLaraGrid extends Component
     public int $perPage = 25;
 
     protected string $theme = BaseLaraGridTheme::class;
+
+    protected abstract function getDataSource(): Builder;
+
+    /** @return BaseLaraGridComponent[] */
+    protected abstract function getColumns(): array;
 
     public function resetFilters(): void
     {
@@ -92,22 +98,7 @@ abstract class BaseLaraGrid extends Component
         ]);
     }
 
-    /**
-     * @throws Exception
-     */
-    private function validateThemeClass(): void
-    {
-        if (!$this->theme || !class_exists($this->theme)) {
-            throw new Exception('Invalid theme class: ' . $this->theme);
-        }
-    }
-
-    protected abstract function getDataSource(): Builder;
-
     /************************************************ PRIVATE ************************************************/
-
-    /** @return BaseLaraGridComponent[] */
-    protected abstract function getColumns(): array;
 
     /**
      * @throws Exception
@@ -121,15 +112,8 @@ abstract class BaseLaraGrid extends Component
 
             $modelField = $column->getModelField();
             $filter = $column->getFilter();
-            if (!$filter || !in_array($filter->getFiltrationType(), FiltrationType::cases())) {
-                throw new Exception(
-                    'Filtration type "'
-                    . $filter->getFiltrationType()->name
-                    . ' for column "'
-                    . $modelField
-                    . '" does not exist.'
-                );
-            }
+
+            $this->validateFilters($filter, $modelField);
 
             $activeFilters = Arr::dot($this->filter);
             if (!array_key_exists($modelField, $activeFilters)) {
@@ -159,6 +143,34 @@ abstract class BaseLaraGrid extends Component
             $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
         } else {
             $query->orderBy($this->sortColumn, $this->sortDirection);
+        }
+    }
+
+    /************************************************ VALIDATORS ************************************************/
+
+    /**
+     * @throws Exception
+     */
+    private function validateThemeClass(): void
+    {
+        if (!$this->theme || !class_exists($this->theme)) {
+            throw new Exception('Invalid theme class: ' . $this->theme);
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function validateFilters(?BaseFilter $filter, string $modelField): void
+    {
+        if ($filter && !in_array($filter->getFiltrationType(), FiltrationType::cases())) {
+            throw new Exception(
+                'Filtration type "'
+                . $filter->getFiltrationType()->name
+                . ' for column "'
+                . $modelField
+                . '" does not exist.'
+            );
         }
     }
 
