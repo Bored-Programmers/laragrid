@@ -34,7 +34,7 @@ abstract class BaseGrid extends Component
     protected string $theme = BaseTheme::class;
 
     /** @return BaseComponent[] */
-    protected abstract function getRowColumns(): array;
+    protected abstract function getColumns(): array;
 
     protected abstract function getDataSource(): Builder;
 
@@ -70,34 +70,36 @@ abstract class BaseGrid extends Component
         $columns = $this->getColumns();
 
         foreach ($columns as $column) {
-            $filter = $column->getFilter();
+            if ($column instanceof Column) {
+                $filter = $column->getFilter();
 
-            if ($filter && !in_array($filter->getFiltrationType(), FiltrationType::cases())) {
-                throw new Exception(
-                    'Filtration type "'
-                    . $filter->getFiltrationType()->name
-                    . ' for column "'
-                    . $column->getModelField()
-                    . '" does not exist.'
-                );
-            }
-
-            $activeFilters = Arr::dot($this->filter);
-
-            if (array_key_exists($column->getModelField(), $activeFilters)) {
-                $searchedTerm = $activeFilters[$column->getModelField()];
-
-                if ($searchedTerm === null || $searchedTerm === '' || $searchedTerm === 'null') {
-                    unset($this->filter[$column->getModelField()]);
-
-                    continue;
+                if ($filter && !in_array($filter->getFiltrationType(), FiltrationType::cases())) {
+                    throw new Exception(
+                        'Filtration type "'
+                        . $filter->getFiltrationType()->name
+                        . ' for column "'
+                        . $column->getModelField()
+                        . '" does not exist.'
+                    );
                 }
 
-                $column->getFilter()->callBuilder(
-                    $query,
-                    $column->getModelField(),
-                    $searchedTerm
-                );
+                $activeFilters = Arr::dot($this->filter);
+
+                if (array_key_exists($column->getModelField(), $activeFilters)) {
+                    $searchedTerm = $activeFilters[$column->getModelField()];
+
+                    if ($searchedTerm === null || $searchedTerm === '' || $searchedTerm === 'null') {
+                        unset($this->filter[$column->getModelField()]);
+
+                        continue;
+                    }
+
+                    $column->getFilter()->callBuilder(
+                        $query,
+                        $column->getModelField(),
+                        $searchedTerm
+                    );
+                }
             }
         }
 
@@ -110,41 +112,8 @@ abstract class BaseGrid extends Component
         return view('laragrid::grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
-            'actionButtons' => $this->getActionButtons(),
             'theme' => new $this->theme,
         ]);
-    }
-
-    /************************************************ PRIVATE ************************************************/
-
-    /** @return Column[] */
-    private function getColumns(): array
-    {
-        $rowColumns = $this->getRowColumns();
-        $columns = [];
-
-        foreach ($rowColumns as $column) {
-            if ($column instanceof Column) {
-                $columns[] = $column;
-            }
-        }
-
-        return $columns;
-    }
-
-    /** @return ActionButton[] */
-    private function getActionButtons(): array
-    {
-        $rowColumns = $this->getRowColumns();
-        $actionButtons = [];
-
-        foreach ($rowColumns as $column) {
-            if ($column instanceof ActionButton) {
-                $actionButtons[] = $column;
-            }
-        }
-
-        return $actionButtons;
     }
 
 }

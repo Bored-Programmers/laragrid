@@ -15,14 +15,14 @@
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
                 <th
-                    wire:key="column-filter-{{ $column->getModelField() }}"
-                    class="{{ $theme->getTh() }}"
+                        wire:key="column-filter-{{ $column->getModelField() }}"
+                        class="{{ $theme->getTh() }}"
                 >
                     <x-laragrid::column-filter
-                        :theme="$theme"
-                        :column="$column"
-                        :sort-column="$sortColumn"
-                        :sort-direction="$sortDirection"
+                            :theme="$theme"
+                            :column="$column"
+                            :sort-column="$sortColumn"
+                            :sort-direction="$sortDirection"
                     />
                 </th>
             @endforeach
@@ -35,19 +35,21 @@
         @foreach($records as $record)
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    <td class="{{ $theme->getTd() }}">
-                        {{ $column->callRenderer($record) }}
-                    </td>
-                @endforeach
+                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
+                        <td class="{{ $theme->getTd() }}">
+                            {{ $column->callRenderer($record) }}
+                        </td>
+                    @endif
 
-                @foreach ($actionButtons as $actionButton)
-                    <td class="{{ $theme->getTd() }}">
-                        <x-laragrid::action-button
-                            :theme="$theme"
-                            :action-button="$actionButton"
-                            :record="$record"
-                        />
-                    </td>
+                    @if($column instanceof ActionButton)
+                        <td class="{{ $theme->getTd() }}">
+                            <x-laragrid::action-button
+                                    :theme="$theme"
+                                    :action-button="$actionButton"
+                                    :record="$record"
+                            />
+                        </td>
+                    @endif
                 @endforeach
             </tr>
         @endforeach
