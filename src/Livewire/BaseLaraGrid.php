@@ -34,6 +34,8 @@ abstract class BaseLaraGrid extends Component
 
     public int $perPage = 25;
 
+    protected array $perPageOptions = [25, 50, 100];
+
     protected string $theme = BaseLaraGridTheme::class;
 
     protected abstract function getDataSource(): Builder;
@@ -95,6 +97,7 @@ abstract class BaseLaraGrid extends Component
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
             'theme' => new $this->theme,
+            'perPageOptions' => $this->perPageOptions,
         ]);
     }
 

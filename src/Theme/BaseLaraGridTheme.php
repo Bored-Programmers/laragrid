@@ -6,18 +6,34 @@ class BaseLaraGridTheme
 {
 
     private ?string $table = null;
+
     private ?string $resetLink = null;
+
     private ?string $thead = null;
+
     private ?string $tr = null;
+
     private ?string $th = null;
+
     private ?string $tbody = null;
+
     private ?string $td = null;
+
     private ?string $actionContainer = null;
+
     private ?string $pagination = null;
+
     private ?string $filterText = null;
+
     private ?string $filterSelect = null;
+
     private ?string $filterDate = null;
+
     private ?string $actionButton = null;
+
+    private ?string $maxResultsSelect = null;
+
+    private ?string $maxResultsSelectContainer = null;
 
     public function getTable(): ?string
     {
@@ -171,6 +187,30 @@ class BaseLaraGridTheme
     public function setActionButton(?string $actionButton): static
     {
         $this->actionButton = $actionButton;
+
+        return $this;
+    }
+
+    public function getMaxResultsSelect(): ?string
+    {
+        return $this->maxResultsSelect;
+    }
+
+    public function setMaxResultsSelect(?string $maxResultsSelect): BaseLaraGridTheme
+    {
+        $this->maxResultsSelect = $maxResultsSelect;
+
+        return $this;
+    }
+
+    public function getMaxResultsSelectContainer(): ?string
+    {
+        return $this->maxResultsSelectContainer;
+    }
+
+    public function setMaxResultsSelectContainer(?string $maxResultsSelectContainer): BaseLaraGridTheme
+    {
+        $this->maxResultsSelectContainer = $maxResultsSelectContainer;
 
         return $this;
     }
