@@ -1,32 +1,9 @@
 @props([
     /** @var \BoredProgrammers\LaraGrid\Components\Column $column */
     'column',
-    'sortColumn',
-    'sortDirection',
+    /** @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme */
     'theme',
 ])
-
-<div
-        @if ($column->isSortable())
-            wire:click="sort('{{ $column->getModelField() }}')"
-        @endif
->
-    @if ($column->isSortable())
-        <span>
-            @if ($sortColumn !== $column->getModelField())
-                &#8597;
-            @elseif ($sortDirection === 'asc')
-                &uarr;
-            @elseif ($sortDirection === 'desc')
-                &darr;
-            @endif
-        </span>
-    @endif
-
-    <span>
-        @lang($column->getLabel())
-    </span>
-</div>
 
 @switch($column->getFilter()?->getFilterType())
     @case(\BoredProgrammers\LaraGrid\Enums\FilterType::TEXT)
@@ -35,10 +12,6 @@
 
     @case(\BoredProgrammers\LaraGrid\Enums\FilterType::SELECT)
         <x-laragrid::select :column="$column" :theme="$theme" />
-        @break
-
-    @case(\BoredProgrammers\LaraGrid\Enums\FilterType::DATE_RANGE)
-        <x-laragrid::date-range :column="$column" :theme="$theme" />
         @break
 
     @case(\BoredProgrammers\LaraGrid\Enums\FilterType::DATE)

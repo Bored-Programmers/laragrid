@@ -40,8 +40,8 @@ class LaraGridServiceProvider extends ServiceProvider
                 return $this;
             }
 
-            $startDate = $startDate ?: Carbon::today();
-            $endDate = $endDate ?: Carbon::today();
+            $startDate = Carbon::parse($startDate)->setTime(0, 0, 0);
+            $endDate = Carbon::parse($endDate)->setTime(23, 59, 59);
 
             $this->where(function (Builder $query) use ($attribute, $startDate, $endDate) {
                 $query->when(
