@@ -59,8 +59,6 @@
             Livewire.dispatch('LGdatePickerChanged', {
               selectedDates: selectedDates,
               dateFormatted: dateStr,
-              timezone: new Date().toString()
-                .match(/([-\+][0-9]+)\s/)[1],
               field: this.dataField,
             });
           }
