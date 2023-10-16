@@ -5,7 +5,7 @@ namespace BoredProgrammers\LaraGrid\Components;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 
-class ActionButton extends BaseComponent
+class ActionButton extends BaseLaraGridComponent
 {
 
     protected Closure $route;

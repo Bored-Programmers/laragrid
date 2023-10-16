@@ -3,10 +3,10 @@
 namespace BoredProgrammers\LaraGrid\Livewire;
 
 use BoredProgrammers\LaraGrid\Components\ActionButton;
-use BoredProgrammers\LaraGrid\Components\BaseComponent;
+use BoredProgrammers\LaraGrid\Components\BaseLaraGridComponent;
 use BoredProgrammers\LaraGrid\Components\Column;
 use BoredProgrammers\LaraGrid\Enums\FiltrationType;
-use BoredProgrammers\LaraGrid\Theme\BaseTheme;
+use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,7 +15,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-abstract class BaseGrid extends Component
+abstract class BaseLaraGrid extends Component
 {
 
     use WithPagination;
@@ -31,9 +31,9 @@ abstract class BaseGrid extends Component
 
     public int $perPage = 25;
 
-    protected string $theme = BaseTheme::class;
+    protected string $theme = BaseLaraGridTheme::class;
 
-    /** @return BaseComponent[] */
+    /** @return BaseLaraGridComponent[] */
     protected abstract function getColumns(): array;
 
     protected abstract function getDataSource(): Builder;

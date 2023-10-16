@@ -1,7 +1,7 @@
 @props([
     /** @var \BoredProgrammers\LaraGrid\Components\ActionButton $actionButton */
     'actionButton',
-    /** @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme */
+    /** @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme */
     'theme',
     'record',
 ])

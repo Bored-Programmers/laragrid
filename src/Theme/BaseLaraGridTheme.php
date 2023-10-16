@@ -2,7 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Theme;
 
-class BaseTheme
+class BaseLaraGridTheme
 {
 
     private ?string $table = null;

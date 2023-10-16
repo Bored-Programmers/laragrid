@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use UnitEnum;
 
-class Column extends BaseComponent
+class Column extends BaseLaraGridComponent
 {
 
     protected string $modelField;

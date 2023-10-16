@@ -2,7 +2,7 @@
     /**
     * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
     * @var \BoredProgrammers\LaraGrid\Components\ActionButton[] $actionButtons
-    * @var \BoredProgrammers\LaraGrid\Theme\BaseTheme $theme
+    * @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme
     */
 @endphp
 <div>
