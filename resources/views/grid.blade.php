@@ -14,17 +14,19 @@
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
-                <th
-                        wire:key="column-filter-{{ $column->getModelField() }}"
-                        class="{{ $theme->getTh() }}"
-                >
-                    <x-laragrid::column-filter
-                            :theme="$theme"
-                            :column="$column"
-                            :sort-column="$sortColumn"
-                            :sort-direction="$sortDirection"
-                    />
-                </th>
+                @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
+                    <th
+                            wire:key="column-filter-{{ $column->getModelField() }}"
+                            class="{{ $theme->getTh() }}"
+                    >
+                        <x-laragrid::column-filter
+                                :theme="$theme"
+                                :column="$column"
+                                :sort-column="$sortColumn"
+                                :sort-direction="$sortDirection"
+                        />
+                    </th>
+                @endif
             @endforeach
             <th>
                 @lang('laraGrid.actions')
