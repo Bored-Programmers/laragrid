@@ -8,11 +8,13 @@
 <div wire:ignore x-data="LGDatePicker()" x-init="init()">
     <input
             type="hidden"
+            x-ref="filter.{{ $column->getModelField() }}.from"
             name="filter.{{ $column->getModelField() }}.from"
             wire:model.live="filter.{{ $column->getModelField() }}.from"
     >
     <input
             type="hidden"
+            x-ref="filter.{{ $column->getModelField() }}.to"
             name="filter.{{ $column->getModelField() }}.to"
             wire:model.live="filter.{{ $column->getModelField() }}.to"
     >
@@ -43,18 +45,26 @@
         return {
           mode: 'range',
           defaultHour: 0,
-          dateFormat: @js(config('laragrid.dateFormat')),
+          defaultDate: [
+            '{{ $this->filter[$column->getModelField()]['from'] ?? null }}',
+            '{{ $this->filter[$column->getModelField()]['to'] ?? null }}',
+          ],
+          dateFormat: @js(config('laragrid.date_format')),
           locale: @js(config('laragrid.locale')),
           onClose: function (selectedDates, dateStr, instance) {
             if (selectedDates.length === 2) {
-              let from = moment(selectedDates[0]).format('YYYY-MM-DD');
-              let to = moment(selectedDates[1]).format('YYYY-MM-DD');
+              console.log(selectedDates[0])
+              let from = moment(selectedDates[0]).format('{{ config('laragrid.js_date_format') }}');
+              let to = moment(selectedDates[1]).format('{{ config('laragrid.js_date_format') }}');
 
-              document.querySelector('input[name="filter.{{ $column->getModelField() }}.from"]').value = from;
-              document.querySelector('input[name="filter.{{ $column->getModelField() }}.to"]').value = to;
+              elementFrom = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.from"]`);
+              elementTo = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.to"]`);
 
-              document.querySelector('input[name="filter.{{ $column->getModelField() }}.from"]').dispatchEvent(new Event('input'));
-              document.querySelector('input[name="filter.{{ $column->getModelField() }}.to"]').dispatchEvent(new Event('input'));
+              elementFrom.value = from;
+              elementTo.value = to;
+
+              elementFrom.dispatchEvent(new Event('input'));
+              elementTo.dispatchEvent(new Event('input'));
             }
           }
         };

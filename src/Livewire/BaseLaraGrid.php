@@ -88,7 +88,7 @@ abstract class BaseLaraGrid extends Component
 
                 $activeFilters = Arr::dot($this->filter);
 
-                if (array_key_exists($column->getModelField(), $activeFilters)) {
+                if (array_key_exists($column->getModelField(), $this->filter)) {
                     if ($column->getFilter()->getFilterType() === FilterType::DATE) {
                         $searchedTerm = [
                             'from' => $activeFilters[$column->getModelField() . '.from'] ?? null,

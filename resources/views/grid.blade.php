@@ -6,23 +6,38 @@
 @endphp
 <div>
     <table class="{{ $theme->getTable() }}">
-        <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-            @lang('laragrid::translations.filter.reset')
-        </a>
+        @if($this->filter)
+            <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
+                @lang('laragrid::translations.filter.reset')
+            </a>
+        @endif
 
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
-                <th
-                        wire:key="column-label-{{ $column->getModelField() }}"
-                        class="{{ $theme->getTh() }}"
-                >
-                    <x-laragrid::column-label
-                            :column="$column"
-                            :sort-column="$sortColumn"
-                            :sort-direction="$sortDirection"
-                    />
-                </th>
+                @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseColumn)
+                    <th
+                            wire:key="column-label-{{ $column->getModelField() }}"
+                            class="{{ $theme->getTh() }}"
+                    >
+                        <x-laragrid::column-label
+                                :column="$column"
+                                :sort-column="$sortColumn"
+                                :sort-direction="$sortDirection"
+                        />
+                    </th>
+                @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnGroup)
+                    <th
+                            wire:key="column-actions-label-{{ uniqid($column->getLabel()) }}"
+                            class="{{ $theme->getTh() }}"
+                    >
+                        <div>
+                            <span>
+                                @lang($column->getLabel())
+                            </span>
+                        </div>
+                    </th>
+                @endif
             @endforeach
         </tr>
         </thead>
@@ -42,17 +57,35 @@
             @endforeach
         </tr>
 
-        @foreach($records as $record)
+        @forelse($records as $record)
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    <td class="{{ $theme->getTd() }}">
-                        <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
+                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseColumn)
+                        <td class="{{ $theme->getTd() }}">
+                            <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
                             {{ $column->callRenderer($record) }}
                         </{{ $column->getColumnTag() }}>
-                    </td>
+                        </td>
+                    @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnGroup)
+                        <td class="{{ $theme->getGroupTd() }}">
+                            @foreach($column->getColumns() as $childColumn)
+                                <{{ $childColumn->getColumnTag() }} {!! $childColumn->getAttributes($record) !!}>
+                                {{ $childColumn->callRenderer($record) }}
+                        </{{ $childColumn->getColumnTag() }}>
+                        @endforeach
+                        </td>
+                    @endif
                 @endforeach
             </tr>
-        @endforeach
+        @empty
+            <tr class="{{ $theme->getTr() }}">
+                <td colspan="{{ count($columns) }}">
+                    <div class="{{ $theme->getEmptyMessage() }}">
+                        @lang('laragrid::translations.empty')
+                    </div>
+                </td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 

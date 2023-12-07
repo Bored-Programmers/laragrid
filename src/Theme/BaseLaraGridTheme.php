@@ -21,6 +21,8 @@ class BaseLaraGridTheme
 
     private ?string $td = null;
 
+    private ?string $groupTd = null;
+
     private ?string $actionContainer = null;
 
     private ?string $pagination = null;
@@ -38,6 +40,8 @@ class BaseLaraGridTheme
     private ?string $paginationMaxResultsContainer = null;
 
     private ?string $paginationContainer = null;
+
+    private ?string $emptyMessage = null;
 
     private ?Closure $resetFilterButton = null;
 
@@ -131,6 +135,18 @@ class BaseLaraGridTheme
     public function setTd(?string $td): static
     {
         $this->td = $td;
+
+        return $this;
+    }
+
+    public function getGroupTd(): ?string
+    {
+        return $this->groupTd;
+    }
+
+    public function setGroupTd(?string $groupTd): BaseLaraGridTheme
+    {
+        $this->groupTd = $groupTd;
 
         return $this;
     }
@@ -239,6 +255,18 @@ class BaseLaraGridTheme
     public function setPaginationContainer(?string $paginationContainer): static
     {
         $this->paginationContainer = $paginationContainer;
+
+        return $this;
+    }
+
+    public function getEmptyMessage(): ?string
+    {
+        return $this->emptyMessage;
+    }
+
+    public function setEmptyMessage(?string $emptyMessage): BaseLaraGridTheme
+    {
+        $this->emptyMessage = $emptyMessage;
 
         return $this;
     }

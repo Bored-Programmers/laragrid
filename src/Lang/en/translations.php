@@ -10,4 +10,5 @@ return [
         ],
     ],
     'actions' => 'Actions',
+    'empty' => 'No records found',
 ];
