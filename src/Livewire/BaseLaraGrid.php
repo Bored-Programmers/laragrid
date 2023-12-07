@@ -60,27 +60,6 @@ abstract class BaseLaraGrid extends Component
         }
     }
 
-    #[On('LGdatePickerChanged')]
-    public function datePickerChanged(
-        array $selectedDates,
-        string $dateFormatted,
-        string $field,
-    ): void
-    {
-        if (!isset($selectedDates[1])) {
-            return;
-        }
-
-        [$startDate, $endDate] = $selectedDates;
-
-        $startDate = Carbon::parse($startDate)->format('Y-m-d');
-        $endDate = Carbon::parse($endDate)->format('Y-m-d');
-
-        $this->filter["$field.from"] = $startDate;
-        $this->filter["$field.to"] = $endDate;
-        $this->filter[$field] = $dateFormatted;
-    }
-
     /**
      * @throws Exception
      */
@@ -119,10 +98,11 @@ abstract class BaseLaraGrid extends Component
 
             $this->validateFilters($filter, $modelField);
 
-            $activeFilters = Arr::dot($this->filter);
-            if (!array_key_exists($modelField, $activeFilters)) {
+            if (!array_key_exists($modelField, $this->filter)) {
                 continue;
             }
+
+            $activeFilters = Arr::dot($this->filter);
 
             $searchTerm = match ($filter->getFilterType()) {
                 FilterType::DATE => [

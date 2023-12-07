@@ -10,12 +10,21 @@
         x-data="LGDatePicker()"
         x-init="init()"
 >
-    <input
-            x-ref="datePicker"
-            type="text"
-            wire:model="filter.{{ $column->getModelField() }}"
-            class="{{ $theme->getFilterDate() }}"
-    >
+  <input
+          type="hidden"
+          name="filter.{{ $column->getModelField() }}.from"
+          wire:model.live="filter.{{ $column->getModelField() }}.from"
+  >
+  <input
+          type="hidden"
+          name="filter.{{ $column->getModelField() }}.to"
+          wire:model.live="filter.{{ $column->getModelField() }}.to"
+  >
+  <input
+          x-ref="datePicker"
+          type="text"
+          class="{{ $theme->getFilterDate() }}"
+  >
 </div>
 
 <script src="https://npmcdn.com/flatpickr/dist/l10n/{{ config('laragrid.locale') }}.js" defer></script>
@@ -25,7 +34,6 @@
     return {
       dataField: @js($column->getModelField()),
       element: null,
-      selectedDates: null,
 
       init() {
         window.addEventListener(`LGdatePickerClear`, () => {
@@ -38,10 +46,6 @@
 
         if (this.$refs && this.$refs.datePicker) {
           this.element = flatpickr(this.$refs.datePicker, options);
-
-          this.selectedDates = this.$wire.get(`filters.${this.dataField}`);
-
-          this.element.setDate(this.selectedDates);
         }
       },
       getOptions() {
@@ -50,17 +54,17 @@
           defaultHour: 0,
           dateFormat: @js(config('laragrid.dateFormat')),
           locale: @js(config('laragrid.locale')),
-        };
+          onClose: function (selectedDates, dateStr, instance) {
+            if (selectedDates.length === 2) {
+              let from = moment(selectedDates[0]).format('YYYY-MM-DD');
+              let to = moment(selectedDates[1]).format('YYYY-MM-DD');
 
-        options.onClose = (selectedDates, dateStr, instance) => {
-          selectedDates = selectedDates.map(date => this.element.formatDate(date, 'Y-m-d'));
+              document.querySelector('input[name="filter.{{ $column->getModelField() }}.from"]').value = from;
+              document.querySelector('input[name="filter.{{ $column->getModelField() }}.to"]').value = to;
 
-          if (selectedDates.length > 0 && (this.selectedDates !== dateStr)) {
-            Livewire.dispatch('LGdatePickerChanged', {
-              selectedDates: selectedDates,
-              dateFormatted: dateStr,
-              field: this.dataField,
-            });
+              document.querySelector('input[name="filter.{{ $column->getModelField() }}.from"]').dispatchEvent(new Event('input'));
+              document.querySelector('input[name="filter.{{ $column->getModelField() }}.to"]').dispatchEvent(new Event('input'));
+            }
           }
         };
 
