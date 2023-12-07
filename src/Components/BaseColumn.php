@@ -28,6 +28,8 @@ class BaseColumn extends BaseLaraGridComponent
 
     protected string $dateFormat = 'd.m.Y';
 
+    protected string $columnTag = 'span';
+
     public function __construct(?string $modelField = null, string $label)
     {
         $this->setModelField($modelField);
@@ -61,18 +63,28 @@ class BaseColumn extends BaseLaraGridComponent
 
     public function getAttributes(Model $model): string
     {
-        $attributes = $this->callAttributes($model);
-        $attributesString = '';
-        foreach ($attributes as $key => $value) {
-            $attributesString .= $key . '="' . $value . '" ';
-        }
-ray($attributesString);
-        return $attributesString;
+        return collect($this->callAttributes($model))
+            ->map(function ($value, $key) {
+                return Str::of($key)->append('="', $value, '"');
+            })
+            ->join(' ');
     }
 
     public function setAttributes(Closure $attributes): static
     {
         $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function getColumnTag(): string
+    {
+        return $this->columnTag;
+    }
+
+    public function setColumnTag(string $columnTag): static
+    {
+        $this->columnTag = $columnTag;
 
         return $this;
     }

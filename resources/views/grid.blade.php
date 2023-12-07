@@ -46,9 +46,9 @@
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
                     <td class="{{ $theme->getTd() }}">
-                        <a {!! $column->getAttributes($record) !!}>
+                        <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
                             {{ $column->callRenderer($record) }}
-                        </a>
+                        </{{ $column->getColumnTag() }}>
                     </td>
                 @endforeach
             </tr>
