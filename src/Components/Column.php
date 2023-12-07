@@ -5,6 +5,7 @@ namespace BoredProgrammers\LaraGrid\Components;
 use BoredProgrammers\LaraGrid\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
+use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -61,7 +62,7 @@ class Column extends BaseLaraGridComponent
         return $value;
     }
 
-    public function callRenderer(Model $model)
+    public function callRenderer(Model $model, BaseLaraGridTheme $theme)
     {
         return ($this->renderer)($model);
     }

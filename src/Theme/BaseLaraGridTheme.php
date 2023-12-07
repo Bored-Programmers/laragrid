@@ -2,6 +2,8 @@
 
 namespace BoredProgrammers\LaraGrid\Theme;
 
+use Closure;
+
 class BaseLaraGridTheme
 {
 
@@ -36,6 +38,18 @@ class BaseLaraGridTheme
     private ?string $paginationMaxResultsContainer = null;
 
     private ?string $paginationContainer = null;
+
+    private ?Closure $resetFilterButton = null;
+
+    public function __construct()
+    {
+        $this->setResetFilterButton(fn() => __('laragrid::translations.filter.reset'));
+    }
+
+    public function make(): static
+    {
+        return new static();
+    }
 
     public function getTable(): ?string
     {
@@ -198,7 +212,7 @@ class BaseLaraGridTheme
         return $this->paginationMaxResults;
     }
 
-    public function setPaginationMaxResults(?string $paginationMaxResults): BaseLaraGridTheme
+    public function setPaginationMaxResults(?string $paginationMaxResults): static
     {
         $this->paginationMaxResults = $paginationMaxResults;
 
@@ -210,7 +224,7 @@ class BaseLaraGridTheme
         return $this->paginationMaxResultsContainer;
     }
 
-    public function setPaginationMaxResultsContainer(?string $paginationMaxResultsContainer): BaseLaraGridTheme
+    public function setPaginationMaxResultsContainer(?string $paginationMaxResultsContainer): static
     {
         $this->paginationMaxResultsContainer = $paginationMaxResultsContainer;
 
@@ -222,9 +236,21 @@ class BaseLaraGridTheme
         return $this->paginationContainer;
     }
 
-    public function setPaginationContainer(?string $paginationContainer): BaseLaraGridTheme
+    public function setPaginationContainer(?string $paginationContainer): static
     {
         $this->paginationContainer = $paginationContainer;
+
+        return $this;
+    }
+
+    public function getResetFilterButton(): Closure
+    {
+        return $this->resetFilterButton;
+    }
+
+    public function setResetFilterButton($resetFilterButton): static
+    {
+        $this->resetFilterButton = $resetFilterButton;
 
         return $this;
     }

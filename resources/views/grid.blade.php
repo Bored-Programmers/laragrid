@@ -8,7 +8,7 @@
 <div>
     <table class="{{ $theme->getTable() }}">
         <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-            @lang('laragrid::translations.filter.reset')
+            {{ $this }}
         </a>
 
         <thead class="{{ $theme->getThead() }}">
@@ -51,20 +51,9 @@
         @foreach($records as $record)
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
-                        <td class="{{ $theme->getTd() }}">
-                            {{ $column->callRenderer($record) }}
-                        </td>
-                    @endif
-
-                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\ActionButton)
-                        <td class="{{ $theme->getTd() }}">
-                            <x-laragrid::action-button
-                                    :theme="$theme"
-                                    :action-button="$column"
-                                    :record="$record"
-                            />
-                        </td>
+                    <td class="{{ $theme->getTd() }}">
+                        {{ $column->callRenderer($record) }}
+                    </td>
                     @endif
                 @endforeach
             </tr>

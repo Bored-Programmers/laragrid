@@ -2,6 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Components;
 
+use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,21 +11,26 @@ class ActionButton extends BaseLaraGridComponent
 
     protected ?Closure $redirect = null;
 
-    protected string $label;
-
     protected Closure $renderer;
 
     protected ?Closure $attributes = null;
 
-    public function __construct(string $label)
+    public function __construct(string|Closure $label)
     {
-        $this->setLabel(__($label));
-        $this->setRenderer(function (Model $model) {
-            return $this->getDefaultRenderer($model);
-        });
+        if ($label instanceof Closure) {
+            $this->setRenderer($label);
+        } else {
+            $this->setRenderer(function (Model $model, $theme) {
+                return view('laragrid::components.action-button', [
+                    'record' => $model,
+                    'actionButton' => $this,
+                    'theme' => $theme,
+                ]);
+            });
+        }
     }
 
-    public static function make(string $label): self
+    public static function make(string|Closure $label): static
     {
         return new static($label);
     }
@@ -45,18 +51,6 @@ class ActionButton extends BaseLaraGridComponent
         return ($this->redirect)($model);
     }
 
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
-
-    public function setLabel(string $label): static
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
     public function setRenderer(Closure $renderer): static
     {
         $this->renderer = $renderer;
@@ -64,14 +58,9 @@ class ActionButton extends BaseLaraGridComponent
         return $this;
     }
 
-    public function callRenderer(Model $model)
+    public function callRenderer(Model $model, BaseLaraGridTheme $theme)
     {
         return ($this->renderer)($model);
-    }
-
-    public function getDefaultRenderer(Model $model): string
-    {
-        return __($this->getLabel());
     }
 
     public function setAttributes(Closure $attributes): ActionButton
