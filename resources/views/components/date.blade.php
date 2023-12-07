@@ -5,26 +5,18 @@
     'theme',
 ])
 
-<div
-        wire:ignore
-        x-data="LGDatePicker()"
-        x-init="init()"
->
-  <input
-          type="hidden"
-          name="filter.{{ $column->getModelField() }}.from"
-          wire:model.live="filter.{{ $column->getModelField() }}.from"
-  >
-  <input
-          type="hidden"
-          name="filter.{{ $column->getModelField() }}.to"
-          wire:model.live="filter.{{ $column->getModelField() }}.to"
-  >
-  <input
-          x-ref="datePicker"
-          type="text"
-          class="{{ $theme->getFilterDate() }}"
-  >
+<div wire:ignore x-data="LGDatePicker()" x-init="init()">
+    <input
+            type="hidden"
+            name="filter.{{ $column->getModelField() }}.from"
+            wire:model.live="filter.{{ $column->getModelField() }}.from"
+    >
+    <input
+            type="hidden"
+            name="filter.{{ $column->getModelField() }}.to"
+            wire:model.live="filter.{{ $column->getModelField() }}.to"
+    >
+    <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDate() }}">
 </div>
 
 <script src="https://npmcdn.com/flatpickr/dist/l10n/{{ config('laragrid.locale') }}.js" defer></script>
@@ -42,14 +34,13 @@
           }
         })
 
-        const options = this.getOptions();
-
         if (this.$refs && this.$refs.datePicker) {
-          this.element = flatpickr(this.$refs.datePicker, options);
+          this.element = flatpickr(this.$refs.datePicker, this.getOptions());
         }
       },
+
       getOptions() {
-        const options = {
+        return {
           mode: 'range',
           defaultHour: 0,
           dateFormat: @js(config('laragrid.dateFormat')),
@@ -67,8 +58,6 @@
             }
           }
         };
-
-        return options;
       }
     }
   }
