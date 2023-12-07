@@ -42,23 +42,24 @@
       },
 
       getOptions() {
+        let defaultFrom = @this.
+        get('filter.{{ $column->getModelField() }}.from');
+        let defaultTo = @this.
+        get('filter.{{ $column->getModelField() }}.to');
+
         return {
           mode: 'range',
           defaultHour: 0,
-          defaultDate: [
-            '{{ $this->filter[$column->getModelField()]['from'] ?? null }}',
-            '{{ $this->filter[$column->getModelField()]['to'] ?? null }}',
-          ],
+          defaultDate: [defaultFrom, defaultTo],
           dateFormat: @js(config('laragrid.date_format')),
           locale: @js(config('laragrid.locale')),
           onClose: function (selectedDates, dateStr, instance) {
             if (selectedDates.length === 2) {
-              console.log(selectedDates[0])
               let from = moment(selectedDates[0]).format('{{ config('laragrid.js_date_format') }}');
               let to = moment(selectedDates[1]).format('{{ config('laragrid.js_date_format') }}');
 
-              elementFrom = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.from"]`);
-              elementTo = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.to"]`);
+              let elementFrom = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.from"]`);
+              let elementTo = document.querySelector(`input[name="filter.{{ $column->getModelField() }}.to"]`);
 
               elementFrom.value = from;
               elementTo.value = to;
