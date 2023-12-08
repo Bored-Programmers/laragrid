@@ -4,10 +4,9 @@ namespace BoredProgrammers\LaraGrid\Livewire;
 
 use BoredProgrammers\LaraGrid\Components\BaseLaraGridComponent;
 use BoredProgrammers\LaraGrid\Components\Column;
-use BoredProgrammers\LaraGrid\Enums\FilterType;
-use BoredProgrammers\LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
-use DateTimeZone;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;

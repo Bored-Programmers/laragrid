@@ -2,8 +2,8 @@
 
 namespace BoredProgrammers\LaraGrid\Filters;
 
-use BoredProgrammers\LaraGrid\Enums\FilterType;
-use BoredProgrammers\LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
 
 class DateFilter extends BaseFilter
 {

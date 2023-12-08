@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Enums;
+namespace BoredProgrammers\LaraGrid\Filters\Enums;
 
 enum FiltrationType
 {

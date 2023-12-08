@@ -2,10 +2,8 @@
 
 namespace BoredProgrammers\LaraGrid\Components;
 
-use BoredProgrammers\LaraGrid\Enums\FilterType;
-use BoredProgrammers\LaraGrid\Filters\BaseFilter;
+use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
-use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use UnitEnum;

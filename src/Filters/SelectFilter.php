@@ -2,8 +2,8 @@
 
 namespace BoredProgrammers\LaraGrid\Filters;
 
-use BoredProgrammers\LaraGrid\Enums\FilterType;
-use BoredProgrammers\LaraGrid\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
 use Illuminate\Support\Collection;
 
 class SelectFilter extends BaseFilter

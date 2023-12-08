@@ -63,16 +63,16 @@
                     @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseColumn)
                         <td class="{{ $theme->getTd() }}">
                             <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
-                            {{ $column->callRenderer($record) }}
-                        </{{ $column->getColumnTag() }}>
+                                {{ $column->callRenderer($record) }}
+                            </{{ $column->getColumnTag() }}>
                         </td>
                     @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnGroup)
                         <td class="{{ $theme->getGroupTd() }}">
                             @foreach($column->getColumns() as $childColumn)
                                 <{{ $childColumn->getColumnTag() }} {!! $childColumn->getAttributes($record) !!}>
-                                {{ $childColumn->callRenderer($record) }}
-                        </{{ $childColumn->getColumnTag() }}>
-                        @endforeach
+                                    {{ $childColumn->callRenderer($record) }}
+                                </{{ $childColumn->getColumnTag() }}>
+                            @endforeach
                         </td>
                     @endif
                 @endforeach
