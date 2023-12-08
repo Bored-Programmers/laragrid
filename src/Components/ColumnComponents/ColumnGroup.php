@@ -7,6 +7,7 @@ use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
 class ColumnGroup
 {
 
+    /** @var BaseColumn[] */
     private array $columns = [];
 
     private string $label;
@@ -29,6 +30,11 @@ class ColumnGroup
         return $this->columns;
     }
 
+    /**
+     * @param BaseColumn[] $columns
+     *
+     * @return $this
+     */
     public function setColumns(array $columns): static
     {
         $this->columns = $columns;

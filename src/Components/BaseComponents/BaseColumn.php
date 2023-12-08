@@ -22,11 +22,7 @@ class BaseColumn extends BaseLaraGridComponent
     {
         $this->setModelField($modelField);
         $this->setLabel($label ?: $modelField);
-
-        $this->setRenderer(function (Model $model) {
-            return $this->defaultRender($model);
-        });
-
+        $this->setRenderer($this->defaultRender());
         $this->setAttributes(function (Model $model) {
             return [];
         });

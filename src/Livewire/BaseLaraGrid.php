@@ -71,6 +71,29 @@ abstract class BaseLaraGrid extends Component
         $query = $this->getDataSource();
         $columns = $this->getColumns();
 
+        $this->applyFilters($columns, $query);
+        $this->applySorting($query);
+
+        return view('laragrid::grid', [
+            'records' => $query->paginate($this->perPage),
+            'columns' => $columns,
+            'theme' => new $this->theme,
+        ]);
+    }
+
+    /************************************************ PRIVATE ************************************************/
+
+    private function applySorting(Builder $query): void
+    {
+        if (str_contains($this->sortColumn, '.')) {
+            $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
+        } else {
+            $query->orderBy($this->sortColumn, $this->sortDirection);
+        }
+    }
+
+    private function applyFilters(array $columns, Builder $query): void
+    {
         foreach ($columns as $column) {
             if ($column instanceof Column) {
                 $filter = $column->getFilter();
@@ -111,18 +134,6 @@ abstract class BaseLaraGrid extends Component
                 }
             }
         }
-
-        if (str_contains($this->sortColumn, '.')) {
-            $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
-        } else {
-            $query->orderBy($this->sortColumn, $this->sortDirection);
-        }
-
-        return view('laragrid::grid', [
-            'records' => $query->paginate($this->perPage),
-            'columns' => $columns,
-            'theme' => new $this->theme,
-        ]);
     }
 
 }

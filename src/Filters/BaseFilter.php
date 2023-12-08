@@ -18,17 +18,7 @@ abstract class BaseFilter
 
     public function __construct()
     {
-        $this->setBuilder(function (\Illuminate\Database\Eloquent\Builder|Builder $query, string $field, $value) {
-            match ($this->getFiltrationType()) {
-                FiltrationType::LIKE => $query->whereLike($field, $value),
-                FiltrationType::EQUAL => $query->whereEqual($field, $value),
-                FiltrationType::DATE_BETWEEN => $query->whereDateBetween(
-                    $field,
-                    $value['from'] ?? null,
-                    $value['to'] ?? null
-                ),
-            };
-        });
+        $this->setBuilder($this->defaultBuilder());
     }
 
     /*********************************************** GETTERS && SETTERS ***********************************************/
@@ -67,6 +57,23 @@ abstract class BaseFilter
         $this->filtrationType = $filtrationType;
 
         return $this;
+    }
+
+    /************************************************ PRIVATE ************************************************/
+
+    protected function defaultBuilder(): Closure
+    {
+        return function (\Illuminate\Database\Eloquent\Builder|Builder $query, string $field, $value) {
+            match ($this->getFiltrationType()) {
+                FiltrationType::LIKE => $query->whereLike($field, $value),
+                FiltrationType::EQUAL => $query->whereEqual($field, $value),
+                FiltrationType::DATE_BETWEEN => $query->whereDateBetween(
+                    $field,
+                    $value['from'] ?? null,
+                    $value['to'] ?? null
+                ),
+            };
+        };
     }
 
 }
