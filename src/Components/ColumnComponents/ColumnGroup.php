@@ -1,6 +1,8 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Components;
+namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
+
+use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
 
 class ColumnGroup
 {

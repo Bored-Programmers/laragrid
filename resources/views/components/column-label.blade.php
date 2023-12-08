@@ -1,5 +1,5 @@
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Components\Column $column */
+    /** @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column $column */
     'column',
     'sortColumn',
     'sortDirection',

@@ -1,8 +1,8 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Components;
+namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
-use Closure;
+use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
 use Illuminate\Database\Eloquent\Model;
 
 class ActionButton extends BaseColumn

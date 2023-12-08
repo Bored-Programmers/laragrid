@@ -2,8 +2,8 @@
 
 namespace BoredProgrammers\LaraGrid\Livewire;
 
-use BoredProgrammers\LaraGrid\Components\BaseLaraGridComponent;
-use BoredProgrammers\LaraGrid\Components\Column;
+use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseLaraGridComponent;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;

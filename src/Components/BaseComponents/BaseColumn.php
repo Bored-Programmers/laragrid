@@ -1,8 +1,7 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Components;
+namespace BoredProgrammers\LaraGrid\Components\BaseComponents;
 
-use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -19,9 +18,7 @@ class BaseColumn extends BaseLaraGridComponent
 
     protected string $columnTag = 'span';
 
-    protected abstract function defaultRender(Model $model);
-
-    public function __construct(?string $modelField = null, string $label)
+    public function __construct(?string $modelField = null, ?string $label = null)
     {
         $this->setModelField($modelField);
         $this->setLabel($label ?: $modelField);

@@ -1,6 +1,8 @@
 # LaraGrid
 
-LaraGrid is a Laravel package that provides a powerful and customizable grid system. It allows you to easily create sortable, filterable tables with pagination. This package is currently in development and **not ready** for use **in production**.
+LaraGrid is a Laravel package that provides a powerful and customizable grid system. It allows you to easily create
+sortable, filterable tables with pagination. This package is currently in development and **not ready** for use **in
+production**.
 
 ## Table of Contents
 
@@ -10,9 +12,9 @@ LaraGrid is a Laravel package that provides a powerful and customizable grid sys
 - [Usage](#usage)
     - [Creating a Grid](#creating-a-grid)
     - [Displaying the Grid](#displaying-the-grid)
-    - [Sorting and Filtering](#sorting-and-filtering)
-    - [Action Buttons](#action-buttons)
     - [Customizing the Theme](#customizing-the-theme)
+    - **[Detailed Class Documentation](docs/detailed-documentation)**
+- [Examples](#examples)
 - [Testing](#testing)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Changelog](#changelog)
@@ -33,7 +35,9 @@ To install LaraGrid, you need to run the following command:
 composer require bored-programmers/laragrid
 ```
 
-LaraGrid depends on `flatpickr` for date and datetime fields. You can install it by following the instructions on the [official website](https://flatpickr.js.org/getting-started/). If you encounter issues with loading the CSS file, you can manually add it to your JS file:
+LaraGrid depends on `flatpickr` for date and datetime fields. You can install it by following the instructions on
+the [official website](https://flatpickr.js.org/getting-started/). If you encounter issues with loading the CSS file,
+you can manually add it to your JS file:
 
 ```javascript
 import 'flatpickr/dist/flatpickr.css';
@@ -67,16 +71,15 @@ php artisan vendor:publish --tag=laragrid-lang
 php artisan vendor:publish --tag=laragrid-views
 ```
 
-## Usage
+## Base Usage
 
 ### Creating a Grid
 
-To create a grid, you need to extend the `BaseLaraGrid` class and implement the `getColumns` and `getDataSource` methods.
+To create a grid, you need to extend the `BaseLaraGrid` class and implement the `getColumns` and `getDataSource`
+methods.
 
 ```php
-use BoredProgrammers\LaraGrid\Livewire\BaseLaraGrid;
-use BoredProgrammers\LaraGrid\Components\Column;
-use Illuminate\Database\Eloquent\Builder;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Livewire\BaseLaraGrid;use Illuminate\Database\Eloquent\Builder;
 
 class MyGrid extends BaseLaraGrid
 {
@@ -96,9 +99,11 @@ class MyGrid extends BaseLaraGrid
 }
 ```
 
-In the `getColumns` method, you define the columns that will be displayed in the grid. The `Column::make` method takes two arguments: the model field and the label.
+In the `getColumns` method, you define the columns that will be displayed in the grid. The `Column::make` method takes
+two arguments: the model field and the label.
 
-The `getDataSource` method should return an instance of `Illuminate\Database\Eloquent\Builder` for the model you want to display in the grid.
+The `getDataSource` method should return an instance of `Illuminate\Database\Eloquent\Builder` for the model you want to
+display in the grid.
 
 ### Displaying the Grid
 
@@ -114,58 +119,10 @@ To display the grid in a Blade view, you can use the `@livewire` or `<livewire>`
 
 _Replace `'my-grid'` with the actual name of your Livewire component._
 
-### Sorting and Filtering
-
-LaraGrid supports sorting and filtering out of the box. To enable sorting for a column, you can use the `setSortable` method:
-
-```php
-Column::make('name', 'Name')->setSortable(true),
-```
-
-Filtering can be enabled by setting a filter on a column:
-
-```php
-use BoredProgrammers\LaraGrid\Filters\TextFilter;
-
-Column::make('name', 'Name')->setFilter(TextFilter::make()),
-```
-
-The `TextFilter` class is used for filtering text fields. LaraGrid also includes `SelectFilter` for select fields and `DateFilter` for date fields.
-
-### Action Buttons
-
-You can add action buttons to your grid by using the ActionButton class. Here's an example:
-
-```php
-use BoredProgrammers\LaraGrid\Components\ActionButton;
-
-ActionButton::make('View')->setRenderer(function (Model $model) {
-    return '<a href="' . route('detail', $model->id) . '">View</a>';
-}),
-```
-
-This will completely rewrite default renderer. But you can also define only button attributes like this:
-
-```php
-use BoredProgrammers\LaraGrid\Components\ActionButton;
-
-ActionButton::make('View')->setAttributes([
-    'target' => '_blank',
-    'href' => 'https://google.com'
-    'class' => 'btn btn-primary'
-    // etc...
-]),
-```
-
-You can also use `setColumnTag` method to define columns html tag.
-
-```php
-ActionButton::make('View')->setColumnTag('a'),
-```
-
 ### Customizing the Theme
 
-You can customize the appearance of the grid by extending the `BaseLaraGridTheme` class and overriding the methods that return CSS classes:
+You can customize the appearance of the grid by extending the `BaseLaraGridTheme` class and overriding the methods that
+return CSS classes:
 
 ```php
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
@@ -192,6 +149,7 @@ class MyTheme extends BaseLaraGridTheme
             ->setPaginationContainer('')
             ->setEmptyMessage('')
             ->setResetFilterButton('');
+            // for more methods, check the BaseLaraGridTheme class
     }
 ```
 
@@ -208,15 +166,7 @@ protected string $theme = MyTheme::class;
 
 namespace App\Modules\Admin\Livewire\Grids;
 
-use App\Enums\Transaction\TransactionStatus;
-use App\Models\Transaction;
-use App\Modules\Shared\Lib\Grids\BaseGrid;
-use BoredProgrammers\LaraGrid\Components\Column;
-use BoredProgrammers\LaraGrid\Filters\DateFilter;
-use BoredProgrammers\LaraGrid\Filters\SelectFilter;
-use BoredProgrammers\LaraGrid\Filters\TextFilter;
-use BoredProgrammers\LaraGrid\Themes\UiKitTheme;
-use Illuminate\Database\Eloquent\Builder;
+use App\Enums\Transaction\TransactionStatus;use App\Models\Transaction;use App\Modules\Shared\Lib\Grids\BaseGrid;use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Filters\DateFilter;use BoredProgrammers\LaraGrid\Filters\SelectFilter;use BoredProgrammers\LaraGrid\Filters\TextFilter;use BoredProgrammers\LaraGrid\Themes\UiKitTheme;use Illuminate\Database\Eloquent\Builder;
 
 class TransactionsGrid extends BaseGrid
 {
@@ -276,13 +226,7 @@ class TransactionsGrid extends BaseGrid
 
 namespace App\Livewire\AdminModule\Grid;
 
-use App\Models\User;
-use BoredProgrammers\LaraGrid\Components\ActionButton;
-use BoredProgrammers\LaraGrid\Components\Column;
-use BoredProgrammers\LaraGrid\Components\ColumnGroup;
-use BoredProgrammers\LaraGrid\Filters\DateFilter;
-use BoredProgrammers\LaraGrid\Filters\TextFilter;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\User;use BoredProgrammers\LaraGrid\Components\ColumnComponents\ActionButton;use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup;use BoredProgrammers\LaraGrid\Filters\DateFilter;use BoredProgrammers\LaraGrid\Filters\TextFilter;use Illuminate\Database\Eloquent\Builder;
 
 class CustomersGrid extends BaseGrid
 {
@@ -345,7 +289,8 @@ vendor/bin/phpunit
 
 ## Contribution Guidelines
 
-We welcome contributions to LaraGrid. If you'd like to contribute, please fork the repository, make your changes, and submit a pull request. We have a few requirements for contributions:
+We welcome contributions to LaraGrid. If you'd like to contribute, please fork the repository, make your changes, and
+submit a pull request. We have a few requirements for contributions:
 
 - Follow the PSR-2 coding standard.
 - Write tests for new features and bug fixes.

@@ -1,6 +1,6 @@
 @php
     /**
-    * @var \BoredProgrammers\LaraGrid\Components\Column[] $columns
+    * @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column[] $columns
     * @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme
     */
 @endphp
@@ -15,7 +15,7 @@
         <thead class="{{ $theme->getThead() }}">
         <tr class="{{ $theme->getTr() }}">
             @foreach($columns as $column)
-                @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseColumn)
+                @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
                     <th
                             wire:key="column-label-{{ $column->getModelField() }}"
                             class="{{ $theme->getTh() }}"
@@ -26,7 +26,7 @@
                                 :sort-direction="$sortDirection"
                         />
                     </th>
-                @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnGroup)
+                @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
                     <th
                             wire:key="column-actions-label-{{ uniqid($column->getLabel()) }}"
                             class="{{ $theme->getTh() }}"
@@ -44,7 +44,7 @@
         <tbody class="{{ $theme->getTbody() }}">
         <tr>
             @foreach($columns as $column)
-                @if($column instanceof \BoredProgrammers\LaraGrid\Components\Column)
+                @if($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
                         <x-laragrid::column-filter
                                 :theme="$theme"
@@ -60,19 +60,19 @@
         @forelse($records as $record)
             <tr class="{{ $theme->getTr() }}">
                 @foreach($columns as $column)
-                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseColumn)
+                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
                         <td class="{{ $theme->getTd() }}">
                             <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
-                                {{ $column->callRenderer($record) }}
-                            </{{ $column->getColumnTag() }}>
+                            {{ $column->callRenderer($record) }}
+                        </{{ $column->getColumnTag() }}>
                         </td>
-                    @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnGroup)
+                    @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
                         <td class="{{ $theme->getGroupTd() }}">
                             @foreach($column->getColumns() as $childColumn)
                                 <{{ $childColumn->getColumnTag() }} {!! $childColumn->getAttributes($record) !!}>
-                                    {{ $childColumn->callRenderer($record) }}
-                                </{{ $childColumn->getColumnTag() }}>
-                            @endforeach
+                                {{ $childColumn->callRenderer($record) }}
+                        </{{ $childColumn->getColumnTag() }}>
+                        @endforeach
                         </td>
                     @endif
                 @endforeach

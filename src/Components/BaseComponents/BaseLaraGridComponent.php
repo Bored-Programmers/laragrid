@@ -1,6 +1,6 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Components;
+namespace BoredProgrammers\LaraGrid\Components\BaseComponents;
 
 use Illuminate\Database\Eloquent\Model;
 

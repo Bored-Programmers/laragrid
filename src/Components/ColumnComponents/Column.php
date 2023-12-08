@@ -1,7 +1,8 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid\Components;
+namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
+use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
 use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
@@ -20,7 +21,7 @@ class Column extends BaseColumn
 
     protected string $dateFormat = 'd.m.Y';
 
-    public static function make(string $modelField, string $label): static
+    public static function make(string $modelField, ?string $label = null): static
     {
         return new static($modelField, $label);
     }
