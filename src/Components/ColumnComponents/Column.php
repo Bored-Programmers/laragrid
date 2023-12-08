@@ -28,23 +28,25 @@ class Column extends BaseColumn
 
     public function defaultRender(Model $model)
     {
-        $value = data_get($model, $this->getModelField());
+        return function (Model $model) {
+            $value = data_get($model, $this->getModelField());
 
-        if ($value instanceof UnitEnum) {
-            $value = $value->name;
-        }
+            if ($value instanceof UnitEnum) {
+                $value = $value->name;
+            }
 
-        if ($value instanceof Carbon) {
-            return $value->format($this->getDateFormat());
-        }
+            if ($value instanceof Carbon) {
+                return $value->format($this->getDateFormat());
+            }
 
-        $filter = $this->getFilter();
+            $filter = $this->getFilter();
 
-        if ($filter && $filter->getFilterType() === FilterType::SELECT) {
-            return $this->getValueLabelFromSelect($filter, $value);
-        }
+            if ($filter && $filter->getFilterType() === FilterType::SELECT) {
+                return $this->getValueLabelFromSelect($filter, $value);
+            }
 
-        return $value;
+            return $value;
+        };
     }
 
     public function getFilter(): ?BaseFilter

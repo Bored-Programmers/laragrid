@@ -15,7 +15,9 @@ class ActionButton extends BaseColumn
 
     public function defaultRender(Model $model): string
     {
-        return __($this->getLabel());
+        return function (Model $model) {
+            return __($this->getLabel());
+        };
     }
 
 }
