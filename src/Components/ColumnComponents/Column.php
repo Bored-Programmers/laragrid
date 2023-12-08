@@ -21,6 +21,13 @@ class Column extends BaseColumn
 
     protected string $dateFormat = 'd.m.Y';
 
+    public function __construct(?string $modelField = null, ?string $label = null)
+    {
+        $this->setModelField($modelField);
+
+        parent::__construct($label);
+    }
+
     public static function make(string $modelField, ?string $label = null): static
     {
         return new static($modelField, $label);
@@ -28,25 +35,23 @@ class Column extends BaseColumn
 
     public function defaultRender(Model $model)
     {
-        return function (Model $model) {
-            $value = data_get($model, $this->getModelField());
+        $value = data_get($model, $this->getModelField());
 
-            if ($value instanceof UnitEnum) {
-                $value = $value->name;
-            }
+        if ($value instanceof UnitEnum) {
+            $value = $value->name;
+        }
 
-            if ($value instanceof Carbon) {
-                return $value->format($this->getDateFormat());
-            }
+        if ($value instanceof Carbon) {
+            return $value->format($this->getDateFormat());
+        }
 
-            $filter = $this->getFilter();
+        $filter = $this->getFilter();
 
-            if ($filter && $filter->getFilterType() === FilterType::SELECT) {
-                return $this->getValueLabelFromSelect($filter, $value);
-            }
+        if ($filter && $filter->getFilterType() === FilterType::SELECT) {
+            return $this->getValueLabelFromSelect($filter, $value);
+        }
 
-            return $value;
-        };
+        return $value;
     }
 
     public function getFilter(): ?BaseFilter

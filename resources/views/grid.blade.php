@@ -46,7 +46,7 @@
             @foreach($columns as $column)
                 @if($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
-                        <x-laragrid::column-filter
+                        <x-laragrid::filters.column-filter
                                 :theme="$theme"
                                 :column="$column"
                                 :sort-column="$sortColumn"
@@ -62,14 +62,14 @@
                 @foreach($columns as $column)
                     @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
                         <td class="{{ $theme->getTd() }}">
-                            <{{ $column->getColumnTag() }} {!! $column->getAttributes($record) !!}>
+                            <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
                             {{ $column->callRenderer($record) }}
                         </{{ $column->getColumnTag() }}>
                         </td>
                     @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
                         <td class="{{ $theme->getGroupTd() }}">
                             @foreach($column->getColumns() as $childColumn)
-                                <{{ $childColumn->getColumnTag() }} {!! $childColumn->getAttributes($record) !!}>
+                                <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>
                                 {{ $childColumn->callRenderer($record) }}
                         </{{ $childColumn->getColumnTag() }}>
                         @endforeach

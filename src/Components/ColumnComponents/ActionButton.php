@@ -10,14 +10,12 @@ class ActionButton extends BaseColumn
 
     public static function make(string $label): self
     {
-        return new static(null, $label);
+        return new static($label);
     }
 
     public function defaultRender(Model $model): string
     {
-        return function (Model $model) {
-            return __($this->getLabel());
-        };
+        return __($this->getLabel());
     }
 
 }

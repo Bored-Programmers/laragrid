@@ -12,17 +12,18 @@ class BaseColumn extends BaseLaraGridComponent
 
     protected string $label;
 
-    protected Closure $renderer;
+    /** @var callable */
+    protected $renderer;
 
-    protected Closure $attributes;
+    /** @var callable */
+    protected $attributes;
 
     protected string $columnTag = 'span';
 
-    public function __construct(?string $modelField = null, ?string $label = null)
+    public function __construct(?string $label = null)
     {
-        $this->setModelField($modelField);
         $this->setLabel($label ?: $modelField);
-        $this->setRenderer($this->defaultRender());
+        $this->setRenderer([$this, 'defaultRender']);
         $this->setAttributes(function (Model $model) {
             return [];
         });
@@ -30,10 +31,15 @@ class BaseColumn extends BaseLaraGridComponent
 
     public function callRenderer(Model $model)
     {
-        return ($this->renderer)($model);
+        return call_user_func_array($this->getRenderer(), [$model]);
     }
 
-    public function setRenderer(Closure $renderer): static
+    public function getRenderer(): callable
+    {
+        return $this->renderer;
+    }
+
+    public function setRenderer(callable $renderer): static
     {
         $this->renderer = $renderer;
 
@@ -42,19 +48,19 @@ class BaseColumn extends BaseLaraGridComponent
 
     public function callAttributes(Model $model)
     {
-        return ($this->attributes)($model);
-    }
-
-    public function getAttributes(Model $model): string
-    {
-        return collect($this->callAttributes($model))
+        return collect(call_user_func_array($this->getAttributes(), [$model]))
             ->map(function ($value, $key) {
                 return Str::of($key)->append('="', $value, '"');
             })
             ->join(' ');
     }
 
-    public function setAttributes(Closure $attributes): static
+    public function getAttributes(): callable
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(callable $attributes): static
     {
         $this->attributes = $attributes;
 

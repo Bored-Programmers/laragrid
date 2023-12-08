@@ -14,21 +14,27 @@ abstract class BaseFilter
 
     protected FiltrationType $filtrationType;
 
-    protected Closure $builder;
+    /** @var callable */
+    protected $builder;
 
     public function __construct()
     {
-        $this->setBuilder($this->defaultBuilder());
+        $this->setBuilder([$this, 'defaultBuilder']);
     }
 
     /*********************************************** GETTERS && SETTERS ***********************************************/
 
     public function callBuilder(Builder|\Illuminate\Database\Eloquent\Builder $query, string $field, $value)
     {
-        return ($this->builder)($query, $field, $value);
+        return call_user_func_array($this->getBuilder(), [$query, $field, $value]);
     }
 
-    public function setBuilder(Closure $builder): static
+    public function getBuilder(): callable
+    {
+        return $this->builder;
+    }
+
+    public function setBuilder(callable $builder): static
     {
         $this->builder = $builder;
 
@@ -61,19 +67,23 @@ abstract class BaseFilter
 
     /************************************************ PRIVATE ************************************************/
 
-    protected function defaultBuilder(): Closure
+    protected function defaultBuilder(
+        \Illuminate\Database\Eloquent\Builder|Builder $query,
+        string $field,
+        mixed $value
+    ): \Illuminate\Database\Eloquent\Builder|Builder
     {
-        return function (\Illuminate\Database\Eloquent\Builder|Builder $query, string $field, $value) {
-            match ($this->getFiltrationType()) {
-                FiltrationType::LIKE => $query->whereLike($field, $value),
-                FiltrationType::EQUAL => $query->whereEqual($field, $value),
-                FiltrationType::DATE_BETWEEN => $query->whereDateBetween(
-                    $field,
-                    $value['from'] ?? null,
-                    $value['to'] ?? null
-                ),
-            };
+        match ($this->getFiltrationType()) {
+            FiltrationType::LIKE => $query->whereLike($field, $value),
+            FiltrationType::EQUAL => $query->whereEqual($field, $value),
+            FiltrationType::DATE_BETWEEN => $query->whereDateBetween(
+                $field,
+                $value['from'] ?? null,
+                $value['to'] ?? null
+            ),
         };
+
+        return $query;
     }
 
 }
