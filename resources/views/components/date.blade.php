@@ -53,7 +53,7 @@
           defaultDate: [defaultFrom, defaultTo],
           dateFormat: @js(config('laragrid.date_format')),
           locale: @js(config('laragrid.locale')),
-          onClose: function (selectedDates, dateStr, instance) {
+          onClose: function (selectedDates) {
             if (selectedDates.length === 2) {
               let from = moment(selectedDates[0]).format('{{ config('laragrid.js_date_format') }}');
               let to = moment(selectedDates[1]).format('{{ config('laragrid.js_date_format') }}');
