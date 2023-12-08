@@ -11,21 +11,15 @@ use Illuminate\Support\Str;
 class BaseColumn extends BaseLaraGridComponent
 {
 
-    protected ?string $modelField;
-
     protected string $label;
-
-    protected bool $sortable = true;
-
-    protected ?BaseFilter $filter = null;
 
     protected Closure $renderer;
 
     protected Closure $attributes;
 
-    protected string $dateFormat = 'd.m.Y';
-
     protected string $columnTag = 'span';
+
+    protected abstract function defaultRender(Model $model);
 
     public function __construct(?string $modelField = null, string $label)
     {
@@ -86,28 +80,6 @@ class BaseColumn extends BaseLaraGridComponent
         return $this;
     }
 
-    public function getModelField(): ?string
-    {
-        return $this->modelField;
-    }
-
-    public function setModelField(?string $modelField): void
-    {
-        $this->modelField = $modelField;
-    }
-
-    public function getFilter(): ?BaseFilter
-    {
-        return $this->filter;
-    }
-
-    public function setFilter(BaseFilter $filter): static
-    {
-        $this->filter = $filter;
-
-        return $this;
-    }
-
     public function getLabel(): string
     {
         return $this->label;
@@ -116,30 +88,6 @@ class BaseColumn extends BaseLaraGridComponent
     public function setLabel(string $label): void
     {
         $this->label = $label;
-    }
-
-    public function isSortable(): bool
-    {
-        return $this->sortable;
-    }
-
-    public function setSortable($isSortable = true): static
-    {
-        $this->sortable = $isSortable;
-
-        return $this;
-    }
-
-    public function getDateFormat(): string
-    {
-        return $this->dateFormat;
-    }
-
-    public function setDateFormat(string $dateFormat): static
-    {
-        $this->dateFormat = $dateFormat;
-
-        return $this;
     }
 
 }
