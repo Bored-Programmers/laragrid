@@ -42,7 +42,7 @@
         </tr>
         </thead>
         <tbody class="{{ $theme->getTbody() }}">
-        <tr>
+        <tr class="{{ $theme->getFilterTr() }}">
             @foreach($columns as $column)
                 @if($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
@@ -58,7 +58,7 @@
         </tr>
 
         @forelse($records as $record)
-            <tr class="{{ $theme->getTr() }}">
+            <tr class="{{ $theme->getRecordTr() }}">
                 @foreach($columns as $column)
                     @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
                         <td class="{{ $theme->getTd() }}">

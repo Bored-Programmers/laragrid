@@ -15,6 +15,10 @@ class BaseLaraGridTheme
 
     private ?string $tr = null;
 
+    private ?string $filterTr = null;
+
+    private ?string $recordTr = null;
+
     private ?string $th = null;
 
     private ?string $tbody = null;
@@ -99,6 +103,30 @@ class BaseLaraGridTheme
     public function setTr(?string $tr): static
     {
         $this->tr = $tr;
+
+        return $this;
+    }
+
+    public function getFilterTr(): ?string
+    {
+        return $this->filterTr;
+    }
+
+    public function setFilterTr(?string $filterTr): BaseLaraGridTheme
+    {
+        $this->filterTr = $filterTr;
+
+        return $this;
+    }
+
+    public function getRecordTr(): ?string
+    {
+        return $this->recordTr;
+    }
+
+    public function setRecordTr(?string $recordTr): BaseLaraGridTheme
+    {
+        $this->recordTr = $recordTr;
 
         return $this;
     }
