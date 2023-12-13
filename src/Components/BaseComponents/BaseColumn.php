@@ -24,7 +24,7 @@ abstract class BaseColumn extends BaseLaraGridComponent
 
     public function __construct(?string $label = null)
     {
-        $this->setLabel($label ?: $modelField);
+        $this->setLabel($label);
         $this->setRenderer([$this, 'defaultRender']);
         $this->setAttributes(function (Model $model) {
             return [];
@@ -41,8 +41,12 @@ abstract class BaseColumn extends BaseLaraGridComponent
         return $this->renderer;
     }
 
-    public function setRenderer(callable $renderer): static
+    public function setRenderer(callable|string $renderer): static
     {
+        if (is_string($renderer)) {
+            $renderer = fn() => $renderer;
+        }
+
         $this->renderer = $renderer;
 
         return $this;
@@ -62,8 +66,12 @@ abstract class BaseColumn extends BaseLaraGridComponent
         return $this->attributes;
     }
 
-    public function setAttributes(callable $attributes): static
+    public function setAttributes(callable|string $attributes): static
     {
+        if (is_string($attributes)) {
+            $attributes = fn() => $attributes;
+        }
+
         $this->attributes = $attributes;
 
         return $this;
