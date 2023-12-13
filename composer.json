@@ -1,6 +1,15 @@
 {
   "name": "bored-programmers/laragrid",
-  "description": "Laravel grid package",
+  "description": "LaraGrid is a powerful and customizable grid system package for Laravel. It provides an easy way to create sortable, filterable tables with pagination. The package is designed to be highly customizable, allowing developers to define columns, apply filters, and sort data with ease.\n\nKey Features:\n- **Column Definition**: LaraGrid allows you to define the columns that will be displayed in the grid. You can specify the model field and the label for each column.\n- **Filters**: The package provides several filter classes out of the box, including text, select, date, and boolean filters. These filters can be applied to the columns to filter the grid's data based on user input.\n- **Sorting**: LaraGrid supports sorting of data based on any column. It also provides support for sorting data based on a related model's field using PowerJoins.\n- **Pagination**: The package integrates with Laravel's pagination system, allowing you to easily paginate the data in the grid.\n- **Customizable Appearance**: LaraGrid allows you to customize the appearance of the grid by extending the `BaseLaraGridTheme` class and setting the desired CSS classes.\n- **Livewire Integration**: LaraGrid is built with Livewire, a full-stack framework for Laravel that makes building dynamic interfaces simple, without leaving the comfort of Laravel.\n\nThe package is currently in development and is not ready for use in production. It requires PHP 8.1 or higher and Laravel 10.0 or higher.",
+  "keywords": [
+    "laravel",
+    "grid",
+    "table",
+    "filter",
+    "sort",
+    "pagination",
+    "livewire"
+  ],
   "type": "library",
   "license": "MIT",
   "require": {
@@ -16,7 +25,7 @@
   "authors": [
     {
       "name": "Matěj Černý",
-      "email": "mat.cerny3@gmail.com"
+      "email": "mat.cerny3@seznam.cz"
     }
   ],
   "minimum-stability": "stable",
