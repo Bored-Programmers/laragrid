@@ -24,44 +24,12 @@ Column::make('name', 'attributes.name')
 
 The `Column` class provides several methods to manipulate a column in the grid.
 
-### `defaultRender(Model $model)`
-
-This method is used to render the value of the column for a given model instance. It handles different types of values, such as `UnitEnum`, `Carbon` (for dates), and select filters.
-
-```php
-public function defaultRender(Model $model)
-```
-
-### `getValueLabelFromSelect($filter, mixed $value)`
-
-This private method is used to get the label of a select filter's value.
-
-```php
-private function getValueLabelFromSelect($filter, mixed $value)
-```
-
-### `getFilter()`
-
-This method returns the filter set on the column.
-
-```php
-public function getFilter(): ?BaseFilter
-```
-
 ### `setFilter(BaseFilter $filter)`
 
 This method sets a filter for the column.
 
 ```php
 public function setFilter(BaseFilter $filter): static
-```
-
-### `getModelField()`
-
-This method returns the model field of the column.
-
-```php
-public function getModelField(): ?string
 ```
 
 ### `setModelField(?string $modelField)`
@@ -72,28 +40,12 @@ This method sets the model field of the column.
 public function setModelField(?string $modelField): void
 ```
 
-### `isSortable()`
-
-This method returns a boolean indicating whether the column is sortable.
-
-```php
-public function isSortable(): bool
-```
-
 ### `setSortable($isSortable = true)`
 
 This method enables or disables sorting for a column.
 
 ```php
 public function setSortable($isSortable = true): static
-```
-
-### `getDateFormat()`
-
-This method returns the date format used to display date values in the column.
-
-```php
-public function getDateFormat(): string
 ```
 
 ### `setDateFormat(string $dateFormat)`

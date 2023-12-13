@@ -18,7 +18,7 @@
           name="filter.{{ $column->getModelField() }}.to"
           wire:model.live="filter.{{ $column->getModelField() }}.to"
   >
-  <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDate() }}">
+  <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDateClass() }}">
 </div>
 
 <script src="https://npmcdn.com/flatpickr/dist/l10n/{{ config('laragrid.locale') }}.js" defer></script>

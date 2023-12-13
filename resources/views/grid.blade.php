@@ -1,24 +1,25 @@
 @php
     /**
     * @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column[] $columns
+    * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator $records
     * @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme
     */
 @endphp
 <div>
-    <table class="{{ $theme->getTable() }}">
+    <table class="{{ $theme->getTableClass() }}">
         @if($this->filter)
-            <a class="{{ $theme->getResetLink() }}" wire:click="resetFilters">
-                @lang('laragrid::translations.filter.reset')
+            <a class="{{ $theme->getFilterResetButtonClass() }}" wire:click="resetFilters">
+                {!! $theme->callFilterResetButtonRenderer() !!}
             </a>
         @endif
 
-        <thead class="{{ $theme->getThead() }}">
-        <tr class="{{ $theme->getTr() }}">
+        <thead class="{{ $theme->getTheadClass() }}">
+        <tr class="{{ $theme->getTrClass() }}">
             @foreach($columns as $column)
                 @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
                     <th
                             wire:key="column-label-{{ $column->getModelField() }}"
-                            class="{{ $theme->getTh() }}"
+                            class="{{ $theme->getThClass() }}"
                     >
                         <x-laragrid::column-label
                                 :column="$column"
@@ -29,7 +30,7 @@
                 @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
                     <th
                             wire:key="column-actions-label-{{ uniqid($column->getLabel()) }}"
-                            class="{{ $theme->getTh() }}"
+                            class="{{ $theme->getThClass() }}"
                     >
                         <div>
                             <span>
@@ -41,8 +42,8 @@
             @endforeach
         </tr>
         </thead>
-        <tbody class="{{ $theme->getTbody() }}">
-        <tr class="{{ $theme->getFilterTr() }}">
+        <tbody class="{{ $theme->getTbodyClass() }}">
+        <tr class="{{ $theme->getFilterTrClass() }}">
             @foreach($columns as $column)
                 @if($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
@@ -58,16 +59,16 @@
         </tr>
 
         @forelse($records as $record)
-            <tr class="{{ $theme->getRecordTr() }}">
+            <tr class="{{ $theme->callRecordTrClass($record) }}">
                 @foreach($columns as $column)
                     @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
-                        <td class="{{ $theme->getTd() }}">
+                        <td class="{{ $theme->getTdClass() }}">
                             <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
                             {{ $column->callRenderer($record) }}
                         </{{ $column->getColumnTag() }}>
                         </td>
                     @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
-                        <td class="{{ $theme->getGroupTd() }}">
+                        <td class="{{ $theme->getGroupTdClass() }}">
                             @foreach($column->getColumns() as $childColumn)
                                 <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>
                                 {{ $childColumn->callRenderer($record) }}
@@ -78,9 +79,9 @@
                 @endforeach
             </tr>
         @empty
-            <tr class="{{ $theme->getTr() }}">
+            <tr class="{{ $theme->getTrClass() }}">
                 <td colspan="{{ count($columns) }}">
-                    <div class="{{ $theme->getEmptyMessage() }}">
+                    <div class="{{ $theme->getEmptyMessageClass() }}">
                         @lang('laragrid::translations.empty')
                     </div>
                 </td>
@@ -89,7 +90,7 @@
         </tbody>
     </table>
 
-    <div class="{{ $theme->getPagination() }}">
+    <div class="{{ $theme->getPaginationClass() }}">
         {{ $records->links() }}
     </div>
 </div>

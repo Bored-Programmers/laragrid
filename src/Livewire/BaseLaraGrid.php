@@ -32,12 +32,12 @@ abstract class BaseLaraGrid extends Component
 
     public int $perPage = 25;
 
-    protected string $theme = BaseLaraGridTheme::class;
-
     /** @return BaseLaraGridComponent[] */
     protected abstract function getColumns(): array;
 
     protected abstract function getDataSource(): Builder;
+
+    protected abstract function getTheme(): BaseLaraGridTheme;
 
     public function resetFilters(): void
     {
@@ -60,12 +60,10 @@ abstract class BaseLaraGrid extends Component
      */
     public function render(): View
     {
-        if (!$this->theme) {
-            throw new Exception('Theme is not set!');
-        }
-
-        if (!class_exists($this->theme)) {
-            throw new Exception('Theme class "' . $this->theme . '" does not exist!');
+        if (!($this->getTheme() instanceof BaseLaraGridTheme)) {
+            throw new Exception(
+                'Theme class "' . $this->getTheme() . '" is not instance of "' . BaseLaraGridTheme::class . '"!'
+            );
         }
 
         $query = $this->getDataSource();
@@ -77,7 +75,7 @@ abstract class BaseLaraGrid extends Component
         return view('laragrid::grid', [
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
-            'theme' => new $this->theme,
+            'theme' => $this->getTheme(),
         ]);
     }
 

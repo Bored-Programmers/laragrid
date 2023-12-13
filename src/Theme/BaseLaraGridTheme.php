@@ -3,310 +3,325 @@
 namespace BoredProgrammers\LaraGrid\Theme;
 
 use Closure;
+use Illuminate\Database\Eloquent\Model;
 
-class BaseLaraGridTheme
+abstract class BaseLaraGridTheme
 {
 
-    private ?string $table = null;
+    public abstract static function make(): static;
 
-    private ?string $resetLink = null;
+    protected ?string $tableClass = null;
 
-    private ?string $thead = null;
+    protected ?string $filterResetButtonClass = null;
 
-    private ?string $tr = null;
+    protected ?string $theadClass = null;
 
-    private ?string $filterTr = null;
+    protected ?string $trClass = null;
 
-    private ?string $recordTr = null;
+    protected ?string $filterTrClass = null;
 
-    private ?string $th = null;
+    protected ?string $thClass = null;
 
-    private ?string $tbody = null;
+    protected ?string $tbodyClass = null;
 
-    private ?string $td = null;
+    protected ?string $tdClass = null;
 
-    private ?string $groupTd = null;
+    protected ?string $groupTdClass = null;
 
-    private ?string $actionContainer = null;
+    protected ?string $actionContainerClass = null;
 
-    private ?string $pagination = null;
+    protected ?string $paginationClass = null;
 
-    private ?string $filterText = null;
+    protected ?string $filterTextClass = null;
 
-    private ?string $filterSelect = null;
+    protected ?string $filterSelectClass = null;
 
-    private ?string $filterDate = null;
+    protected ?string $filterDateClass = null;
 
-    private ?string $actionButton = null;
+    protected ?string $actionButtonClass = null;
 
-    private ?string $paginationMaxResults = null;
+    protected ?string $paginationMaxResultsClass = null;
 
-    private ?string $paginationMaxResultsContainer = null;
+    protected ?string $paginationMaxResultsContainerClass = null;
 
-    private ?string $paginationContainer = null;
+    protected ?string $paginationContainerClass = null;
 
-    private ?string $emptyMessage = null;
+    protected ?string $emptyMessageClass = null;
 
-    private ?Closure $resetFilterButton = null;
+    /** @var callable */
+    protected $filterResetButtonRenderer;
+
+    /** @var callable */
+    protected $recordTrClass;
 
     public function __construct()
     {
-        $this->setResetFilterButton(fn() => __('laragrid::translations.filter.reset'));
+        $this->setFilterResetButtonRenderer(fn() => __('laragrid::translations.filter.reset'));
     }
 
-    public function make(): static
+    public function callFilterResetButtonRenderer()
     {
-        return new static();
+        return call_user_func($this->getFilterResetButtonRenderer());
     }
 
-    public function getTable(): ?string
+    public function getFilterResetButtonRenderer(): callable
     {
-        return $this->table;
+        return $this->filterResetButtonRenderer;
     }
 
-    public function setTable(?string $table): static
+    public function setFilterResetButtonRenderer(callable $filterResetButtonRenderer): static
     {
-        $this->table = $table;
+        $this->filterResetButtonRenderer = $filterResetButtonRenderer;
 
         return $this;
     }
 
-    public function getResetLink(): ?string
+    public function callRecordTrClass(Model $model)
     {
-        return $this->resetLink;
+        return call_user_func_array($this->getRecordTrClass(), [$model]);
     }
 
-    public function setResetLink(?string $resetLink): static
+    public function getRecordTrClass(): callable
     {
-        $this->resetLink = $resetLink;
+        return $this->recordTrClass;
+    }
+
+    public function setRecordTrClass(callable|string $recordTrClass): static
+    {
+        if (is_string($recordTrClass)) {
+            $recordTrClass = fn() => $recordTrClass;
+        }
+
+        $this->recordTrClass = $recordTrClass;
 
         return $this;
     }
 
-    public function getThead(): ?string
+    public function getTableClass(): ?string
     {
-        return $this->thead;
+        return $this->tableClass;
     }
 
-    public function setThead(?string $thead): static
+    public function setTableClass(?string $tableClass): BaseLaraGridTheme
     {
-        $this->thead = $thead;
+        $this->tableClass = $tableClass;
 
         return $this;
     }
 
-    public function getTr(): ?string
+    public function getFilterResetButtonClass(): ?string
     {
-        return $this->tr;
+        return $this->filterResetButtonClass;
     }
 
-    public function setTr(?string $tr): static
+    public function setFilterResetButtonClass(?string $filterResetButtonClass): BaseLaraGridTheme
     {
-        $this->tr = $tr;
+        $this->filterResetButtonClass = $filterResetButtonClass;
 
         return $this;
     }
 
-    public function getFilterTr(): ?string
+    public function getTheadClass(): ?string
     {
-        return $this->filterTr;
+        return $this->theadClass;
     }
 
-    public function setFilterTr(?string $filterTr): BaseLaraGridTheme
+    public function setTheadClass(?string $theadClass): BaseLaraGridTheme
     {
-        $this->filterTr = $filterTr;
+        $this->theadClass = $theadClass;
 
         return $this;
     }
 
-    public function getRecordTr(): ?string
+    public function getTrClass(): ?string
     {
-        return $this->recordTr;
+        return $this->trClass;
     }
 
-    public function setRecordTr(?string $recordTr): BaseLaraGridTheme
+    public function setTrClass(?string $trClass): BaseLaraGridTheme
     {
-        $this->recordTr = $recordTr;
+        $this->trClass = $trClass;
 
         return $this;
     }
 
-    public function getTh(): ?string
+    public function getFilterTrClass(): ?string
     {
-        return $this->th;
+        return $this->filterTrClass;
     }
 
-    public function setTh(?string $th): static
+    public function setFilterTrClass(?string $filterTrClass): BaseLaraGridTheme
     {
-        $this->th = $th;
+        $this->filterTrClass = $filterTrClass;
 
         return $this;
     }
 
-    public function getTbody(): ?string
+    public function getThClass(): ?string
     {
-        return $this->tbody;
+        return $this->thClass;
     }
 
-    public function setTbody(?string $tbody): static
+    public function setThClass(?string $thClass): BaseLaraGridTheme
     {
-        $this->tbody = $tbody;
+        $this->thClass = $thClass;
 
         return $this;
     }
 
-    public function getTd(): ?string
+    public function getTbodyClass(): ?string
     {
-        return $this->td;
+        return $this->tbodyClass;
     }
 
-    public function setTd(?string $td): static
+    public function setTbodyClass(?string $tbodyClass): BaseLaraGridTheme
     {
-        $this->td = $td;
+        $this->tbodyClass = $tbodyClass;
 
         return $this;
     }
 
-    public function getGroupTd(): ?string
+    public function getTdClass(): ?string
     {
-        return $this->groupTd;
+        return $this->tdClass;
     }
 
-    public function setGroupTd(?string $groupTd): BaseLaraGridTheme
+    public function setTdClass(?string $tdClass): BaseLaraGridTheme
     {
-        $this->groupTd = $groupTd;
+        $this->tdClass = $tdClass;
 
         return $this;
     }
 
-    public function getPagination(): ?string
+    public function getGroupTdClass(): ?string
     {
-        return $this->pagination;
+        return $this->groupTdClass;
     }
 
-    public function setPagination(?string $pagination): static
+    public function setGroupTdClass(?string $groupTdClass): BaseLaraGridTheme
     {
-        $this->pagination = $pagination;
+        $this->groupTdClass = $groupTdClass;
 
         return $this;
     }
 
-    public function getFilterText(): ?string
+    public function getActionContainerClass(): ?string
     {
-        return $this->filterText;
+        return $this->actionContainerClass;
     }
 
-    public function setFilterText(?string $filterText): static
+    public function setActionContainerClass(?string $actionContainerClass): BaseLaraGridTheme
     {
-        $this->filterText = $filterText;
+        $this->actionContainerClass = $actionContainerClass;
 
         return $this;
     }
 
-    public function getFilterSelect(): ?string
+    public function getPaginationClass(): ?string
     {
-        return $this->filterSelect;
+        return $this->paginationClass;
     }
 
-    public function setFilterSelect(?string $filterSelect): static
+    public function setPaginationClass(?string $paginationClass): BaseLaraGridTheme
     {
-        $this->filterSelect = $filterSelect;
+        $this->paginationClass = $paginationClass;
 
         return $this;
     }
 
-    public function getFilterDate(): ?string
+    public function getFilterTextClass(): ?string
     {
-        return $this->filterDate;
+        return $this->filterTextClass;
     }
 
-    public function setFilterDate(?string $filterDate): static
+    public function setFilterTextClass(?string $filterTextClass): BaseLaraGridTheme
     {
-        $this->filterDate = $filterDate;
+        $this->filterTextClass = $filterTextClass;
 
         return $this;
     }
 
-    public function getActionContainer(): ?string
+    public function getFilterSelectClass(): ?string
     {
-        return $this->actionContainer;
+        return $this->filterSelectClass;
     }
 
-    public function setActionContainer(?string $actionContainer): static
+    public function setFilterSelectClass(?string $filterSelectClass): BaseLaraGridTheme
     {
-        $this->actionContainer = $actionContainer;
+        $this->filterSelectClass = $filterSelectClass;
 
         return $this;
     }
 
-    public function getActionButton(): ?string
+    public function getFilterDateClass(): ?string
     {
-        return $this->actionButton;
+        return $this->filterDateClass;
     }
 
-    public function setActionButton(?string $actionButton): static
+    public function setFilterDateClass(?string $filterDateClass): BaseLaraGridTheme
     {
-        $this->actionButton = $actionButton;
+        $this->filterDateClass = $filterDateClass;
 
         return $this;
     }
 
-    public function getPaginationMaxResults(): ?string
+    public function getActionButtonClass(): ?string
     {
-        return $this->paginationMaxResults;
+        return $this->actionButtonClass;
     }
 
-    public function setPaginationMaxResults(?string $paginationMaxResults): static
+    public function setActionButtonClass(?string $actionButtonClass): BaseLaraGridTheme
     {
-        $this->paginationMaxResults = $paginationMaxResults;
+        $this->actionButtonClass = $actionButtonClass;
 
         return $this;
     }
 
-    public function getPaginationMaxResultsContainer(): ?string
+    public function getPaginationMaxResultsClass(): ?string
     {
-        return $this->paginationMaxResultsContainer;
+        return $this->paginationMaxResultsClass;
     }
 
-    public function setPaginationMaxResultsContainer(?string $paginationMaxResultsContainer): static
+    public function setPaginationMaxResultsClass(?string $paginationMaxResultsClass): BaseLaraGridTheme
     {
-        $this->paginationMaxResultsContainer = $paginationMaxResultsContainer;
+        $this->paginationMaxResultsClass = $paginationMaxResultsClass;
 
         return $this;
     }
 
-    public function getPaginationContainer(): ?string
+    public function getPaginationMaxResultsContainerClass(): ?string
     {
-        return $this->paginationContainer;
+        return $this->paginationMaxResultsContainerClass;
     }
 
-    public function setPaginationContainer(?string $paginationContainer): static
+    public function setPaginationMaxResultsContainerClass(?string $paginationMaxResultsContainerClass
+    ): BaseLaraGridTheme
     {
-        $this->paginationContainer = $paginationContainer;
+        $this->paginationMaxResultsContainerClass = $paginationMaxResultsContainerClass;
 
         return $this;
     }
 
-    public function getEmptyMessage(): ?string
+    public function getPaginationContainerClass(): ?string
     {
-        return $this->emptyMessage;
+        return $this->paginationContainerClass;
     }
 
-    public function setEmptyMessage(?string $emptyMessage): BaseLaraGridTheme
+    public function setPaginationContainerClass(?string $paginationContainerClass): BaseLaraGridTheme
     {
-        $this->emptyMessage = $emptyMessage;
+        $this->paginationContainerClass = $paginationContainerClass;
 
         return $this;
     }
 
-    public function getResetFilterButton(): Closure
+    public function getEmptyMessageClass(): ?string
     {
-        return $this->resetFilterButton;
+        return $this->emptyMessageClass;
     }
 
-    public function setResetFilterButton($resetFilterButton): static
+    public function setEmptyMessageClass(?string $emptyMessageClass): BaseLaraGridTheme
     {
-        $this->resetFilterButton = $resetFilterButton;
+        $this->emptyMessageClass = $emptyMessageClass;
 
         return $this;
     }

@@ -5,9 +5,9 @@ namespace BoredProgrammers\LaraGrid\Filters;
 class SelectFilterOption
 {
 
-    private mixed $label;
+    protected mixed $label;
 
-    private mixed $value;
+    protected mixed $value;
 
     public function __construct(mixed $value, mixed $label)
     {

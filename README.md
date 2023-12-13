@@ -121,42 +121,57 @@ _Replace `'my-grid'` with the actual name of your Livewire component._
 
 ### Customizing the Theme
 
-You can customize the appearance of the grid by extending the `BaseLaraGridTheme` class and overriding the methods that
-return CSS classes:
+You can customize the appearance of the grid by extending the `BaseLaraGridTheme` class and setting the desired CSS.
 
 ```php
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
+use Illuminate\Database\Eloquent\Model;
 
 class MyTheme extends BaseLaraGridTheme
 {
-    public function getTable(): ?string
+
+    public static function make(): static
     {
-        $this->setTable('')
-            ->setThead('')
-            ->setTr('')
-            ->setTh('')
-            ->setTbody('')
-            ->setTd('')
-            ->setGroupTd('')
-            ->setActionContainer('')
-            ->setPagination('')
-            ->setFilterText('')
-            ->setFilterSelect('')
-            ->setFilterDate('')
-            ->setActionButton('')
-            ->setPaginationMaxResults('')
-            ->setPaginationMaxResultsContainer('')
-            ->setPaginationContainer('')
-            ->setEmptyMessage('')
-            ->setResetFilterButton('');
-            // for more methods, check the BaseLaraGridTheme class
+        $theme = new static();
+
+        $theme->setTableClass('');
+        $theme->setFilterResetButtonClass('');
+        $theme->setTheadClass('');
+        $theme->setTrClass('');
+        $theme->setFilterTrClass('');
+        $theme->setThClass('');
+        $theme->setTbodyClass('');
+        $theme->setTdClass('');
+        $theme->setGroupTdClass('');
+        $theme->setActionContainerClass('');
+        $theme->setPaginationClass('');
+        $theme->setFilterTextClass('');
+        $theme->setFilterSelectClass('');
+        $theme->setFilterDateClass('');
+        $theme->setActionButtonClass('');
+        $theme->setPaginationMaxResultsClass('');
+        
+        $theme->setFilterResetButtonRenderer(fn() => view('test')); // you can also set renderer for filter reset button. Pass a closure that returns a whatever you want -> string, view, etc.
+
+        $theme->setRecordTrClass(fn(Model $model) => $model->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
+        $theme->setRecordTrClass('bg-gray-100'); // If you don't want to set a closure, you can just pass a string class.
+
+        // for more methods, check the BaseLaraGridTheme class
+
+        return $theme;
     }
+
+}
+
 ```
 
-Then, in your Livewire component, you can set the $theme property to your custom theme class:
+Then, in your grid class, you need to override the `getTheme` method and return an instance of your theme class.
 
 ```php
-protected string $theme = MyTheme::class;
+    protected function getTheme(): BaseLaraGridTheme
+    {
+        return MyTheme::make();
+    }
 ```
 
 ## Testing

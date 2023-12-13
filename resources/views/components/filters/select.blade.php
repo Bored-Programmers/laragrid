@@ -10,7 +10,7 @@
     $filter = $column->getFilter()
 @endphp
 
-<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $theme->getFilterSelect() }}">
+<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $theme->getFilterSelectClass() }}">
     @if($filter->getPrompt())
         <option wire:key="item-prompt" value="">@lang($filter->getPrompt())</option>
     @endif

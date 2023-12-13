@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
-class BaseColumn extends BaseLaraGridComponent
+abstract class BaseColumn extends BaseLaraGridComponent
 {
+
+    public abstract function defaultRender(Model $model);
 
     protected string $label;
 

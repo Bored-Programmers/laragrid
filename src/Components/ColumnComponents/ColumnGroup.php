@@ -8,9 +8,9 @@ class ColumnGroup
 {
 
     /** @var BaseColumn[] */
-    private array $columns = [];
+    protected array $columns = [];
 
-    private string $label;
+    protected string $label;
 
     public function __construct(string $label)
     {
