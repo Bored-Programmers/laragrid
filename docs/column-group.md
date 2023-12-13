@@ -16,14 +16,6 @@ ColumnGroup::make('User Details')
 
 The `ColumnGroup` class provides several methods to manipulate a column group in the grid.
 
-### `getColumns()`
-
-This method returns an array of `BaseColumn` instances that belong to the group.
-
-```php
-public function getColumns(): array
-```
-
 ### `setColumns(array $columns)`
 
 This method sets the columns of the group. It takes one argument: an array of `BaseColumn` instances.

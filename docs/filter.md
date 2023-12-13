@@ -70,5 +70,3 @@ protected function getColumns(): array
     ];
 }
 ```
-
-In this example, we have four columns: 'ID', 'Name', 'Status', and 'Created At'. The 'Name' column has a text filter, the 'Status' column has a select filter, and the 'Created At' column has a date filter.
