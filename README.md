@@ -197,7 +197,7 @@ For any questions or concerns, please feel free to create a discussion on GitHub
 
 ## Credits
 
-Created by [Bored Programmers](@LeMatosDeFuk)
+Created by [Matěj Černý](https://github.com/LeMatosDeFuk) from [Bored Programmers](https://github.com/Bored-Programmers).
 
 ## Acknowledgments
 
