@@ -193,7 +193,7 @@ This project is licensed under the [MIT license](https://github.com/Bored-Progra
 
 ## Contact Information
 
-For any questions or concerns, please feel free to create a discussion on GitHub.
+For any questions or concerns, please feel free to create a [discussion](https://github.com/Bored-Programmers/laragrid/discussions) on GitHub.
 
 ## Credits
 
