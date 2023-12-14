@@ -193,7 +193,7 @@ submit a pull request. We have a few requirements for contributions:
 
 ## Changelog
 
-For a detailed history of changes, see the [CHANGELOG.md](CHANGELOG.md) file.
+For a detailed history of changes, see releases on GitHub.
 
 ## License
 
@@ -202,6 +202,10 @@ This project is licensed under the [MIT license](https://github.com/Bored-Progra
 ## Contact Information
 
 For any questions or concerns, please feel free to create a discussion on GitHub.
+
+## Credits
+
+Created by [Bored Programmers](@LeMatosDeFuk)
 
 ## Acknowledgments
 
