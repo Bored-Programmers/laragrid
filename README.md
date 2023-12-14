@@ -174,14 +174,6 @@ Then, in your grid class, you need to override the `getTheme` method and return 
     }
 ```
 
-## Testing
-
-To run the tests for the package, you can use the following command:
-
-```bash
-vendor/bin/phpunit
-```
-
 ## Contribution Guidelines
 
 We welcome contributions to LaraGrid. If you'd like to contribute, please fork the repository, make your changes, and
