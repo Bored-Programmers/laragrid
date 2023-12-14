@@ -71,6 +71,13 @@ php artisan vendor:publish --tag=laragrid-lang
 php artisan vendor:publish --tag=laragrid-views
 ```
 
+## TODO List
+
+1. [ ] Write tests for all functionality
+2. [ ] Make flatpickr as internal dependency and not as project dependency (probably with cdn?)
+3. [ ] Unify the code style, create a code style guide
+4. [ ] Make classes more modular
+
 ## Base Usage
 
 ### Creating a Grid
