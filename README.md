@@ -82,14 +82,19 @@ php artisan vendor:publish --tag=laragrid-views
 
 ### Creating a Grid
 
-To create a grid, you need to extend the `BaseLaraGrid` class and implement the `getColumns` and `getDataSource`
-methods.
+To create a grid, you need to extend the `BaseLaraGrid` class and implement the `getColumns`, `getDataSource` and `getTheme` methods.
 
 ```php
 use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Livewire\BaseLaraGrid;use Illuminate\Database\Eloquent\Builder;
 
 class MyGrid extends BaseLaraGrid
 {
+
+    protected function getTheme(): BaseLaraGridTheme
+    {
+        return MyTheme::make();
+    }
+
     protected function getColumns(): array
     {
         return [
@@ -103,6 +108,7 @@ class MyGrid extends BaseLaraGrid
     {
         return MyModel::query();
     }
+
 }
 ```
 
