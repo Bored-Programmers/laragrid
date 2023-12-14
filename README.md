@@ -185,7 +185,7 @@ submit a pull request. We have a few requirements for contributions:
 
 ## Changelog
 
-For a detailed history of changes, see releases on GitHub.
+For a detailed history of changes, see [releases](https://github.com/Bored-Programmers/laragrid/releases) on GitHub.
 
 ## License
 
