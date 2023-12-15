@@ -1,11 +1,12 @@
-
 # LaraGrid Action Button Class
 
-The `ActionButton` class is a part of the LaraGrid package. It is used to define an interactive button in the grid. Each instance of the `ActionButton` class represents an action button in the grid.
+The `ActionButton` class is a part of the LaraGrid package. It is used to define an interactive button in the grid. Each
+instance of the `ActionButton` class represents an action button in the grid.
 
 ## Creating an Action Button
 
-To create an action button, you use the `make` method. This static method creates a new instance of the `ActionButton` class. It takes one argument: the label.
+To create an action button, you use the `make` method. This static method creates a new instance of the `ActionButton`
+class. It takes one argument: the label.
 
 ```php
 ActionButton::make('View')
@@ -45,7 +46,8 @@ class MyClass
 
 ### `setAttributes(array $attributes): static`
 
-This method sets the attributes of the action button. The attributes are HTML attributes that are applied to the action button tag. You can pass a callable, a class method, or an array.
+This method sets the attributes of the action button. The attributes are HTML attributes that are applied to the action
+button tag. You can pass a callable, a class method, or an array.
 
 ```php
 public function setAttributes(array $attributes): static

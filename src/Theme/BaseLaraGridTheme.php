@@ -2,13 +2,10 @@
 
 namespace BoredProgrammers\LaraGrid\Theme;
 
-use Closure;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseLaraGridTheme
 {
-
-    public abstract static function make(): static;
 
     protected ?string $tableClass = null;
 
@@ -48,6 +45,8 @@ abstract class BaseLaraGridTheme
     {
         $this->setFilterResetButtonRenderer(fn() => __('laragrid::translations.filter.reset'));
     }
+
+    public abstract static function make(): static;
 
     public function callFilterResetButtonRenderer()
     {

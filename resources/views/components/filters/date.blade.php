@@ -8,19 +8,19 @@
 ])
 
 <div wire:ignore x-data="LGDatePicker()" x-init="init()">
-  <input
-          type="hidden"
-          x-ref="filter.{{ $column->getModelField() }}.from"
-          name="filter.{{ $column->getModelField() }}.from"
-          wire:model.live="filter.{{ $column->getModelField() }}.from"
-  >
-  <input
-          type="hidden"
-          x-ref="filter.{{ $column->getModelField() }}.to"
-          name="filter.{{ $column->getModelField() }}.to"
-          wire:model.live="filter.{{ $column->getModelField() }}.to"
-  >
-  <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDateClass() }}">
+    <input
+            type="hidden"
+            x-ref="filter.{{ $column->getModelField() }}.from"
+            name="filter.{{ $column->getModelField() }}.from"
+            wire:model.live="filter.{{ $column->getModelField() }}.from"
+    >
+    <input
+            type="hidden"
+            x-ref="filter.{{ $column->getModelField() }}.to"
+            name="filter.{{ $column->getModelField() }}.to"
+            wire:model.live="filter.{{ $column->getModelField() }}.to"
+    >
+    <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDateClass() }}">
 </div>
 
 <script src="https://npmcdn.com/flatpickr/dist/l10n/{{ config('laragrid.locale') }}.js" defer></script>
