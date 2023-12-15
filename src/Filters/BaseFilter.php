@@ -2,17 +2,22 @@
 
 namespace BoredProgrammers\LaraGrid\Filters;
 
-use BoredProgrammers\LaraGrid\BaseLaraGridClass;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Traits\HasBootableClass;
 use BoredProgrammers\LaraGrid\Traits\HasBuilder;
 use BoredProgrammers\LaraGrid\Traits\HasFilterType;
 use BoredProgrammers\LaraGrid\Traits\HasFiltrationType;
 use Illuminate\Database\Query\Builder;
 
-abstract class BaseFilter extends BaseLaraGridClass
+abstract class BaseFilter
 {
 
-    use HasBuilder, HasFilterType, HasFiltrationType;
+    use HasBuilder, HasFilterType, HasFiltrationType, HasBootableClass;
+
+    public function __construct()
+    {
+        $this->bootTraits();
+    }
 
     public function defaultBuilder(
         \Illuminate\Database\Eloquent\Builder|Builder $query,

@@ -1,14 +1,9 @@
 <?php
 
-namespace BoredProgrammers\LaraGrid;
+namespace BoredProgrammers\LaraGrid\Traits;
 
-class BaseLaraGridClass
+trait HasBootableClass
 {
-
-    public function __construct()
-    {
-        $this->bootTraits();
-    }
 
     public function bootTraits()
     {

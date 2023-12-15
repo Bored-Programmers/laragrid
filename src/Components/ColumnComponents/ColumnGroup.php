@@ -2,11 +2,10 @@
 
 namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
-use BoredProgrammers\LaraGrid\BaseLaraGridClass;
 use BoredProgrammers\LaraGrid\Traits\HasColumns;
 use BoredProgrammers\LaraGrid\Traits\HasLabel;
 
-class ColumnGroup extends BaseLaraGridClass
+class ColumnGroup
 {
 
     use HasLabel, HasColumns;
