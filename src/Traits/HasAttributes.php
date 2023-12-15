@@ -3,6 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 trait HasAttributes
 {
