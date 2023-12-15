@@ -2,6 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
+use BoredProgrammers\LaraGrid\BaseLaraGridClass;
 use BoredProgrammers\LaraGrid\Traits\HasAttributes;
 use BoredProgrammers\LaraGrid\Traits\HasColumnTag;
 use BoredProgrammers\LaraGrid\Traits\HasLabel;
@@ -11,7 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use function BoredProgrammers\LaraGrid\Components\BaseComponents\collect;
 
-abstract class BaseColumn
+abstract class BaseColumn extends BaseLaraGridClass
 {
 
     use HasRenderer, HasAttributes, HasLabel, HasColumnTag;
