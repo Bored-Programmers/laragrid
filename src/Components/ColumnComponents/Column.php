@@ -2,10 +2,12 @@
 
 namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
-use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
-use BoredProgrammers\LaraGrid\Filters\BaseFilter;
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
+use BoredProgrammers\LaraGrid\Traits\HasDateFormatter;
+use BoredProgrammers\LaraGrid\Traits\HasFilter;
+use BoredProgrammers\LaraGrid\Traits\HasModelField;
+use BoredProgrammers\LaraGrid\Traits\HasSortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use UnitEnum;
@@ -13,13 +15,7 @@ use UnitEnum;
 class Column extends BaseColumn
 {
 
-    protected ?string $modelField;
-
-    protected bool $sortable = true;
-
-    protected ?BaseFilter $filter = null;
-
-    protected string $dateFormat = 'd.m.Y';
+    use HasSortable, HasModelField, HasFilter, HasDateFormatter;
 
     public function __construct(?string $modelField = null, ?string $label = null)
     {
@@ -31,6 +27,11 @@ class Column extends BaseColumn
     public static function make(string $modelField, ?string $label = null): static
     {
         return new static($modelField, $label);
+    }
+
+    public function defaultAttributes(Model $model): array
+    {
+        return [];
     }
 
     public function defaultRender(Model $model)
@@ -52,52 +53,6 @@ class Column extends BaseColumn
         }
 
         return $value;
-    }
-
-    public function getFilter(): ?BaseFilter
-    {
-        return $this->filter;
-    }
-
-    public function setFilter(BaseFilter $filter): static
-    {
-        $this->filter = $filter;
-
-        return $this;
-    }
-
-    public function getModelField(): ?string
-    {
-        return $this->modelField;
-    }
-
-    public function setModelField(?string $modelField): void
-    {
-        $this->modelField = $modelField;
-    }
-
-    public function isSortable(): bool
-    {
-        return $this->sortable;
-    }
-
-    public function setSortable($isSortable = true): static
-    {
-        $this->sortable = $isSortable;
-
-        return $this;
-    }
-
-    public function getDateFormat(): string
-    {
-        return $this->dateFormat;
-    }
-
-    public function setDateFormat(string $dateFormat): static
-    {
-        $this->dateFormat = $dateFormat;
-
-        return $this;
     }
 
     /************************************************ PRIVATE ************************************************/

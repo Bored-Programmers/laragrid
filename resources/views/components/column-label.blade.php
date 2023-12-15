@@ -1,5 +1,6 @@
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column $column */
+    /** @var Column $column */
     'column',
     'sortColumn',
     'sortDirection',

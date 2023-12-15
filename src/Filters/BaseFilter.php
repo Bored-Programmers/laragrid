@@ -4,70 +4,18 @@ namespace BoredProgrammers\LaraGrid\Filters;
 
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Traits\HasBuilder;
+use BoredProgrammers\LaraGrid\Traits\HasFilterType;
+use BoredProgrammers\LaraGrid\Traits\HasFiltrationType;
 use Closure;
 use Illuminate\Database\Query\Builder;
 
 abstract class BaseFilter
 {
 
-    protected FilterType $filterType;
+    use HasBuilder, HasFilterType, HasFiltrationType;
 
-    protected FiltrationType $filtrationType;
-
-    /** @var callable */
-    protected $builder;
-
-    public function __construct()
-    {
-        $this->setBuilder([$this, 'defaultBuilder']);
-    }
-
-    /*********************************************** GETTERS && SETTERS ***********************************************/
-
-    public function callBuilder(Builder|\Illuminate\Database\Eloquent\Builder $query, string $field, $value)
-    {
-        return call_user_func_array($this->getBuilder(), [$query, $field, $value]);
-    }
-
-    public function getBuilder(): callable
-    {
-        return $this->builder;
-    }
-
-    public function setBuilder(callable $builder): static
-    {
-        $this->builder = $builder;
-
-        return $this;
-    }
-
-    public function getFilterType(): FilterType
-    {
-        return $this->filterType;
-    }
-
-    public function setFilterType(FilterType $filterType): static
-    {
-        $this->filterType = $filterType;
-
-        return $this;
-    }
-
-    public function getFiltrationType(): FiltrationType
-    {
-        return $this->filtrationType;
-    }
-
-    public function setFiltrationType(FiltrationType $filtrationType): static
-    {
-        $this->filtrationType = $filtrationType;
-
-        return $this;
-    }
-
-    /************************************************ PRIVATE ************************************************/
-
-    protected function defaultBuilder(
+    public function defaultBuilder(
         \Illuminate\Database\Eloquent\Builder|Builder $query,
         string $field,
         mixed $value

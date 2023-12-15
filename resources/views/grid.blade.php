@@ -1,8 +1,13 @@
+@php use Illuminate\Contracts\Pagination\LengthAwarePaginator; @endphp
+@php use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme; @endphp
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn; @endphp
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup; @endphp
 @php
     /**
-    * @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column[] $columns
-    * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator $records
-    * @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme
+    * @var Column[] $columns
+    * @var LengthAwarePaginator $records
+    * @var BaseLaraGridTheme $theme
     */
 @endphp
 <div>
@@ -16,7 +21,7 @@
         <thead class="{{ $theme->getTheadClass() }}">
         <tr class="{{ $theme->getTrClass() }}">
             @foreach($columns as $column)
-                @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
+                @if($column instanceof BaseColumn)
                     <th
                             wire:key="column-label-{{ $column->getModelField() }}"
                             class="{{ $theme->getThClass() }}"
@@ -27,7 +32,7 @@
                                 :sort-direction="$sortDirection"
                         />
                     </th>
-                @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
+                @elseif($column instanceof ColumnGroup)
                     <th
                             wire:key="column-actions-label-{{ uniqid($column->getLabel()) }}"
                             class="{{ $theme->getThClass() }}"
@@ -45,7 +50,7 @@
         <tbody class="{{ $theme->getTbodyClass() }}">
         <tr class="{{ $theme->getFilterTrClass() }}">
             @foreach($columns as $column)
-                @if($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
+                @if($column instanceof Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
                         <x-laragrid::filters.column-filter
                                 :theme="$theme"
@@ -61,13 +66,13 @@
         @forelse($records as $record)
             <tr class="{{ $theme->callRecordTrClass($record) }}">
                 @foreach($columns as $column)
-                    @if($column instanceof \BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn)
+                    @if($column instanceof BaseColumn)
                         <td class="{{ $theme->getTdClass() }}">
                             <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
                             {{ $column->callRenderer($record) }}
                         </{{ $column->getColumnTag() }}>
                         </td>
-                    @elseif($column instanceof \BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
+                    @elseif($column instanceof ColumnGroup)
                         <td class="{{ $theme->getGroupTdClass() }}">
                             @foreach($column->getColumns() as $childColumn)
                                 <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>

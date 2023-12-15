@@ -1,20 +1,23 @@
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
+@php use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme; @endphp
+@php use BoredProgrammers\LaraGrid\Filters\Enums\FilterType; @endphp
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column $column */
+    /** @var Column $column */
     'column',
-    /** @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme */
+    /** @var BaseLaraGridTheme $theme */
     'theme',
 ])
 
 @switch($column->getFilter()?->getFilterType())
-    @case(\BoredProgrammers\LaraGrid\Filters\Enums\FilterType::TEXT)
+    @case(FilterType::TEXT)
         <x-laragrid::filters.text :column="$column" :theme="$theme"/>
         @break
 
-    @case(\BoredProgrammers\LaraGrid\Filters\Enums\FilterType::SELECT)
+    @case(FilterType::SELECT)
         <x-laragrid::filters.select :column="$column" :theme="$theme"/>
         @break
 
-    @case(\BoredProgrammers\LaraGrid\Filters\Enums\FilterType::DATE)
+    @case(FilterType::DATE)
         <x-laragrid::filters.date :column="$column" :theme="$theme"/>
         @break
 @endswitch

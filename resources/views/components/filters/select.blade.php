@@ -1,12 +1,15 @@
+@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
+@php use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme; @endphp
+@php use BoredProgrammers\LaraGrid\Filters\SelectFilter; @endphp
 @props([
-    /** @var \BoredProgrammers\LaraGrid\Components\ColumnComponents\Column $column */
+    /** @var Column $column */
     'column',
-    /** @var \BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme $theme */
+    /** @var BaseLaraGridTheme $theme */
     'theme',
 ])
 
 @php
-    /** @var \BoredProgrammers\LaraGrid\Filters\SelectFilter $filter */
+    /** @var SelectFilter $filter */
     $filter = $column->getFilter()
 @endphp
 

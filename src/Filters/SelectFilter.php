@@ -4,15 +4,14 @@ namespace BoredProgrammers\LaraGrid\Filters;
 
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Traits\HasOptions;
+use BoredProgrammers\LaraGrid\Traits\HasPrompt;
 use Illuminate\Support\Collection;
 
 class SelectFilter extends BaseFilter
 {
 
-    /** @var SelectFilterOption[] */
-    protected array $options = [];
-
-    protected string $prompt = 'laragrid::translations.filter.choose';
+    use HasPrompt, HasOptions;
 
     public static function make(): static
     {
@@ -21,36 +20,6 @@ class SelectFilter extends BaseFilter
         $filter->setFilterType(FilterType::SELECT);
 
         return $filter;
-    }
-
-    public function getOptions(): array
-    {
-        return $this->options;
-    }
-
-    public function setOptions(array|Collection $options): static
-    {
-        $selectOptions = [];
-
-        foreach ($options as $value => $label) {
-            $selectOptions[] = SelectFilterOption::make($value, $label);
-        }
-
-        $this->options = $selectOptions;
-
-        return $this;
-    }
-
-    public function getPrompt(): string
-    {
-        return $this->prompt;
-    }
-
-    public function setPrompt(string $prompt): static
-    {
-        $this->prompt = $prompt;
-
-        return $this;
     }
 
 }

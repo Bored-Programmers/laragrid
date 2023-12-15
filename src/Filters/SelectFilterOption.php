@@ -2,46 +2,23 @@
 
 namespace BoredProgrammers\LaraGrid\Filters;
 
+use BoredProgrammers\LaraGrid\Traits\HasLabel;
+use BoredProgrammers\LaraGrid\Traits\HasValue;
+
 class SelectFilterOption
 {
 
-    protected mixed $label;
+    use HasLabel, HasValue;
 
-    protected mixed $value;
-
-    public function __construct(mixed $value, mixed $label)
+    public function __construct(mixed $value, string $label)
     {
         $this->setValue($value);
         $this->setLabel($label);
     }
 
-    public static function make(mixed $value, mixed $label = null): static
+    public static function make(mixed $value, string $label = null): static
     {
         return new static($value, $label ?: $value);
-    }
-
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    public function setLabel($label): static
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function setValue($value): static
-    {
-        $this->value = $value;
-
-        return $this;
     }
 
 }

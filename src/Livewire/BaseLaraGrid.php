@@ -3,6 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Livewire;
 
 use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseLaraGridComponent;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn;
 use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
@@ -32,7 +33,7 @@ abstract class BaseLaraGrid extends Component
 
     public int $perPage = 25;
 
-    /** @return BaseLaraGridComponent[] */
+    /** @return BaseColumn[] */
     protected abstract function getColumns(): array;
 
     protected abstract function getDataSource(): Builder;

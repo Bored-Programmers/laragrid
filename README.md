@@ -156,13 +156,10 @@ class MyTheme extends BaseLaraGridTheme
         $theme->setTbodyClass('');
         $theme->setTdClass('');
         $theme->setGroupTdClass('');
-        $theme->setActionContainerClass('');
         $theme->setPaginationClass('');
         $theme->setFilterTextClass('');
         $theme->setFilterSelectClass('');
         $theme->setFilterDateClass('');
-        $theme->setActionButtonClass('');
-        $theme->setPaginationMaxResultsClass('');
         
         $theme->setFilterResetButtonRenderer(fn() => view('test')); // you can also set renderer for filter reset button. Pass a closure that returns a whatever you want -> string, view, etc.
 

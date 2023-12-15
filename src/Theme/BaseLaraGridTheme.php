@@ -28,8 +28,6 @@ abstract class BaseLaraGridTheme
 
     protected ?string $groupTdClass = null;
 
-    protected ?string $actionContainerClass = null;
-
     protected ?string $paginationClass = null;
 
     protected ?string $filterTextClass = null;
@@ -37,14 +35,6 @@ abstract class BaseLaraGridTheme
     protected ?string $filterSelectClass = null;
 
     protected ?string $filterDateClass = null;
-
-    protected ?string $actionButtonClass = null;
-
-    protected ?string $paginationMaxResultsClass = null;
-
-    protected ?string $paginationMaxResultsContainerClass = null;
-
-    protected ?string $paginationContainerClass = null;
 
     protected ?string $emptyMessageClass = null;
 
@@ -205,18 +195,6 @@ abstract class BaseLaraGridTheme
         return $this;
     }
 
-    public function getActionContainerClass(): ?string
-    {
-        return $this->actionContainerClass;
-    }
-
-    public function setActionContainerClass(?string $actionContainerClass): BaseLaraGridTheme
-    {
-        $this->actionContainerClass = $actionContainerClass;
-
-        return $this;
-    }
-
     public function getPaginationClass(): ?string
     {
         return $this->paginationClass;
@@ -261,55 +239,6 @@ abstract class BaseLaraGridTheme
     public function setFilterDateClass(?string $filterDateClass): BaseLaraGridTheme
     {
         $this->filterDateClass = $filterDateClass;
-
-        return $this;
-    }
-
-    public function getActionButtonClass(): ?string
-    {
-        return $this->actionButtonClass;
-    }
-
-    public function setActionButtonClass(?string $actionButtonClass): BaseLaraGridTheme
-    {
-        $this->actionButtonClass = $actionButtonClass;
-
-        return $this;
-    }
-
-    public function getPaginationMaxResultsClass(): ?string
-    {
-        return $this->paginationMaxResultsClass;
-    }
-
-    public function setPaginationMaxResultsClass(?string $paginationMaxResultsClass): BaseLaraGridTheme
-    {
-        $this->paginationMaxResultsClass = $paginationMaxResultsClass;
-
-        return $this;
-    }
-
-    public function getPaginationMaxResultsContainerClass(): ?string
-    {
-        return $this->paginationMaxResultsContainerClass;
-    }
-
-    public function setPaginationMaxResultsContainerClass(?string $paginationMaxResultsContainerClass
-    ): BaseLaraGridTheme
-    {
-        $this->paginationMaxResultsContainerClass = $paginationMaxResultsContainerClass;
-
-        return $this;
-    }
-
-    public function getPaginationContainerClass(): ?string
-    {
-        return $this->paginationContainerClass;
-    }
-
-    public function setPaginationContainerClass(?string $paginationContainerClass): BaseLaraGridTheme
-    {
-        $this->paginationContainerClass = $paginationContainerClass;
 
         return $this;
     }

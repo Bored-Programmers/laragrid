@@ -2,7 +2,6 @@
 
 namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
-use BoredProgrammers\LaraGrid\Components\BaseComponents\BaseColumn;
 use Illuminate\Database\Eloquent\Model;
 
 class ActionButton extends BaseColumn
@@ -16,6 +15,11 @@ class ActionButton extends BaseColumn
     public function defaultRender(Model $model): string
     {
         return __($this->getLabel());
+    }
+
+    public function defaultAttributes(Model $model): array
+    {
+        return [];
     }
 
 }
