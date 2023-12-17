@@ -18,9 +18,9 @@ trait HasAttributes
         $this->setAttributes([$this, 'defaultAttributes']);
     }
 
-    public function callAttributes(Model $model)
+    public function callAttributes(...$args)
     {
-        return collect(call_user_func_array($this->getAttributes(), [$model]))
+        return collect(call_user_func_array($this->getAttributes(), $args))
             ->map(function ($value, $key) {
                 return Str::of($key)->append('="', $value, '"');
             })

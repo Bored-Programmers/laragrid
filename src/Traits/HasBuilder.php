@@ -21,9 +21,9 @@ trait HasBuilder
         $this->setBuilder([$this, 'defaultBuilder']);
     }
 
-    public function callBuilder(Builder|\Illuminate\Database\Eloquent\Builder $query, string $field, $value)
+    public function callBuilder(...$args)
     {
-        return call_user_func_array($this->getBuilder(), [$query, $field, $value]);
+        return call_user_func_array($this->getBuilder(), $args);
     }
 
     public function getBuilder(): callable
