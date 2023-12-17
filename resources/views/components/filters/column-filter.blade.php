@@ -10,14 +10,14 @@
 
 @switch($column->getFilter()?->getFilterType())
     @case(FilterType::TEXT)
-        <x-laragrid::filters.text :column="$column" :theme="$theme"/>
+        <x-laragrid::filters.text :$column :$theme/>
         @break
 
     @case(FilterType::SELECT)
-        <x-laragrid::filters.select :column="$column" :theme="$theme"/>
+        <x-laragrid::filters.select :$column :$theme/>
         @break
 
     @case(FilterType::DATE)
-        <x-laragrid::filters.date :column="$column" :theme="$theme"/>
+        <x-laragrid::filters.date :$column :$theme/>
         @break
 @endswitch

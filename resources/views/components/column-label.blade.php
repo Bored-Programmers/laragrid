@@ -15,10 +15,10 @@
         <span>
             @if ($sortColumn !== $column->getModelField())
                 &#8597;
-                @elseif ($sortDirection === 'asc')
-                    &uarr;
-                @elseif ($sortDirection === 'desc')
-                    &darr;
+            @elseif ($sortDirection === 'asc')
+                &uarr;
+            @elseif ($sortDirection === 'desc')
+                &darr;
             @endif
         </span>
     @endif
