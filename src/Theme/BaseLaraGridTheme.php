@@ -38,9 +38,9 @@ abstract class BaseLaraGridTheme
 
     public abstract static function make(): static;
 
-    public function callRecordTrClass(Model $model)
+    public function callRecordTrClass(...$args)
     {
-        return call_user_func_array($this->getRecordTrClass(), [$model]);
+        return call_user_func_array($this->getRecordTrClass(), $args);
     }
 
     public function getRecordTrClass(): callable

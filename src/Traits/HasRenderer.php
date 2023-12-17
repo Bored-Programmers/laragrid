@@ -19,7 +19,7 @@ trait HasRenderer
 
     public function callRenderer(...$args)
     {
-        return call_user_func($this->getRenderer(), $args);
+        return call_user_func_array($this->getRenderer(), $args);
     }
 
     public function getRenderer(): callable
