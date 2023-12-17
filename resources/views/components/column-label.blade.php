@@ -1,4 +1,5 @@
-@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
+@use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
+
 @props([
     /** @var Column $column */
     'column',

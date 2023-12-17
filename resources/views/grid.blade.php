@@ -1,8 +1,9 @@
-@php use Illuminate\Contracts\Pagination\LengthAwarePaginator; @endphp
-@php use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme; @endphp
-@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
-@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn; @endphp
-@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup; @endphp
+@use(Illuminate\Contracts\Pagination\LengthAwarePaginator)
+@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
+@use(BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn)
+@use(BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
+
 @php
     /**
     * @var Column[] $columns
@@ -10,6 +11,7 @@
     * @var BaseLaraGridTheme $theme
     */
 @endphp
+
 <div>
     <table class="{{ $theme->getTableClass() }}">
         @if($this->filter)
@@ -19,7 +21,7 @@
         @endif
 
         <thead class="{{ $theme->getTheadClass() }}">
-        <tr class="{{ $theme->getTrClass() }}" wire:ignore>
+        <tr class="{{ $theme->getTrClass() }}" wire:key="{{ uniqid('tr-label-') }}" wire:ignore>
             @foreach($columns as $column)
                 @if($column instanceof BaseColumn)
                     <th
@@ -46,22 +48,23 @@
                 @endif
             @endforeach
         </tr>
-        <tr class="{{ $theme->getFilterTrClass() }}">
+        <tr class="{{ $theme->getFilterTrClass() }}" wire:key="{{ uniqid('tr-filter-') }}" wire:ignore>
             @foreach($columns as $column)
                 @if($column instanceof Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
                         <x-laragrid::filters.column-filter
-                                :theme="$theme"
-                                :column="$column"
-                                :sort-column="$sortColumn"
-                                :sort-direction="$sortDirection"
+                                :$theme
+                                :$column
+                                :$sortColumn
+                                :$sortDirection
                         />
                     </td>
                 @endif
             @endforeach
+            {{ $filter['email'] }}
         </tr>
         </thead>
-        <tbody class="{{ $theme->getTbodyClass() }}">
+        <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
         @forelse($records as $record)
             <tr class="{{ $theme->callRecordTrClass($record) }}">
                 @foreach($columns as $column)

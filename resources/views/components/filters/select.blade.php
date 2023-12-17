@@ -1,6 +1,7 @@
-@php use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column; @endphp
-@php use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme; @endphp
-@php use BoredProgrammers\LaraGrid\Filters\SelectFilter; @endphp
+@use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
+@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Filters\SelectFilter)
+
 @props([
     /** @var Column $column */
     'column',
