@@ -29,9 +29,9 @@
                             class="{{ $theme->getThClass() }}"
                     >
                         <x-laragrid::column-label
-                                :column="$column"
-                                :sort-column="$sortColumn"
-                                :sort-direction="$sortDirection"
+                                :$column
+                                :$sortColumn
+                                :$sortDirection
                         />
                     </th>
                 @elseif($column instanceof ColumnGroup)
