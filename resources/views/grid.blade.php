@@ -61,7 +61,6 @@
                     </td>
                 @endif
             @endforeach
-            {{ $filter['email'] }}
         </tr>
         </thead>
         <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
