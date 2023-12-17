@@ -16,9 +16,9 @@
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
             @if($this->filter)
-                <a class="{{ $theme->getFilterResetButtonClass() }}" wire:click="resetFilters">
-                    {!! $theme->callFilterResetButtonRenderer() !!}
-                </a>
+                <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!} wire:click="resetFilters">
+                    {{ $column->callRenderer($record) }}
+                </{{ $column->getColumnTag() }}>
             @endif
         </div>
 

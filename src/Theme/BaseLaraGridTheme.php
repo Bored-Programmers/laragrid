@@ -9,8 +9,6 @@ abstract class BaseLaraGridTheme
 
     protected ?string $tableClass = null;
 
-    protected ?string $filterResetButtonClass = null;
-
     protected ?string $theadClass = null;
 
     protected ?string $trClass = null;
@@ -36,34 +34,9 @@ abstract class BaseLaraGridTheme
     protected ?string $emptyMessageClass = null;
 
     /** @var callable */
-    protected $filterResetButtonRenderer;
-
-    /** @var callable */
     protected $recordTrClass;
 
-    public function __construct()
-    {
-        $this->setFilterResetButtonRenderer(fn() => __('laragrid::translations.filter.reset'));
-    }
-
     public abstract static function make(): static;
-
-    public function callFilterResetButtonRenderer()
-    {
-        return call_user_func($this->getFilterResetButtonRenderer());
-    }
-
-    public function getFilterResetButtonRenderer(): callable
-    {
-        return $this->filterResetButtonRenderer;
-    }
-
-    public function setFilterResetButtonRenderer(callable $filterResetButtonRenderer): static
-    {
-        $this->filterResetButtonRenderer = $filterResetButtonRenderer;
-
-        return $this;
-    }
 
     public function callRecordTrClass(Model $model)
     {
@@ -94,18 +67,6 @@ abstract class BaseLaraGridTheme
     public function setTableClass(?string $tableClass): BaseLaraGridTheme
     {
         $this->tableClass = $tableClass;
-
-        return $this;
-    }
-
-    public function getFilterResetButtonClass(): ?string
-    {
-        return $this->filterResetButtonClass;
-    }
-
-    public function setFilterResetButtonClass(?string $filterResetButtonClass): BaseLaraGridTheme
-    {
-        $this->filterResetButtonClass = $filterResetButtonClass;
 
         return $this;
     }
