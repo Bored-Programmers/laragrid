@@ -14,20 +14,19 @@
 
 <div>
     <table class="{{ $theme->getTableClass() }}">
-        @if($this->filter)
-            <a class="{{ $theme->getFilterResetButtonClass() }}" wire:click="resetFilters">
-                {!! $theme->callFilterResetButtonRenderer() !!}
-            </a>
-        @endif
+        <div wire:ignore.self>
+            @if($this->filter)
+                <a class="{{ $theme->getFilterResetButtonClass() }}" wire:click="resetFilters">
+                    {!! $theme->callFilterResetButtonRenderer() !!}
+                </a>
+            @endif
+        </div>
 
         <thead class="{{ $theme->getTheadClass() }}">
-        <tr class="{{ $theme->getTrClass() }}" wire:key="{{ uniqid('tr-label-') }}">
+        <tr class="{{ $theme->getTrClass() }}">
             @foreach($columns as $column)
                 @if($column instanceof BaseColumn)
-                    <th
-                            wire:key="column-label-{{ $column->getModelField() }}"
-                            class="{{ $theme->getThClass() }}"
-                    >
+                    <th class="{{ $theme->getThClass() }}">
                         <x-laragrid::column-label
                                 :column="$column"
                                 :sort-column="$sortColumn"
@@ -35,10 +34,7 @@
                         />
                     </th>
                 @elseif($column instanceof ColumnGroup)
-                    <th
-                            wire:key="column-actions-label-{{ uniqid($column->getLabel()) }}"
-                            class="{{ $theme->getThClass() }}"
-                    >
+                    <th class="{{ $theme->getThClass() }}">
                         <div>
                             <span>
                                 @lang($column->getLabel())
@@ -49,8 +45,8 @@
             @endforeach
         </tr>
         </thead>
-        <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
-        <tr class="{{ $theme->getFilterTrClass() }}" wire:key="{{ uniqid('tr-filter-') }}">
+        <tbody class="{{ $theme->getTbodyClass() }}">
+        <tr class="{{ $theme->getFilterTrClass() }}">
             @foreach($columns as $column)
                 @if($column instanceof Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
