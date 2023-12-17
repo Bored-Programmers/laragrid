@@ -72,7 +72,7 @@ abstract class BaseLaraGridTheme
 
     public function getRecordTrClass(): callable
     {
-        return $this->recordTrClass;
+        return $this->recordTrClass ?: fn() => '';
     }
 
     public function setRecordTrClass(callable|string $recordTrClass): static
