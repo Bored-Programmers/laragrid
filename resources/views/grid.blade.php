@@ -21,7 +21,7 @@
         @endif
 
         <thead class="{{ $theme->getTheadClass() }}">
-        <tr class="{{ $theme->getTrClass() }}" wire:key="{{ uniqid('tr-label-') }}" wire:ignore>
+        <tr class="{{ $theme->getTrClass() }}" wire:key="{{ uniqid('tr-label-') }}">
             @foreach($columns as $column)
                 @if($column instanceof BaseColumn)
                     <th
@@ -50,7 +50,7 @@
         </tr>
         </thead>
         <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
-        <tr class="{{ $theme->getFilterTrClass() }}" wire:key="{{ uniqid('tr-filter-') }}" wire:ignore>
+        <tr class="{{ $theme->getFilterTrClass() }}" wire:key="{{ uniqid('tr-filter-') }}">
             @foreach($columns as $column)
                 @if($column instanceof Column)
                     <td wire:key="column-filter-{{ $column->getModelField() }}">
@@ -70,16 +70,16 @@
                     @if($column instanceof BaseColumn)
                         <td class="{{ $theme->getTdClass() }}">
                             <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
-                            {{ $column->callRenderer($record) }}
-                        </{{ $column->getColumnTag() }}>
+                                {{ $column->callRenderer($record) }}
+                            </{{ $column->getColumnTag() }}>
                         </td>
                     @elseif($column instanceof ColumnGroup)
                         <td class="{{ $theme->getGroupTdClass() }}">
                             @foreach($column->getColumns() as $childColumn)
                                 <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>
-                                {{ $childColumn->callRenderer($record) }}
-                        </{{ $childColumn->getColumnTag() }}>
-                        @endforeach
+                                    {{ $childColumn->callRenderer($record) }}
+                                </{{ $childColumn->getColumnTag() }}>
+                            @endforeach
                         </td>
                     @endif
                 @endforeach

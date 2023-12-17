@@ -45,10 +45,8 @@
       },
 
       getOptions() {
-        let defaultFrom = @this.
-        get('filter.{{ $column->getModelField() }}.from');
-        let defaultTo = @this.
-        get('filter.{{ $column->getModelField() }}.to');
+        let defaultFrom = @this.get('filter.{{ $column->getModelField() }}.from');
+        let defaultTo = @this.get('filter.{{ $column->getModelField() }}.to');
 
         return {
           mode: 'range',

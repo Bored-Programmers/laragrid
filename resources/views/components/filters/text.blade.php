@@ -8,4 +8,8 @@
     'theme'
 ])
 
-<input type="text" class="{{ $theme->getFilterTextClass() }}" wire:model.live="filter.{{ $column->getModelField() }}">
+<input
+        type="text"
+        class="{{ $theme->getFilterTextClass() }}"
+        wire:model.live="filter.{{ $column->getModelField() }}"
+>
