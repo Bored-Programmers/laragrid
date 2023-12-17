@@ -3,7 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Components\ColumnComponents;
 
 use BoredProgrammers\LaraGrid\Traits\HasAttributes;
-use BoredProgrammers\LaraGrid\Traits\HasBootableClass;
+use BoredProgrammers\LaraGrid\Traits\HasBootableTrait;
 use BoredProgrammers\LaraGrid\Traits\HasColumnTag;
 use BoredProgrammers\LaraGrid\Traits\HasLabel;
 use BoredProgrammers\LaraGrid\Traits\HasRenderer;
@@ -15,7 +15,7 @@ use function BoredProgrammers\LaraGrid\Components\BaseComponents\collect;
 abstract class BaseColumn
 {
 
-    use HasRenderer, HasAttributes, HasLabel, HasColumnTag, HasBootableClass;
+    use HasRenderer, HasAttributes, HasLabel, HasColumnTag, HasBootableTrait;
 
     public function __construct(?string $label = null)
     {

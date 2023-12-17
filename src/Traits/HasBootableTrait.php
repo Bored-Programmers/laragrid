@@ -2,7 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Traits;
 
-trait HasBootableClass
+trait HasBootableTrait
 {
 
     public function bootTraits()

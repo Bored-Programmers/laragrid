@@ -3,7 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Filters;
 
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
-use BoredProgrammers\LaraGrid\Traits\HasBootableClass;
+use BoredProgrammers\LaraGrid\Traits\HasBootableTrait;
 use BoredProgrammers\LaraGrid\Traits\HasBuilder;
 use BoredProgrammers\LaraGrid\Traits\HasFilterType;
 use BoredProgrammers\LaraGrid\Traits\HasFiltrationType;
@@ -12,7 +12,7 @@ use Illuminate\Database\Query\Builder;
 abstract class BaseFilter
 {
 
-    use HasBuilder, HasFilterType, HasFiltrationType, HasBootableClass;
+    use HasBuilder, HasFilterType, HasFiltrationType, HasBootableTrait;
 
     public function __construct()
     {

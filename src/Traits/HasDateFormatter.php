@@ -7,6 +7,11 @@ trait HasDateFormatter
 
     private string $dateFormat = 'Y-m-d H:i';
 
+    public function bootHasDateFormatter(): void
+    {
+        $this->dateFormat = config('laragrid.date_format', $this->dateFormat);
+    }
+
     public function getDateFormat(): string
     {
         return $this->dateFormat;
