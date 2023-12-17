@@ -17,6 +17,10 @@ abstract class BaseColumn
 
     use HasRenderer, HasAttributes, HasLabel, HasColumnTag, HasBootableTrait;
 
+    public abstract function defaultRender(Model $model);
+
+    public abstract function defaultAttributes(Model $model): array;
+
     public function __construct(?string $label = null)
     {
         $this->setLabel($label);

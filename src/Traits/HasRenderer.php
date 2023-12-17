@@ -10,8 +10,6 @@ trait HasRenderer
     /** @var callable */
     private $renderer;
 
-    public abstract function defaultRender(Model $model);
-
     public function bootHasRenderer()
     {
         $this->setRenderer([$this, 'defaultRender']);

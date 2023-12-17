@@ -11,8 +11,6 @@ trait HasAttributes
     /** @var callable */
     private $attributes;
 
-    public abstract function defaultAttributes(Model $model): array;
-
     public function bootHasAttributes()
     {
         $this->setAttributes([$this, 'defaultAttributes']);

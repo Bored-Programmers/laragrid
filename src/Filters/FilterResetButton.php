@@ -25,12 +25,12 @@ class FilterResetButton
         return new static();
     }
 
-    public function defaultRender(Model $model)
+    public function defaultRender()
     {
         return __('laragrid::translations.filter.reset');
     }
 
-    public function defaultAttributes(Model $model): array
+    public function defaultAttributes(): array
     {
         return [];
     }
