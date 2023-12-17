@@ -4,8 +4,8 @@
 ])
 
 <{{ $filterResetButton->getColumnTag() }}
-    {!! $filterResetButton->callAttributes($record) !!}
+    {!! $filterResetButton->callAttributes() !!}
     wire:click="resetFilters"
 >
-    {{ $filterResetButton->callRenderer($record) }}
+    {{ $filterResetButton->callRenderer() }}
 </{{ $filterResetButton->getColumnTag() }}>
