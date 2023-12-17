@@ -7,6 +7,7 @@ use BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn;
 use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
 use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
+use BoredProgrammers\LaraGrid\Filters\FilterResetButton;
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -39,6 +40,8 @@ abstract class BaseLaraGrid extends Component
     protected abstract function getDataSource(): Builder;
 
     protected abstract function getTheme(): BaseLaraGridTheme;
+
+    protected abstract function getFilterResetButton(): FilterResetButton;
 
     public function resetFilters(): void
     {
@@ -77,6 +80,7 @@ abstract class BaseLaraGrid extends Component
             'records' => $query->paginate($this->perPage),
             'columns' => $columns,
             'theme' => $this->getTheme(),
+            'filterResetButton' => $this->getFilterResetButton(),
         ]);
     }
 

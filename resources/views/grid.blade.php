@@ -3,12 +3,14 @@
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn)
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
+@use(BoredProgrammers\LaraGrid\Filters\FilterResetButton)
 
 @php
     /**
     * @var Column[] $columns
     * @var LengthAwarePaginator $records
     * @var BaseLaraGridTheme $theme
+    * @var FilterResetButton $filterResetButton
     */
 @endphp
 
@@ -16,9 +18,7 @@
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
             @if($this->filter)
-                <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!} wire:click="resetFilters">
-                    {{ $column->callRenderer($record) }}
-                </{{ $column->getColumnTag() }}>
+                <x-laragrid::filters.filter-reset-button :$filterResetButton/>
             @endif
         </div>
 
@@ -65,17 +65,11 @@
                 @foreach($columns as $column)
                     @if($column instanceof BaseColumn)
                         <td class="{{ $theme->getTdClass() }}">
-                            <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
-                                {{ $column->callRenderer($record) }}
-                            </{{ $column->getColumnTag() }}>
+                            <x-laragrid::column :$column :$record/>
                         </td>
                     @elseif($column instanceof ColumnGroup)
                         <td class="{{ $theme->getGroupTdClass() }}">
-                            @foreach($column->getColumns() as $childColumn)
-                                <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>
-                                    {{ $childColumn->callRenderer($record) }}
-                                </{{ $childColumn->getColumnTag() }}>
-                            @endforeach
+                            <x-laragrid::column-group :$column :$record/>
                         </td>
                     @endif
                 @endforeach

@@ -17,9 +17,9 @@ trait HasRenderer
         $this->setRenderer([$this, 'defaultRender']);
     }
 
-    public function callRenderer(Model $model)
+    public function callRenderer(...$args)
     {
-        return call_user_func_array($this->getRenderer(), [$model]);
+        return call_user_func($this->getRenderer(), $args);
     }
 
     public function getRenderer(): callable
