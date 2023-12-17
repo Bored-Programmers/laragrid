@@ -19,7 +19,7 @@
         @endif
 
         <thead class="{{ $theme->getTheadClass() }}">
-        <tr class="{{ $theme->getTrClass() }}">
+        <tr class="{{ $theme->getTrClass() }}" wire:ignore>
             @foreach($columns as $column)
                 @if($column instanceof BaseColumn)
                     <th
@@ -46,8 +46,6 @@
                 @endif
             @endforeach
         </tr>
-        </thead>
-        <tbody class="{{ $theme->getTbodyClass() }}">
         <tr class="{{ $theme->getFilterTrClass() }}">
             @foreach($columns as $column)
                 @if($column instanceof Column)
@@ -62,7 +60,8 @@
                 @endif
             @endforeach
         </tr>
-
+        </thead>
+        <tbody class="{{ $theme->getTbodyClass() }}">
         @forelse($records as $record)
             <tr class="{{ $theme->callRecordTrClass($record) }}">
                 @foreach($columns as $column)
