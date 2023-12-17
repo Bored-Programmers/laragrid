@@ -29,9 +29,9 @@
                             class="{{ $theme->getThClass() }}"
                     >
                         <x-laragrid::column-label
-                                :$column
-                                :$sortColumn
-                                :$sortDirection
+                                :column="$column"
+                                :sort-column="$sortColumn"
+                                :sort-direction="$sortDirection"
                         />
                     </th>
                 @elseif($column instanceof ColumnGroup)
@@ -48,6 +48,8 @@
                 @endif
             @endforeach
         </tr>
+        </thead>
+        <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
         <tr class="{{ $theme->getFilterTrClass() }}" wire:key="{{ uniqid('tr-filter-') }}" wire:ignore>
             @foreach($columns as $column)
                 @if($column instanceof Column)
@@ -62,8 +64,6 @@
                 @endif
             @endforeach
         </tr>
-        </thead>
-        <tbody class="{{ $theme->getTbodyClass() }}" wire:key="{{ uniqid('tbody-') }}">
         @forelse($records as $record)
             <tr class="{{ $theme->callRecordTrClass($record) }}">
                 @foreach($columns as $column)
