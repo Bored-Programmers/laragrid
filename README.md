@@ -35,36 +35,16 @@ To install LaraGrid, you need to run the following command:
 composer require bored-programmers/laragrid
 ```
 
-LaraGrid depends on `flatpickr` for date and datetime fields. You can install it by following the instructions on
-the [official website](https://flatpickr.js.org/getting-started/). If you encounter issues with loading the CSS file,
-you can manually add it to your JS file:
-
-```javascript
-import 'flatpickr/dist/flatpickr.css';
-```
-
-**_Don't forget to make flatpickr globally accessible_**
-
-```javascript
-window.flatpickr = flatpickr;
-```
-
-You also need to install `momentjs` for date formatting:
-
-```bash
-npm install moment --save
-```
-
-**_Don't forget to make moment globally accessible_**
-
-```javascript
-window.flatpickr = flatpickr;
-```
-
-## Publishable Assets
+## Publishable
 
 You can publish the package's configuration, language files, and views using the following commands:
 
+**_required_**
+```bash
+php artisan vendor:publish --tag=laragrid-assets
+```
+
+**_optional_**
 ```bash
 php artisan vendor:publish --tag=laragrid-config
 php artisan vendor:publish --tag=laragrid-lang
@@ -74,9 +54,6 @@ php artisan vendor:publish --tag=laragrid-views
 ## TODO List
 
 1. [ ] Write tests for all functionality
-2. [ ] Make flatpickr as internal dependency and not as project dependency (probably with cdn?)
-3. [ ] Unify the code style, create a code style guide
-4. [ ] Make classes more modular
 
 ## Base Usage
 
@@ -149,7 +126,6 @@ class MyTheme extends BaseLaraGridTheme
         $theme = new static();
 
         $theme->setTableClass('');
-        $theme->setFilterResetButtonClass('');
         $theme->setTheadClass('');
         $theme->setTrClass('');
         $theme->setFilterTrClass('');
@@ -161,8 +137,6 @@ class MyTheme extends BaseLaraGridTheme
         $theme->setFilterTextClass('');
         $theme->setFilterSelectClass('');
         $theme->setFilterDateClass('');
-        
-        $theme->setFilterResetButtonRenderer(fn() => view('test')); // you can also set renderer for filter reset button. Pass a closure that returns a whatever you want -> string, view, etc.
 
         $theme->setRecordTrClass(fn(Model $model) => $model->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
         $theme->setRecordTrClass('bg-gray-100'); // If you don't want to set a closure, you can just pass a string class.

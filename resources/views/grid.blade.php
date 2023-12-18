@@ -14,6 +14,10 @@
     */
 @endphp
 
+@assets
+    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
+@endassets
+
 <div>
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
@@ -90,3 +94,8 @@
         {{ $records->links() }}
     </div>
 </div>
+
+<script src="{{ asset('vendor/laragrid/js/flatpickr.min.js') }}"></script>
+<script src="{{ asset('vendor/laragrid/js/dayjs.min.js') }}"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/{{ config('laragrid.flatpickr.locale') }}.js"></script>
+<script src="{{ asset('vendor/laragrid/js/date-picker.js') }}"></script>

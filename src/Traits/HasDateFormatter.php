@@ -9,7 +9,7 @@ trait HasDateFormatter
 
     public function bootHasDateFormatter(): void
     {
-        $this->dateFormat = config('laragrid.date_format', $this->dateFormat);
+        $this->dateFormat = config('laragrid.flatpickr.date_format', $this->dateFormat);
     }
 
     public function getDateFormat(): string
