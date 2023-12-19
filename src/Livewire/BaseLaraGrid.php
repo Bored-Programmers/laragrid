@@ -81,7 +81,7 @@ abstract class BaseLaraGrid extends Component
         $this->applySorting($query);
 
         return view('laragrid::grid', [
-            'records' => $query->paginate($this->perPage),
+            'records' => $query->paginate($this->perPage)->onEachSide(2),
             'columns' => $columns,
             'theme' => $this->getTheme(),
             'filterResetButton' => $this->getFilterResetButton(),
