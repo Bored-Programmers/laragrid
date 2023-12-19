@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class ActionButton extends BaseColumn
 {
 
-    public static function make(string $label): self
+    public static function make(string $label): static
     {
-        return new static($label);
+        $button = new static($label);
+        $button->setColumnTag('button');
+
+        return $button;
     }
 
     public function defaultRender(Model $model): string
