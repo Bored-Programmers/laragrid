@@ -11,11 +11,13 @@ abstract class BaseLaraGridTheme
 
     private ?string $paginationClass = null;
 
-    private ?FilterTheme $filterTheme = null;
+    private ?string $perPageClass = null;
 
-    private ?THeadTheme $theadTheme = null;
+    private ?FilterTheme $filterTheme;
 
-    private ?TBodyTheme $tbodyTheme = null;
+    private ?THeadTheme $theadTheme;
+
+    private ?TBodyTheme $tbodyTheme;
 
     public function __construct()
     {
@@ -31,7 +33,7 @@ abstract class BaseLaraGridTheme
         return $this->tableClass;
     }
 
-    public function setTableClass(?string $tableClass): BaseLaraGridTheme
+    public function setTableClass(?string $tableClass): static
     {
         $this->tableClass = $tableClass;
 
@@ -43,9 +45,21 @@ abstract class BaseLaraGridTheme
         return $this->paginationClass;
     }
 
-    public function setPaginationClass(?string $paginationClass): BaseLaraGridTheme
+    public function setPaginationClass(?string $paginationClass): static
     {
         $this->paginationClass = $paginationClass;
+
+        return $this;
+    }
+
+    public function getPerPageClass(): ?string
+    {
+        return $this->perPageClass;
+    }
+
+    public function setPerPageClass(?string $perPageClass): static
+    {
+        $this->perPageClass = $perPageClass;
 
         return $this;
     }
@@ -55,7 +69,7 @@ abstract class BaseLaraGridTheme
         return $this->filterTheme;
     }
 
-    public function setFilterTheme(?FilterTheme $filterTheme): BaseLaraGridTheme
+    public function setFilterTheme(?FilterTheme $filterTheme): static
     {
         $this->filterTheme = $filterTheme;
 
@@ -67,7 +81,7 @@ abstract class BaseLaraGridTheme
         return $this->theadTheme;
     }
 
-    public function setTHeadTheme(?THeadTheme $theadTheme): BaseLaraGridTheme
+    public function setTHeadTheme(?THeadTheme $theadTheme): static
     {
         $this->theadTheme = $theadTheme;
 
@@ -79,11 +93,11 @@ abstract class BaseLaraGridTheme
         return $this->tbodyTheme;
     }
 
-    public function setTBodyTheme(?TBodyTheme $tbodyTheme): BaseLaraGridTheme
+    public function setTBodyTheme(?TBodyTheme $tbodyTheme): static
     {
         $this->tbodyTheme = $tbodyTheme;
 
         return $this;
     }
-    
+
 }

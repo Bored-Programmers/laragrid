@@ -31,6 +31,8 @@ abstract class BaseLaraGrid extends Component
 
     public int $perPage = 25;
 
+    public array $perPageOptions = [25, 50, 100];
+
     /** @return BaseColumn[] */
     protected abstract function getColumns(): array;
 

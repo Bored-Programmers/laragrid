@@ -116,6 +116,12 @@
     <div class="{{ $theme->getPaginationClass() }}">
         {{ $records->links() }}
     </div>
+
+    <select wire:model.live="perPage" class="{{ $theme->getPerPageClass() }}">
+        @foreach($this->perPageOptions as $option)
+            <option value="{{ $option }}">{{ $option }}</option>
+        @endforeach
+    </select>
 </div>
 
 <script src="{{ asset('vendor/laragrid/js/flatpickr.min.js') }}"></script>
