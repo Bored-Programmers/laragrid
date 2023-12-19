@@ -42,6 +42,11 @@ abstract class BaseLaraGrid extends Component
 
     protected abstract function getFilterResetButton(): FilterResetButton;
 
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+
     public function resetFilters(): void
     {
         $this->dispatch('LGdatePickerClear');
