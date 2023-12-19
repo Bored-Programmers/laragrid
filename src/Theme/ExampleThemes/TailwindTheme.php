@@ -17,7 +17,8 @@ class TailwindTheme extends BaseLaraGridTheme
         $theme = new static();
 
         $theme->setTableClass('min-w-full table-auto')
-            ->setPaginationClass('mt-6');
+            ->setPaginationClass('mt-6')
+            ->setPerPageClass('border border-gray-300 rounded-xl text-gray-500 text-sm mt-2');
 
         $theme->setTheadTheme(
             THeadTheme::make()

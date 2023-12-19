@@ -27,10 +27,10 @@
 @endphp
 
 @assets
-<link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
 @endassets
 
-<div style="overflow-x: auto">
+<div style="overflow-x: auto;padding:1px;"> {{-- padding 1px to prevent border focus issues --}}
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
             @if($this->filter)
@@ -41,75 +41,75 @@
         </div>
 
         <thead class="{{ $theadTheme->getTheadClass() }}">
-            <tr class="{{ $theadTheme->getTrClass() }}">
-                @foreach($columns as $column)
-                    @if($column instanceof BaseColumn)
-                        <th class="{{ $theadTheme->getThClass() }}">
-                            <x-laragrid::column-label
-                                    :$column
-                                    :$sortColumn
-                                    :$sortDirection
-                            />
-                        </th>
-                    @elseif($column instanceof ColumnGroup)
-                        <th class="{{ $theadTheme->getThClass() }}">
-                            <div>
+        <tr class="{{ $theadTheme->getTrClass() }}">
+            @foreach($columns as $column)
+                @if($column instanceof BaseColumn)
+                    <th class="{{ $theadTheme->getThClass() }}">
+                        <x-laragrid::column-label
+                                :$column
+                                :$sortColumn
+                                :$sortDirection
+                        />
+                    </th>
+                @elseif($column instanceof ColumnGroup)
+                    <th class="{{ $theadTheme->getThClass() }}">
+                        <div>
                                 <span>
                                     @lang($column->getLabel())
                                 </span>
-                            </div>
-                        </th>
-                    @endif
-                @endforeach
-            </tr>
-            <tr class="{{ $theadTheme->getTrClass() }}">
-                @foreach($columns as $column)
-                    @if($column instanceof Column)
-                        <th
-                                wire:key="column-filter-{{ $column->getModelField() }}"
-                                class="{{ $theadTheme->getThClass() }}"
-                        >
-                            <x-laragrid::filters.column-filter
-                                    :$filterTheme
-                                    :$column
-                                    :$sortColumn
-                                    :$sortDirection
-                            />
-                        </th>
-                    @endif
-                @endforeach
-            </tr>
+                        </div>
+                    </th>
+                @endif
+            @endforeach
+        </tr>
+        <tr class="{{ $theadTheme->getTrClass() }}">
+            @foreach($columns as $column)
+                @if($column instanceof Column)
+                    <th
+                            wire:key="column-filter-{{ $column->getModelField() }}"
+                            class="{{ $theadTheme->getThClass() }}"
+                    >
+                        <x-laragrid::filters.column-filter
+                                :$filterTheme
+                                :$column
+                                :$sortColumn
+                                :$sortDirection
+                        />
+                    </th>
+                @endif
+            @endforeach
+        </tr>
         </thead>
         <tbody class="{{ $tbodyTheme->getTbodyClass() }}">
-            @forelse($records as $record)
-                <tr class="{{ $tbodyTheme->callRecordTrClass($record) }}">
-                    @foreach($columns as $column)
-                        @if($column instanceof BaseColumn)
-                            <td class="{{ $tbodyTheme->getTdClass() }}">
-                                <x-laragrid::column
-                                        :$column
-                                        :$record
-                                />
-                            </td>
-                        @elseif($column instanceof ColumnGroup)
-                            <td class="{{ $tbodyTheme->getGroupTdClass() }}">
-                                <x-laragrid::column-group
-                                        :$column
-                                        :$record
-                                />
-                            </td>
-                        @endif
-                    @endforeach
-                </tr>
-            @empty
-                <tr class="{{ $tbodyTheme->getTrClass() }}">
-                    <td colspan="{{ count($columns) }}">
-                        <div class="{{ $tbodyTheme->getEmptyMessageClass() }}">
-                            @lang('laragrid::translations.empty')
-                        </div>
-                    </td>
-                </tr>
-            @endforelse
+        @forelse($records as $record)
+            <tr class="{{ $tbodyTheme->callRecordTrClass($record) }}">
+                @foreach($columns as $column)
+                    @if($column instanceof BaseColumn)
+                        <td class="{{ $tbodyTheme->getTdClass() }}">
+                            <x-laragrid::column
+                                    :$column
+                                    :$record
+                            />
+                        </td>
+                    @elseif($column instanceof ColumnGroup)
+                        <td class="{{ $tbodyTheme->getGroupTdClass() }}">
+                            <x-laragrid::column-group
+                                    :$column
+                                    :$record
+                            />
+                        </td>
+                    @endif
+                @endforeach
+            </tr>
+        @empty
+            <tr class="{{ $tbodyTheme->getTrClass() }}">
+                <td colspan="{{ count($columns) }}">
+                    <div class="{{ $tbodyTheme->getEmptyMessageClass() }}">
+                        @lang('laragrid::translations.empty')
+                    </div>
+                </td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 
