@@ -5,5 +5,5 @@
 ])
 
 <{{ $column->getColumnTag() }} {!! $column->callAttributes($record) !!}>
-    {{ $column->callRenderer($record) }}
+    {!! $column->callRenderer($record) !!}
 </{{ $column->getColumnTag() }}>

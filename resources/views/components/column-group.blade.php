@@ -6,6 +6,6 @@
 
 @foreach($column->getColumns() as $childColumn)
     <{{ $childColumn->getColumnTag() }} {!! $childColumn->callAttributes($record) !!}>
-    {{ $childColumn->callRenderer($record) }}
+    {!! $childColumn->callRenderer($record) !!}
     </{{ $childColumn->getColumnTag() }}>
 @endforeach

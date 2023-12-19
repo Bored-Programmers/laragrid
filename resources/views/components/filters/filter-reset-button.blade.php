@@ -7,5 +7,5 @@
     {!! $filterResetButton->callAttributes() !!}
     wire:click="resetFilters"
 >
-    {{ $filterResetButton->callRenderer() }}
+    {!! $filterResetButton->callRenderer() !!}
 </{{ $filterResetButton->getColumnTag() }}>
