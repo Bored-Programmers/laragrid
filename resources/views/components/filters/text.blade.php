@@ -1,15 +1,15 @@
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
-@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Theme\FilterTheme)
 
 @props([
     /** @var Column $column */
     'column',
-    /** @var BaseLaraGridTheme $theme */
-    'theme'
+    /** @var FilterTheme $filterTheme */
+    'filterTheme',
 ])
 
 <input
         type="text"
-        class="{{ $theme->getFilterTextClass() }}"
+        class="{{ $filterTheme->getFilterTextClass() }}"
         wire:model.live="filter.{{ $column->getModelField() }}"
 >

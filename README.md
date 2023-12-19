@@ -17,7 +17,6 @@ production**.
     - [Customizing the Theme](#customizing-the-theme)
     - **[Detailed Class Documentation](docs/detailed-documentation.md)**
 - [Examples](docs/examples.md)
-- [Testing](#testing)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Changelog](#changelog)
 - [License](#license)
@@ -42,11 +41,13 @@ composer require bored-programmers/laragrid
 You can publish the package's configuration, language files, and views using the following commands:
 
 **_required_**
+
 ```bash
 php artisan vendor:publish --tag=laragrid-assets
 ```
 
 **_optional_**
+
 ```bash
 php artisan vendor:publish --tag=laragrid-config
 php artisan vendor:publish --tag=laragrid-lang
@@ -61,14 +62,22 @@ php artisan vendor:publish --tag=laragrid-views
 
 ### Creating a Grid
 
-To create a grid, you need to extend the `BaseLaraGrid` class and implement the `getColumns`, `getDataSource`
-and `getTheme` methods.
+To create a grid, you need to extend the `BaseLaraGrid` class and implement
+the `getColumns`, `getDataSource`, `getFilterResetButton` and `getTheme` methods.
 
 ```php
-use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Livewire\BaseLaraGrid;use Illuminate\Database\Eloquent\Builder;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
+use BoredProgrammers\LaraGrid\Livewire\BaseLaraGrid;
+use Illuminate\Database\Eloquent\Builder;
+use BoredProgrammers\LaraGrid\Filters\FilterResetButton;
 
 class MyGrid extends BaseLaraGrid
 {
+
+    protected function getFilterResetButton(): FilterResetButton
+    {
+        return FilterResetButton::make();
+    }
 
     protected function getTheme(): BaseLaraGridTheme
     {
@@ -118,7 +127,9 @@ You can customize the appearance of the grid by extending the `BaseLaraGridTheme
 
 ```php
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
-use Illuminate\Database\Eloquent\Model;
+use BoredProgrammers\LaraGrid\Theme\FilterTheme;
+use BoredProgrammers\LaraGrid\Theme\TBodyTheme;
+use BoredProgrammers\LaraGrid\Theme\THeadTheme;
 
 class MyTheme extends BaseLaraGridTheme
 {
@@ -127,27 +138,36 @@ class MyTheme extends BaseLaraGridTheme
     {
         $theme = new static();
 
-        $theme->setTableClass('');
-        $theme->setTheadClass('');
-        $theme->setTrClass('');
-        $theme->setFilterTrClass('');
-        $theme->setThClass('');
-        $theme->setTbodyClass('');
-        $theme->setTdClass('');
-        $theme->setGroupTdClass('');
-        $theme->setPaginationClass('');
-        $theme->setFilterTextClass('');
-        $theme->setFilterSelectClass('');
-        $theme->setFilterDateClass('');
+        $theme->setTableClass('min-w-full table-auto');
 
-        $theme->setRecordTrClass(fn(Model $model) => $model->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
-        $theme->setRecordTrClass('bg-gray-100'); // If you don't want to set a closure, you can just pass a string class.
+        $theme->setTheadTheme(
+            THeadTheme::make()
+                ->setTheadClass('pb-4')
+                ->setThClass('pb-3 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap')
+        );
 
-        // for more methods, check the BaseLaraGridTheme class
+        $theme->setTbodyTheme(
+            TBodyTheme::make()
+                ->setEmptyMessageClass('text-white')
+                ->setTdClass('whitespace-nowrap p-3 text-sm text-gray-500')
+                ->setGroupTdClass('whitespace-nowrap flex items-center p-3 text-sm text-gray-500')
+
+                ->setRecordTrClass(fn(Model $model) => $model->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
+                ->setRecordTrClass('bg-white odd:bg-gray-100'); // If you don't want to set a closure, you can just pass a string class.
+        );
+
+        $theme->setFilterTheme(
+            FilterTheme::make()
+                ->setFilterTextClass('bg-white w-full rounded-xl border border-gray-300')
+                ->setFilterSelectClass('bg-white w-full rounded-xl border border-gray-300')
+                ->setFilterDateClass('bg-white w-full rounded-xl border border-gray-300')
+        );
+        
+        // those are not all methods, you can find all of them in BaseLaraGridTheme, THeadTheme, TBodyTheme and FilterTheme classes
 
         return $theme;
     }
-
+    
 }
 
 ```
@@ -160,6 +180,49 @@ Then, in your grid class, you need to override the `getTheme` method and return 
         return MyTheme::make();
     }
 ```
+
+There is also one predefined theme called `TailwindTheme`. You can use it like this:
+
+```php
+    protected function getTheme(): BaseLaraGridTheme
+    {
+        return TailwindTheme::make();
+    }
+```
+
+## Show filtering and sorting in url
+
+If you want to show filtering and sorting in url, you need to rewrite default LaraGrid properties. You can do it like
+this:
+
+```php
+abstract class MyBaseGrid extends BaseLaraGrid
+{
+
+    #[Url]
+    public array $filter = [];
+
+    #[Url(except: 'id')]
+    public string $sortColumn = 'id';
+
+    #[Url]
+    public string $sortDirection = 'desc';
+
+    protected function getFilterResetButton(): FilterResetButton
+    {
+        return FilterResetButton::make();
+    }
+
+    protected function getTheme(): BaseLaraGridTheme
+    {
+        return MyTheme::make();
+    }
+
+}
+```
+
+Those Url params are default from livewire, so you can customize them as you want by
+following [livewire docs](https://livewire.laravel.com/docs/url#initializing-properties-from-the-url).
 
 ## Contribution Guidelines
 

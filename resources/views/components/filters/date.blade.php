@@ -1,11 +1,11 @@
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
-@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Theme\FilterTheme)
 
 @props([
     /** @var Column $column */
     'column',
-    /** @var BaseLaraGridTheme $theme */
-    'theme',
+    /** @var FilterTheme $filterTheme */
+    'filterTheme',
 ])
 
 <div
@@ -32,5 +32,5 @@
             name="filter.{{ $column->getModelField() }}.to"
             wire:model.live="filter.{{ $column->getModelField() }}.to"
     >
-    <input x-ref="datePicker" type="text" class="{{ $theme->getFilterDateClass() }}">
+    <input x-ref="datePicker" type="text" class="{{ $filterTheme->getFilterDateClass() }}">
 </div>

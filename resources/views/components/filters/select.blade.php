@@ -1,12 +1,12 @@
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
-@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Theme\FilterTheme)
 @use(BoredProgrammers\LaraGrid\Filters\SelectFilter)
 
 @props([
     /** @var Column $column */
     'column',
-    /** @var BaseLaraGridTheme $theme */
-    'theme',
+    /** @var Filter $filterTheme */
+    'filterTheme',
 ])
 
 @php
@@ -14,7 +14,7 @@
     $filter = $column->getFilter()
 @endphp
 
-<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $theme->getFilterSelectClass() }}">
+<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $filterTheme->getFilterSelectClass() }}">
     @if($filter->getPrompt())
         <option wire:key="item-prompt" value="">@lang($filter->getPrompt())</option>
     @endif

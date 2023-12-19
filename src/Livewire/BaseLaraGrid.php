@@ -23,13 +23,10 @@ abstract class BaseLaraGrid extends Component
 
     use WithPagination;
 
-    #[Url]
     public array $filter = [];
 
-    #[Url]
     public string $sortColumn = 'id';
 
-    #[Url]
     public string $sortDirection = 'desc';
 
     public int $perPage = 25;

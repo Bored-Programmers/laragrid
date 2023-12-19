@@ -7,57 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 abstract class BaseLaraGridTheme
 {
 
-    protected ?string $tableClass = null;
+    private ?string $tableClass = null;
 
-    protected ?string $theadClass = null;
+    private ?string $paginationClass = null;
 
-    protected ?string $trClass = null;
+    private ?FilterTheme $filterTheme = null;
 
-    protected ?string $filterTrClass = null;
+    private ?THeadTheme $theadTheme = null;
 
-    protected ?string $thClass = null;
+    private ?TBodyTheme $tbodyTheme = null;
 
-    protected ?string $tbodyClass = null;
-
-    protected ?string $tdClass = null;
-
-    protected ?string $groupTdClass = null;
-
-    protected ?string $paginationClass = null;
-
-    protected ?string $filterTextClass = null;
-
-    protected ?string $filterSelectClass = null;
-
-    protected ?string $filterDateClass = null;
-
-    protected ?string $emptyMessageClass = null;
-
-    /** @var callable */
-    protected $recordTrClass;
+    public function __construct()
+    {
+        $this->filterTheme = FilterTheme::make();
+        $this->theadTheme = THeadTheme::make();
+        $this->tbodyTheme = TBodyTheme::make();
+    }
 
     public abstract static function make(): static;
-
-    public function callRecordTrClass(...$args)
-    {
-        return call_user_func_array($this->getRecordTrClass(), $args);
-    }
-
-    public function getRecordTrClass(): callable
-    {
-        return $this->recordTrClass ?: fn() => '';
-    }
-
-    public function setRecordTrClass(callable|string $recordTrClass): static
-    {
-        if (is_string($recordTrClass)) {
-            $recordTrClass = fn() => $recordTrClass;
-        }
-
-        $this->recordTrClass = $recordTrClass;
-
-        return $this;
-    }
 
     public function getTableClass(): ?string
     {
@@ -67,90 +34,6 @@ abstract class BaseLaraGridTheme
     public function setTableClass(?string $tableClass): BaseLaraGridTheme
     {
         $this->tableClass = $tableClass;
-
-        return $this;
-    }
-
-    public function getTheadClass(): ?string
-    {
-        return $this->theadClass;
-    }
-
-    public function setTheadClass(?string $theadClass): BaseLaraGridTheme
-    {
-        $this->theadClass = $theadClass;
-
-        return $this;
-    }
-
-    public function getTrClass(): ?string
-    {
-        return $this->trClass;
-    }
-
-    public function setTrClass(?string $trClass): BaseLaraGridTheme
-    {
-        $this->trClass = $trClass;
-
-        return $this;
-    }
-
-    public function getFilterTrClass(): ?string
-    {
-        return $this->filterTrClass;
-    }
-
-    public function setFilterTrClass(?string $filterTrClass): BaseLaraGridTheme
-    {
-        $this->filterTrClass = $filterTrClass;
-
-        return $this;
-    }
-
-    public function getThClass(): ?string
-    {
-        return $this->thClass;
-    }
-
-    public function setThClass(?string $thClass): BaseLaraGridTheme
-    {
-        $this->thClass = $thClass;
-
-        return $this;
-    }
-
-    public function getTbodyClass(): ?string
-    {
-        return $this->tbodyClass;
-    }
-
-    public function setTbodyClass(?string $tbodyClass): BaseLaraGridTheme
-    {
-        $this->tbodyClass = $tbodyClass;
-
-        return $this;
-    }
-
-    public function getTdClass(): ?string
-    {
-        return $this->tdClass;
-    }
-
-    public function setTdClass(?string $tdClass): BaseLaraGridTheme
-    {
-        $this->tdClass = $tdClass;
-
-        return $this;
-    }
-
-    public function getGroupTdClass(): ?string
-    {
-        return $this->groupTdClass;
-    }
-
-    public function setGroupTdClass(?string $groupTdClass): BaseLaraGridTheme
-    {
-        $this->groupTdClass = $groupTdClass;
 
         return $this;
     }
@@ -167,52 +50,40 @@ abstract class BaseLaraGridTheme
         return $this;
     }
 
-    public function getFilterTextClass(): ?string
+    public function getFilterTheme(): ?FilterTheme
     {
-        return $this->filterTextClass;
+        return $this->filterTheme;
     }
 
-    public function setFilterTextClass(?string $filterTextClass): BaseLaraGridTheme
+    public function setFilterTheme(?FilterTheme $filterTheme): BaseLaraGridTheme
     {
-        $this->filterTextClass = $filterTextClass;
+        $this->filterTheme = $filterTheme;
 
         return $this;
     }
 
-    public function getFilterSelectClass(): ?string
+    public function getTHeadTheme(): ?THeadTheme
     {
-        return $this->filterSelectClass;
+        return $this->theadTheme;
     }
 
-    public function setFilterSelectClass(?string $filterSelectClass): BaseLaraGridTheme
+    public function setTHeadTheme(?THeadTheme $theadTheme): BaseLaraGridTheme
     {
-        $this->filterSelectClass = $filterSelectClass;
+        $this->theadTheme = $theadTheme;
 
         return $this;
     }
 
-    public function getFilterDateClass(): ?string
+    public function getTBodyTheme(): ?TBodyTheme
     {
-        return $this->filterDateClass;
+        return $this->tbodyTheme;
     }
 
-    public function setFilterDateClass(?string $filterDateClass): BaseLaraGridTheme
+    public function setTBodyTheme(?TBodyTheme $tbodyTheme): BaseLaraGridTheme
     {
-        $this->filterDateClass = $filterDateClass;
+        $this->tbodyTheme = $tbodyTheme;
 
         return $this;
     }
-
-    public function getEmptyMessageClass(): ?string
-    {
-        return $this->emptyMessageClass;
-    }
-
-    public function setEmptyMessageClass(?string $emptyMessageClass): BaseLaraGridTheme
-    {
-        $this->emptyMessageClass = $emptyMessageClass;
-
-        return $this;
-    }
-
+    
 }

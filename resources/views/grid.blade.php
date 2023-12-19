@@ -1,92 +1,115 @@
 @use(Illuminate\Contracts\Pagination\LengthAwarePaginator)
-@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\Column)
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\BaseColumn)
 @use(BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup)
+
 @use(BoredProgrammers\LaraGrid\Filters\FilterResetButton)
+
+@use(BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme)
+@use(BoredProgrammers\LaraGrid\Theme\FilterTheme)
+@use(BoredProgrammers\LaraGrid\Theme\THeadTheme)
+@use(BoredProgrammers\LaraGrid\Theme\TBodyTheme)
 
 @php
     /**
     * @var Column[] $columns
     * @var LengthAwarePaginator $records
     * @var BaseLaraGridTheme $theme
+    * @var FilterTheme $filterTheme
+    * @var TheadTheme $theadTheme
+    * @var TbodyTheme $tbodyTheme
     * @var FilterResetButton $filterResetButton
     */
+    $filterTheme = $theme->getFilterTheme();
+    $theadTheme = $theme->getTHeadTheme();
+    $tbodyTheme = $theme->getTBodyTheme();
 @endphp
 
 @assets
-    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
 @endassets
 
-<div>
+<div style="overflow-x: auto">
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
             @if($this->filter)
-                <x-laragrid::filters.filter-reset-button :$filterResetButton/>
+                <x-laragrid::filters.filter-reset-button
+                        :$filterResetButton
+                />
             @endif
         </div>
 
-        <thead class="{{ $theme->getTheadClass() }}">
-        <tr class="{{ $theme->getTrClass() }}">
-            @foreach($columns as $column)
-                @if($column instanceof BaseColumn)
-                    <th class="{{ $theme->getThClass() }}">
-                        <x-laragrid::column-label
-                                :$column
-                                :$sortColumn
-                                :$sortDirection
-                        />
-                    </th>
-                @elseif($column instanceof ColumnGroup)
-                    <th class="{{ $theme->getThClass() }}">
-                        <div>
-                            <span>
-                                @lang($column->getLabel())
-                            </span>
-                        </div>
-                    </th>
-                @endif
-            @endforeach
-        </tr>
-        <tr class="{{ $theme->getFilterTrClass() }}">
-            @foreach($columns as $column)
-                @if($column instanceof Column)
-                    <td wire:key="column-filter-{{ $column->getModelField() }}">
-                        <x-laragrid::filters.column-filter
-                                :$theme
-                                :$column
-                                :$sortColumn
-                                :$sortDirection
-                        />
-                    </td>
-                @endif
-            @endforeach
-        </tr>
-        </thead>
-        <tbody class="{{ $theme->getTbodyClass() }}">
-        @forelse($records as $record)
-            <tr class="{{ $theme->callRecordTrClass($record) }}">
+        <thead class="{{ $theadTheme->getTheadClass() }}">
+            <tr class="{{ $theadTheme->getTrClass() }}">
                 @foreach($columns as $column)
                     @if($column instanceof BaseColumn)
-                        <td class="{{ $theme->getTdClass() }}">
-                            <x-laragrid::column :$column :$record/>
-                        </td>
+                        <th class="{{ $theadTheme->getThClass() }}">
+                            <x-laragrid::column-label
+                                    :$column
+                                    :$sortColumn
+                                    :$sortDirection
+                            />
+                        </th>
                     @elseif($column instanceof ColumnGroup)
-                        <td class="{{ $theme->getGroupTdClass() }}">
-                            <x-laragrid::column-group :$column :$record/>
-                        </td>
+                        <th class="{{ $theadTheme->getThClass() }}">
+                            <div>
+                                <span>
+                                    @lang($column->getLabel())
+                                </span>
+                            </div>
+                        </th>
                     @endif
                 @endforeach
             </tr>
-        @empty
-            <tr class="{{ $theme->getTrClass() }}">
-                <td colspan="{{ count($columns) }}">
-                    <div class="{{ $theme->getEmptyMessageClass() }}">
-                        @lang('laragrid::translations.empty')
-                    </div>
-                </td>
+            <tr class="{{ $theadTheme->getTrClass() }}">
+                @foreach($columns as $column)
+                    @if($column instanceof Column)
+                        <th
+                                wire:key="column-filter-{{ $column->getModelField() }}"
+                                class="{{ $theadTheme->getThClass() }}"
+                        >
+                            <x-laragrid::filters.column-filter
+                                    :$filterTheme
+                                    :$column
+                                    :$sortColumn
+                                    :$sortDirection
+                            />
+                        </th>
+                    @endif
+                @endforeach
             </tr>
-        @endforelse
+        </thead>
+        <tbody class="{{ $tbodyTheme->getTbodyClass() }}">
+            @forelse($records as $record)
+                <tr class="{{ $tbodyTheme->callRecordTrClass($record) }}">
+                    @foreach($columns as $column)
+                        @if($column instanceof BaseColumn)
+                            <td class="{{ $tbodyTheme->getTdClass() }}">
+                                <x-laragrid::column
+                                        :$column
+                                        :$record
+                                />
+                            </td>
+                        @elseif($column instanceof ColumnGroup)
+                            <td class="{{ $tbodyTheme->getGroupTdClass() }}">
+                                <x-laragrid::column-group
+                                        :$column
+                                        :$record
+                                />
+                            </td>
+                        @endif
+                    @endforeach
+                </tr>
+            @empty
+                <tr class="{{ $tbodyTheme->getTrClass() }}">
+                    <td colspan="{{ count($columns) }}">
+                        <div class="{{ $tbodyTheme->getEmptyMessageClass() }}">
+                            @lang('laragrid::translations.empty')
+                        </div>
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
