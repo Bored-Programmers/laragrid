@@ -13,7 +13,7 @@ trait HasFooterRenderer
         return call_user_func_array($this->getFooterRenderer(), $args);
     }
 
-    public function getFooterRenderer(): callable
+    public function getFooterRenderer(): ?callable
     {
         return $this->footerRenderer;
     }
