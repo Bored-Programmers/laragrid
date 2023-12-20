@@ -36,7 +36,7 @@ abstract class BaseLaraGrid extends Component
     /** @return BaseColumn[] */
     protected abstract function getColumns(): array;
 
-    protected abstract function getDataSource(): Builder|\Illuminate\Database\Query\Builder|Collection;
+    protected abstract function getDataSource(): Builder|\Illuminate\Database\Query\Builder|Collection|array;
 
     public function updatingPerPage()
     {
@@ -71,6 +71,11 @@ abstract class BaseLaraGrid extends Component
         }
 
         $query = $this->getDataSource();
+
+        if (is_array($query)) {
+            $query = collect($query);
+        }
+
         $columns = $this->getColumns();
 
         $this->applyFilters($columns, $query);
@@ -96,7 +101,7 @@ abstract class BaseLaraGrid extends Component
 
     /************************************************ PRIVATE ************************************************/
 
-    private function applySorting(Builder|\Illuminate\Database\Query\Builder|Collection $query): void
+    private function applySorting(Builder|\Illuminate\Database\Query\Builder|Collection|array $query): void
     {
         if ($query instanceof Collection) {
             $query->sortBy($this->sortColumn, SORT_REGULAR, $this->sortDirection === 'desc');
@@ -109,7 +114,10 @@ abstract class BaseLaraGrid extends Component
         }
     }
 
-    private function applyFilters(array $columns, Builder|\Illuminate\Database\Query\Builder|Collection $query): void
+    private function applyFilters(
+        array $columns,
+        Builder|\Illuminate\Database\Query\Builder|Collection|array $query
+    ): void
     {
         foreach ($columns as $column) {
             if ($column instanceof Column) {
