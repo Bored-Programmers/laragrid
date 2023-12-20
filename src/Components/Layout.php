@@ -3,13 +3,13 @@
 namespace BoredProgrammers\LaraGrid\Components;
 
 use BoredProgrammers\LaraGrid\Traits\HasBootableTrait;
-use BoredProgrammers\LaraGrid\Traits\HasFooter;
-use BoredProgrammers\LaraGrid\Traits\HasHeader;
+use BoredProgrammers\LaraGrid\Traits\HasFooterRenderer;
+use BoredProgrammers\LaraGrid\Traits\HasHeaderRenderer;
 
 class Layout
 {
 
-    use HasHeader, HasFooter;
+    use HasHeaderRenderer, HasFooterRenderer;
 
     public function __construct()
     {

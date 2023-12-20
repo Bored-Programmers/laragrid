@@ -5,7 +5,15 @@
 
 namespace App\Modules\Admin\Livewire\Grids;
 
-use App\Enums\Transaction\TransactionStatus;use App\Models\Transaction;use App\Modules\Shared\Lib\Grids\BaseGrid;use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Filters\DateFilter;use BoredProgrammers\LaraGrid\Filters\SelectFilter;use BoredProgrammers\LaraGrid\Filters\TextFilter;use BoredProgrammers\LaraGrid\Themes\UiKitTheme;use Illuminate\Database\Eloquent\Builder;
+use App\Enums\Transaction\TransactionStatus;
+use App\Models\Transaction;
+use App\Modules\Shared\Lib\Grids\BaseGrid;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
+use BoredProgrammers\LaraGrid\Filters\DateFilter;
+use BoredProgrammers\LaraGrid\Filters\SelectFilter;
+use BoredProgrammers\LaraGrid\Filters\TextFilter;
+use BoredProgrammers\LaraGrid\Themes\UiKitTheme;
+use Illuminate\Database\Eloquent\Builder;
 
 class TransactionsGrid extends BaseGrid
 {
@@ -65,7 +73,13 @@ class TransactionsGrid extends BaseGrid
 
 namespace App\Livewire\AdminModule\Grid;
 
-use App\Models\User;use BoredProgrammers\LaraGrid\Components\ColumnComponents\ActionButton;use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;use BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup;use BoredProgrammers\LaraGrid\Filters\DateFilter;use BoredProgrammers\LaraGrid\Filters\TextFilter;use Illuminate\Database\Eloquent\Builder;
+use App\Models\User;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\ActionButton;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
+use BoredProgrammers\LaraGrid\Components\ColumnComponents\ColumnGroup;
+use BoredProgrammers\LaraGrid\Filters\DateFilter;
+use BoredProgrammers\LaraGrid\Filters\TextFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class CustomersGrid extends BaseGrid
 {

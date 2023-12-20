@@ -35,7 +35,7 @@
 <div style="overflow-x: auto;padding:1px;"> {{-- padding 1px to prevent border focus issues --}}
     <div class="{{ $theme->getHeaderClass() }}">
         @if(method_exists($this, 'getLayout'))
-            {!! $this->getLayout($theme)->callHeader() !!}
+            {!! $this->getLayout($theme)->callHeaderRenderer() !!}
         @endif
     </div>
 
@@ -133,7 +133,7 @@
 
     <div class="{{ $theme->getFooterClass() }}">
         @if(method_exists($this, 'getLayout'))
-            {!! $this->getLayout($theme)->callFooter() !!}
+            {!! $this->getLayout($theme)->callFooterRenderer() !!}
         @endif
     </div>
 </div>
