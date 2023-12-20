@@ -9,12 +9,12 @@
 
 <div
         @if ($column->isSortable())
-            wire:click="sort('{{ $column->getModelField() }}')"
+            wire:click="sort('{{ $column->getRecordField() }}')"
         @endif
 >
     @if ($column->isSortable())
         <span>
-            @if ($sortColumn !== $column->getModelField())
+            @if ($sortColumn !== $column->getRecordField())
                 &#8597;
             @elseif ($sortDirection === 'asc')
                 &uarr;

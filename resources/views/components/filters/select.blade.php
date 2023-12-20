@@ -14,7 +14,7 @@
     $filter = $column->getFilter()
 @endphp
 
-<select wire:model.live="filter.{{ $column->getModelField() }}" class="{{ $filterTheme->getFilterSelectClass() }}">
+<select wire:model.live="filter.{{ $column->getRecordField() }}" class="{{ $filterTheme->getFilterSelectClass() }}">
     @if($filter->getPrompt())
         <option wire:key="item-prompt" value="">@lang($filter->getPrompt())</option>
     @endif

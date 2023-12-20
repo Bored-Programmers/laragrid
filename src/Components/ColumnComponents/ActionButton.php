@@ -15,12 +15,12 @@ class ActionButton extends BaseColumn
         return $button;
     }
 
-    public function defaultRender(Model $model): string
+    public function defaultRender($record): string
     {
         return __($this->getLabel());
     }
 
-    public function defaultAttributes(Model $model): array
+    public function defaultAttributes($record): array
     {
         return [];
     }

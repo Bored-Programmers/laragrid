@@ -11,5 +11,5 @@
 <input
         type="text"
         class="{{ $filterTheme->getFilterTextClass() }}"
-        wire:model.live="filter.{{ $column->getModelField() }}"
+        wire:model.live="filter.{{ $column->getRecordField() }}"
 >

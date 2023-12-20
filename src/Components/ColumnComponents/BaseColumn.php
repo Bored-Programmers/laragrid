@@ -17,9 +17,9 @@ abstract class BaseColumn
 
     use HasRenderer, HasAttributes, HasLabel, HasColumnTag, HasBootableTrait;
 
-    public abstract function defaultRender(Model $model);
+    public abstract function defaultRender($record);
 
-    public abstract function defaultAttributes(Model $model): array;
+    public abstract function defaultAttributes($record): array;
 
     public function __construct(?string $label = null)
     {

@@ -3,6 +3,7 @@
 namespace BoredProgrammers\LaraGrid\Traits;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 
 trait HasBuilder
 {
@@ -11,10 +12,10 @@ trait HasBuilder
     private $builder;
 
     public abstract function defaultBuilder(
-        \Illuminate\Database\Eloquent\Builder|Builder $query,
+        \Illuminate\Database\Eloquent\Builder|Builder|Collection $query,
         string $field,
         mixed $value
-    ): \Illuminate\Database\Eloquent\Builder|Builder;
+    ): \Illuminate\Database\Eloquent\Builder|Builder|Collection;
 
     public function bootHasBuilder()
     {

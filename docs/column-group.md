@@ -48,13 +48,13 @@ protected function getColumns(): array
             ]),
         ColumnGroup::make('Actions')
             ->setColumns([
-                ActionButton::make('View')->setRenderer(function (Model $model) {
-                    return '<a href="' . route('detail', $model->id) . '">View</a>';
+                ActionButton::make('View')->setRenderer(function ($record) {
+                    return '<a href="' . route('detail', $record->id) . '">View</a>';
                 }),
                 ActionButton::make('Edit')->setAttributes(function() {
                     return [
                         'class' => 'btn btn-primary'
-                        'href' => route('edit', $model->id)
+                        'href' => route('edit', $record->id)
                         'wire:click' => 'openModal'
                     ];
                 })
