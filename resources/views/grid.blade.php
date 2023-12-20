@@ -29,7 +29,7 @@
 @endphp
 
 @assets
-<link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet" />
 @endassets
 
 <div style="overflow-x: auto;padding:1px;"> {{-- padding 1px to prevent border focus issues --}}
