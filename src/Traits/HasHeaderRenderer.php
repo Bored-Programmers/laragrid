@@ -13,7 +13,7 @@ trait HasHeaderRenderer
         return call_user_func_array($this->getHeaderRenderer(), $args);
     }
 
-    public function getHeaderRenderer(): callable
+    public function getHeaderRenderer(): ?callable
     {
         return $this->headerRenderer;
     }
