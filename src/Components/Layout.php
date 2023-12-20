@@ -13,6 +13,8 @@ class Layout
 
     public function __construct()
     {
+        $this->setHeaderRenderer(fn() => '');
+        $this->setFooterRenderer(fn() => '');
     }
 
     public static function make(): static
