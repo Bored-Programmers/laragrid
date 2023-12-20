@@ -63,7 +63,7 @@ php artisan vendor:publish --tag=laragrid-views
 ### Creating a Grid
 
 To create a grid, you need to extend the `BaseLaraGrid` class and implement
-the `getColumns`, `getDataSource`, `getFilterResetButton` and `getTheme` methods.
+the `getColumns`, and `getDataSource` methods.
 
 ```php
 use BoredProgrammers\LaraGrid\Components\ColumnComponents\Column;
@@ -73,16 +73,6 @@ use BoredProgrammers\LaraGrid\Filters\FilterResetButton;
 
 class MyGrid extends BaseLaraGrid
 {
-
-    protected function getFilterResetButton(): FilterResetButton
-    {
-        return FilterResetButton::make();
-    }
-
-    protected function getTheme(): BaseLaraGridTheme
-    {
-        return MyTheme::make();
-    }
 
     protected function getColumns(): array
     {
@@ -181,14 +171,7 @@ Then, in your grid class, you need to override the `getTheme` method and return 
     }
 ```
 
-There is also one predefined theme called `TailwindTheme`. You can use it like this:
-
-```php
-    protected function getTheme(): BaseLaraGridTheme
-    {
-        return TailwindTheme::make();
-    }
-```
+By default, there is a theme called `TailwindTheme`. 
 
 ## Show filtering and sorting in url
 

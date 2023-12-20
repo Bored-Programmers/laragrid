@@ -13,6 +13,10 @@ abstract class BaseLaraGridTheme
 
     private ?string $perPageClass = null;
 
+    private ?string $headerClass = null;
+
+    private ?string $footerClass = null;
+
     private ?FilterTheme $filterTheme;
 
     private ?THeadTheme $theadTheme;
@@ -60,6 +64,30 @@ abstract class BaseLaraGridTheme
     public function setPerPageClass(?string $perPageClass): static
     {
         $this->perPageClass = $perPageClass;
+
+        return $this;
+    }
+
+    public function getHeaderClass(): ?string
+    {
+        return $this->headerClass;
+    }
+
+    public function setHeaderClass(?string $headerClass): BaseLaraGridTheme
+    {
+        $this->headerClass = $headerClass;
+
+        return $this;
+    }
+
+    public function getFooterClass(): ?string
+    {
+        return $this->footerClass;
+    }
+
+    public function setFooterClass(?string $footerClass): BaseLaraGridTheme
+    {
+        $this->footerClass = $footerClass;
 
         return $this;
     }

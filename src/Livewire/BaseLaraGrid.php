@@ -9,12 +9,11 @@ use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
 use BoredProgrammers\LaraGrid\Filters\FilterResetButton;
 use BoredProgrammers\LaraGrid\Theme\BaseLaraGridTheme;
+use BoredProgrammers\LaraGrid\Theme\ExampleThemes\TailwindTheme;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,10 +36,6 @@ abstract class BaseLaraGrid extends Component
     protected abstract function getColumns(): array;
 
     protected abstract function getDataSource(): Builder;
-
-    protected abstract function getTheme(): BaseLaraGridTheme;
-
-    protected abstract function getFilterResetButton(): FilterResetButton;
 
     public function updatingPerPage()
     {
@@ -83,9 +78,19 @@ abstract class BaseLaraGrid extends Component
         return view('laragrid::grid', [
             'records' => $query->paginate($this->perPage)->onEachSide(2),
             'columns' => $columns,
-            'theme' => $this->getTheme(),
-            'filterResetButton' => $this->getFilterResetButton(),
         ]);
+    }
+
+    /************************************************ GETTERS ************************************************/
+
+    public function getFilterResetButton(): FilterResetButton
+    {
+        return FilterResetButton::make();
+    }
+
+    public function getTheme(): BaseLaraGridTheme
+    {
+        return TailwindTheme::make();
     }
 
     /************************************************ PRIVATE ************************************************/

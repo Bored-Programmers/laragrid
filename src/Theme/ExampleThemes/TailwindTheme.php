@@ -36,7 +36,10 @@ class TailwindTheme extends BaseLaraGridTheme
                 ->setRecordTrClass('bg-white odd:bg-gray-100')
                 ->setTrClass('')
                 ->setTdClass('whitespace-nowrap p-3 text-sm text-gray-500')
-                ->setGroupTdClass('whitespace-nowrap flex space-x-2 items-center p-3 text-sm text-gray-500')
+                ->setGroupTdClass(
+                    'whitespace-nowrap flex space-x-2 items-center p-3 text-sm text-gray-500
+                    *:transition hover:*:-translate-y-1'
+                )
         );
 
         $theme->setFilterTheme(

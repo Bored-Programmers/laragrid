@@ -21,16 +21,24 @@
     * @var TbodyTheme $tbodyTheme
     * @var FilterResetButton $filterResetButton
     */
+    $theme = $this->getTheme();
+    $filterResetButton = $this->getFilterResetButton();
     $filterTheme = $theme->getFilterTheme();
     $theadTheme = $theme->getTHeadTheme();
     $tbodyTheme = $theme->getTBodyTheme();
 @endphp
 
 @assets
-    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet" />
 @endassets
 
 <div style="overflow-x: auto;padding:1px;"> {{-- padding 1px to prevent border focus issues --}}
+    <div class="{{ $theme->getHeaderClass() }}">
+        @if(method_exists($this, 'getLayout'))
+            {!! $this->getLayout($theme)->callHeaderRenderer() !!}
+        @endif
+    </div>
+
     <table class="{{ $theme->getTableClass() }}">
         <div wire:ignore.self>
             @if($this->filter)
@@ -122,6 +130,12 @@
             <option value="{{ $option }}">{{ $option }}</option>
         @endforeach
     </select>
+
+    <div class="{{ $theme->getFooterClass() }}">
+        @if(method_exists($this, 'getLayout'))
+            {!! $this->getLayout($theme)->callFooterRenderer() !!}
+        @endif
+    </div>
 </div>
 
 <script src="{{ asset('vendor/laragrid/js/flatpickr.min.js') }}"></script>
