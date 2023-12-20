@@ -79,3 +79,40 @@ protected function getColumns(): array
     ];
 }
 ```
+
+## Custom builder
+
+You can also define a custom builder for a filter. This is useful when you want to modify the query builder based on
+the filter's value.
+
+```php
+Column::make('name', 'Name')->setFilter(TextFilter::make()->setBuilder(function ($builder, $value) {
+    $builder->where('name', 'LIKE', "%{$value}%");
+})),
+```
+
+## Custom filter
+
+You can also define a custom filter by extending the `BaseFilter` class. This is useful when you want to define a
+filter that is not provided by LaraGrid.
+
+```php
+use BoredProgrammers\LaraGrid\Filters\BaseFilter;
+use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
+use BoredProgrammers\LaraGrid\Filters\Enums\FiltrationType;
+
+class MyCustomFilter extends BaseFilter
+{
+    public static function make(): static
+    {
+        $filter = new static();
+        $filter->setFiltrationType(FiltrationType::DATE_BETWEEN);
+        $filter->setFilterType(FilterType::DATE);
+        $filter->setBuilder(function ($query, $field, $value) {
+            $query->whereBetween($field, $value);
+        });
+
+        return $filter;
+    }
+}
+```

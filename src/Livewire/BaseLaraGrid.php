@@ -101,10 +101,10 @@ abstract class BaseLaraGrid extends Component
 
     /************************************************ PRIVATE ************************************************/
 
-    private function applySorting(Builder|\Illuminate\Database\Query\Builder|Collection|array $query): void
+    private function applySorting(Builder|\Illuminate\Database\Query\Builder|Collection &$query): void
     {
         if ($query instanceof Collection) {
-            $query->sortBy($this->sortColumn, SORT_REGULAR, $this->sortDirection === 'desc');
+            $query = $query->sortBy($this->sortColumn,  descending: $this->sortDirection === 'desc')->values();
         } else {
             if (str_contains($this->sortColumn, '.')) {
                 $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
@@ -116,7 +116,7 @@ abstract class BaseLaraGrid extends Component
 
     private function applyFilters(
         array $columns,
-        Builder|\Illuminate\Database\Query\Builder|Collection|array $query
+        Builder|\Illuminate\Database\Query\Builder|Collection &$query
     ): void
     {
         foreach ($columns as $column) {
@@ -151,7 +151,7 @@ abstract class BaseLaraGrid extends Component
                         continue;
                     }
 
-                    $column->getFilter()->callBuilder(
+                    $query = $column->getFilter()->callBuilder(
                         $query,
                         $column->getRecordField(),
                         $searchedTerm
