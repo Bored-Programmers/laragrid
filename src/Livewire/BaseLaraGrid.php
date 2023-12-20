@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -35,7 +36,7 @@ abstract class BaseLaraGrid extends Component
     /** @return BaseColumn[] */
     protected abstract function getColumns(): array;
 
-    protected abstract function getDataSource(): Builder;
+    protected abstract function getDataSource(): Builder|\Illuminate\Database\Query\Builder|Collection;
 
     public function updatingPerPage()
     {
@@ -95,16 +96,20 @@ abstract class BaseLaraGrid extends Component
 
     /************************************************ PRIVATE ************************************************/
 
-    private function applySorting(Builder $query): void
+    private function applySorting(Builder|\Illuminate\Database\Query\Builder|Collection $query): void
     {
-        if (str_contains($this->sortColumn, '.')) {
-            $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
+        if ($query instanceof Collection) {
+            $query->sortBy($this->sortColumn, SORT_REGULAR, $this->sortDirection === 'desc');
         } else {
-            $query->orderBy($this->sortColumn, $this->sortDirection);
+            if (str_contains($this->sortColumn, '.')) {
+                $query->orderByLeftPowerJoins($this->sortColumn, $this->sortDirection);
+            } else {
+                $query->orderBy($this->sortColumn, $this->sortDirection);
+            }
         }
     }
 
-    private function applyFilters(array $columns, Builder $query): void
+    private function applyFilters(array $columns, Builder|\Illuminate\Database\Query\Builder|Collection $query): void
     {
         foreach ($columns as $column) {
             if ($column instanceof Column) {
@@ -115,32 +120,32 @@ abstract class BaseLaraGrid extends Component
                         'Filtration type "'
                         . $filter->getFiltrationType()->name
                         . ' for column "'
-                        . $column->getModelField()
+                        . $column->getRecordField()
                         . '" does not exist.'
                     );
                 }
 
                 $activeFilters = Arr::dot($this->filter);
 
-                if (array_key_exists($column->getModelField(), $this->filter)) {
+                if (array_key_exists($column->getRecordField(), $this->filter)) {
                     if ($column->getFilter()->getFilterType() === FilterType::DATE) {
                         $searchedTerm = [
-                            'from' => $activeFilters[$column->getModelField() . '.from'] ?? null,
-                            'to' => $activeFilters[$column->getModelField() . '.to'] ?? null,
+                            'from' => $activeFilters[$column->getRecordField() . '.from'] ?? null,
+                            'to' => $activeFilters[$column->getRecordField() . '.to'] ?? null,
                         ];
                     } else {
-                        $searchedTerm = $activeFilters[$column->getModelField()];
+                        $searchedTerm = $activeFilters[$column->getRecordField()];
                     }
 
                     if ($searchedTerm === null || $searchedTerm === '' || $searchedTerm === 'null') {
-                        unset($this->filter[$column->getModelField()]);
+                        unset($this->filter[$column->getRecordField()]);
 
                         continue;
                     }
 
                     $column->getFilter()->callBuilder(
                         $query,
-                        $column->getModelField(),
+                        $column->getRecordField(),
                         $searchedTerm
                     );
                 }

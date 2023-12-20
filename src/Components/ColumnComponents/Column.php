@@ -17,26 +17,26 @@ class Column extends BaseColumn
 
     use HasSortable, HasModelField, HasFilter, HasDateFormatter;
 
-    public function __construct(?string $modelField = null, ?string $label = null)
+    public function __construct(?string $recordField = null, ?string $label = null)
     {
-        $this->setModelField($modelField);
+        $this->setRecordField($recordField);
 
         parent::__construct($label);
     }
 
-    public static function make(string $modelField, ?string $label = null): static
+    public static function make(string $recordField, ?string $label = null): static
     {
-        return new static($modelField, $label);
+        return new static($recordField, $label);
     }
 
-    public function defaultAttributes(Model $model): array
+    public function defaultAttributes($record): array
     {
         return [];
     }
 
-    public function defaultRender(Model $model)
+    public function defaultRender($record)
     {
-        $value = data_get($model, $this->getModelField());
+        $value = data_get($record, $this->getRecordField());
 
         if ($value instanceof UnitEnum) {
             $value = $value->name;

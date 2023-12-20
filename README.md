@@ -142,7 +142,7 @@ class MyTheme extends BaseLaraGridTheme
                 ->setTdClass('whitespace-nowrap p-3 text-sm text-gray-500')
                 ->setGroupTdClass('whitespace-nowrap flex items-center p-3 text-sm text-gray-500')
 
-                ->setRecordTrClass(fn(Model $model) => $model->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
+                ->setRecordTrClass(fn($record) => $record->role === 'admin' ? 'bg-red-500' : 'bg-white'); // you can also set a closure for record tr class. Pass a closure that returns a string class.
                 ->setRecordTrClass('bg-white odd:bg-gray-100'); // If you don't want to set a closure, you can just pass a string class.
         );
 

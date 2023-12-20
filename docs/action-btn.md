@@ -26,10 +26,10 @@ public function setRenderer(callable $renderer): static
 
 ```php
 ActionButton::make('View')
-    ->setRenderer(function (Model $model) {
+    ->setRenderer(function ($record) {
         return "<span class='bg-blue-200'>View</span>";
     })
-    ->setRenderer(fn(Model $model) => view('test'))
+    ->setRenderer(fn($record) => view('test'))
     ->setRenderer([MyClass::class, 'myMethod'])
     ->setRenderer('Random Text')
 ```
@@ -37,9 +37,9 @@ ActionButton::make('View')
 ```php
 class MyClass
 {
-    public static function myMethod(Model $model)
+    public static function myMethod($record)
     {
-        return '<a href="' . route('detail', $model->id) . '">View</a>';
+        return '<a href="' . route('detail', $record->id) . '">View</a>';
     }
 }
 ```
@@ -55,7 +55,7 @@ public function setAttributes(array $attributes): static
 
 ```php
 ActionButton::make('View')
-    ->setAttributes(function (Model $model) {
+    ->setAttributes(function ($record) {
         return [
             'target' => '_blank',
             'href' => 'https://google.com',
@@ -69,7 +69,7 @@ ActionButton::make('View')
 ```php
 class MyClass
 {
-    public static function myMethod(Model $model)
+    public static function myMethod($record)
     {
         return [
             'target' => '_blank',

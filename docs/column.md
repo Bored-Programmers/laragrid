@@ -17,8 +17,8 @@ Column::make('name', 'attributes.name')
 
 ```php
 Column::make('name', 'attributes.name')
-    ->setRenderer(function (Model $model) {
-        return __($model->name);
+    ->setRenderer(function ($record) {
+        return __($record->name);
     })
 ```
 
@@ -35,12 +35,12 @@ are: `TextFilter`, `DateFilter`, `SelectFilter`, `BooleanFilter`.
 public function setFilter(BaseFilter $filter): static
 ```
 
-### `setModelField(?string $modelField)`
+### `setRecordField(?string $recordField)`
 
 This method sets the model field of the column.
 
 ```php
-public function setModelField(?string $modelField): void
+public function setRecordField(?string $recordField): void
 ```
 
 ### `setSortable($isSortable = true)`
@@ -77,8 +77,8 @@ public function setRenderer(callable $renderer): static
 
 ```php
 Column::make(label: 'Name')
-    ->setRenderer(function (Model $model) {
-        return $model->name;
+    ->setRenderer(function ($record) {
+        return $record->name;
     })
     ->setRenderer([MyClass::class, 'myMethod'])
     ->setRenderer('Random Text')
@@ -87,9 +87,9 @@ Column::make(label: 'Name')
 ```php
 class MyClass
 {
-    public static function myMethod(Model $model)
+    public static function myMethod($record)
     {
-        return $model->name;
+        return $record->name;
     }
 }
 ```
@@ -105,11 +105,11 @@ public function setAttributes(array $attributes): static
 
 ```php
 Column::make(label: 'Name')
-    ->setAttributes(function (Model $model) {
+    ->setAttributes(function ($record) {
         return [
             'class' => 'text-center',
-            'data-id' => $model->id,
-            'wire:click.prevent' => 'download(' . $model->id . ')',
+            'data-id' => $record->id,
+            'wire:click.prevent' => 'download(' . $record->id . ')',
         ];
     })
     ->setAttributes([MyClass::class, 'myMethod'])
@@ -119,12 +119,12 @@ Column::make(label: 'Name')
 ```php
 class MyClass
 {
-    public static function myMethod(Model $model)
+    public static function myMethod($record)
     {
         return [
             'class' => 'text-center',
-            'data-id' => $model->id,
-            'wire:click.prevent' => 'download(' . $model->id . ')',
+            'data-id' => $record->id,
+            'wire:click.prevent' => 'download(' . $record->id . ')',
         ];
     }
 }

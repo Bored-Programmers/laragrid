@@ -74,7 +74,7 @@
             @foreach($columns as $column)
                 @if($column instanceof Column)
                     <th
-                            wire:key="column-filter-{{ $column->getModelField() }}"
+                            wire:key="column-filter-{{ $column->getRecordField() }}"
                             class="{{ $theadTheme->getThClass() }}"
                     >
                         <x-laragrid::filters.column-filter

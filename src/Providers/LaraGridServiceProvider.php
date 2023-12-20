@@ -7,6 +7,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class LaraGridServiceProvider extends ServiceProvider
 {
@@ -40,6 +42,21 @@ class LaraGridServiceProvider extends ServiceProvider
             $this->whereOrWhereRelation($attributes, $searchTerm, 'LIKE', "%{$searchTerm}%");
 
             return $this;
+        });
+
+        Collection::macro('paginate', function ($perPage, $page = null, $pageName = 'page') {
+            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+
+            return new LengthAwarePaginator(
+                $this->forPage($page, $perPage),
+                $this->count(),
+                $perPage,
+                $page,
+                [
+                    'path' => LengthAwarePaginator::resolveCurrentPath(),
+                    'pageName' => $pageName,
+                ]
+            );
         });
 
         Builder::macro('whereEqual', function ($attributes, $value) {

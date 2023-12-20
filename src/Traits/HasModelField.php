@@ -5,16 +5,16 @@ namespace BoredProgrammers\LaraGrid\Traits;
 trait HasModelField
 {
 
-    private ?string $modelField;
+    private ?string $recordField;
 
-    public function getModelField(): ?string
+    public function getRecordField(): ?string
     {
-        return $this->modelField;
+        return $this->recordField;
     }
 
-    public function setModelField(?string $modelField): void
+    public function setRecordField(?string $recordField): void
     {
-        $this->modelField = $modelField;
+        $this->recordField = $recordField;
     }
 
 }
