@@ -2,7 +2,7 @@
 
 namespace BoredProgrammers\LaraGrid\Traits;
 
-trait HasModelField
+trait HasRecordField
 {
 
     private ?string $recordField;

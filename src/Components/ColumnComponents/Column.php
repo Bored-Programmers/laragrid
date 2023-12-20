@@ -6,7 +6,7 @@ use BoredProgrammers\LaraGrid\Filters\Enums\FilterType;
 use BoredProgrammers\LaraGrid\Filters\SelectFilterOption;
 use BoredProgrammers\LaraGrid\Traits\HasDateFormatter;
 use BoredProgrammers\LaraGrid\Traits\HasFilter;
-use BoredProgrammers\LaraGrid\Traits\HasModelField;
+use BoredProgrammers\LaraGrid\Traits\HasRecordField;
 use BoredProgrammers\LaraGrid\Traits\HasSortable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -15,7 +15,7 @@ use UnitEnum;
 class Column extends BaseColumn
 {
 
-    use HasSortable, HasModelField, HasFilter, HasDateFormatter;
+    use HasSortable, HasRecordField, HasFilter, HasDateFormatter;
 
     public function __construct(?string $recordField = null, ?string $label = null)
     {
