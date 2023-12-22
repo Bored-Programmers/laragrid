@@ -1,10 +1,11 @@
 # LaraGrid
 
+🚧 This package is in development, and is not ready for use in production yet. 🚧
+
 <img src="./resources/assets/img/logo.png" alt="LaraGrid Logo" height="500" width="750">
 
 LaraGrid is a Laravel package that provides a powerful and customizable grid system. It allows you to easily create
-sortable, filterable tables with pagination. This package is currently in development and **not ready** for use **in
-production**.
+sortable, filterable tables with pagination.
 
 ## Table of Contents
 
