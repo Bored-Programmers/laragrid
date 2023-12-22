@@ -30,9 +30,9 @@ trait HasAttributes
         return $this->attributes;
     }
 
-    public function setAttributes(callable|string $attributes): static
+    public function setAttributes(callable|array $attributes): static
     {
-        if (is_string($attributes)) {
+        if (is_array($attributes)) {
             $attributes = fn() => $attributes;
         }
 
