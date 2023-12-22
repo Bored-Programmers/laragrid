@@ -1,6 +1,6 @@
 # LaraGrid
 
-🚧 This package is in development, and is not ready for use in production yet. 🚧
+🚧 **This package is in development, and is not ready for use in production yet.** 🚧
 
 <img src="./resources/assets/img/logo.png" alt="LaraGrid Logo" height="500" width="750">
 
