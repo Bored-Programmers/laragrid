@@ -97,10 +97,10 @@ class MyClass
 ### `setAttributes(array $attributes): static`
 
 This method sets the attributes of the column. The attributes are HTML attributes that are applied to the column tag.
-You can pass a callable, a class method, or an array.
+You can pass a callable, a class method or an array.
 
 ```php
-public function setAttributes(array $attributes): static
+public function setAttributes(callable|array $attributes): static
 ```
 
 ```php
