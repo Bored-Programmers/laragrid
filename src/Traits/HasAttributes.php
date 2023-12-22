@@ -33,7 +33,14 @@ trait HasAttributes
     public function setAttributes(callable|array $attributes): static
     {
         if (is_array($attributes)) {
-            $attributes = fn() => $attributes;
+            // This is a workaround if you want to pass an array of attributes to the component.
+            if (isset($attributes[0]) && is_object($attributes[0]) && method_exists($attributes[0], $attributes[1])) {
+                $this->attributes = $attributes;
+
+                return $this;
+            } else {
+                $attributes = fn() => $attributes;
+            }
         }
 
         $this->attributes = $attributes;
