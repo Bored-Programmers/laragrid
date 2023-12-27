@@ -29,7 +29,7 @@
 @endphp
 
 @assets
-    <link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('vendor/laragrid/css/flatpickr.min.css') }}" rel="stylesheet" />
 @endassets
 
 <div style="overflow-x: auto;padding:1px;"> {{-- padding 1px to prevent border focus issues --}}
@@ -125,11 +125,13 @@
         {{ $records->links() }}
     </div>
 
-    <select wire:model.live="perPage" class="{{ $theme->getPerPageClass() }}">
-        @foreach($this->perPageOptions as $option)
-            <option value="{{ $option }}">{{ $option }}</option>
-        @endforeach
-    </select>
+    @if($records->hasPages())
+        <select wire:model.live="perPage" class="{{ $theme->getPerPageClass() }}">
+            @foreach($this->perPageOptions as $option)
+                <option value="{{ $option }}">{{ $option }}</option>
+            @endforeach
+        </select>
+    @endif
 
     <div class="{{ $theme->getFooterClass() }}">
         @if(method_exists($this, 'getLayout'))
