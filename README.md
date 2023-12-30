@@ -4,6 +4,10 @@
 
 <img src="./resources/assets/img/logo.png" alt="LaraGrid Logo" height="500" width="750">
 
+[![Latest Stable Version](https://poser.pugx.org/bored-programmers/laragrid/v)](//packagist.org/packages/bored-programmers/laragrid)
+[![Total Downloads](https://poser.pugx.org/bored-programmers/laragrid/downloads)](//packagist.org/packages/bored-programmers/laragrid)
+[![License](https://poser.pugx.org/bored-programmers/laragrid/license)](//packagist.org/packages/bored-programmers/laragrid)
+
 LaraGrid is a Laravel package that provides a powerful and customizable grid system. It allows you to easily create
 sortable, filterable tables with pagination.
 
