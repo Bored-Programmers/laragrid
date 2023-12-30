@@ -11,13 +11,12 @@ sortable, filterable tables with pagination.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Publishable Assets](#publishable-assets)
-- [Usage](#usage)
+- [Publishable Assets](#publishable)
+- **[Documentation](https://boredprogrammers.gitbook.io/laragrid)**
+- [Usage](#base-usage) 
     - [Creating a Grid](#creating-a-grid)
     - [Displaying the Grid](#displaying-the-grid)
     - [Customizing the Theme](#customizing-the-theme)
-    - **[Detailed Class Documentation](docs/detailed-documentation.md)**
-- [Examples](docs/examples.md)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Changelog](#changelog)
 - [License](#license)
